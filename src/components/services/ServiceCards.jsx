@@ -28,7 +28,7 @@ export function ServiceCards() {
 
   return (
     <section className="py-24 bg-[#fdfaf7] relative overflow-hidden">
-      {/* Pattern de fond subtil */}
+      {/* Pattern de fond */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none" 
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238B4513' fill-opacity='1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")` }} 
@@ -75,40 +75,39 @@ export function ServiceCards() {
                   y: -8, 
                   transition: { duration: 0.3 },
                   boxShadow: service.highlight 
-                    ? "0 0 30px rgba(217, 119, 6, 0.3)" // Glow plus diffus
-                    : "0 20px 40px -15px rgba(62, 39, 35, 0.1)" 
+                    ? "0 0 25px rgba(217, 119, 6, 0.4)" // Glow ambré pour les cartes sombres
+                    : "0 20px 40px -15px rgba(62, 39, 35, 0.15)" 
                 }}
-                // MODIFICATION : bg-[#2d1b18] est plus clair que #1a120b mais reste prestigieux
                 className={`group p-8 rounded-3xl border transition-all duration-300 cursor-pointer relative overflow-hidden
                   ${service.highlight 
-                    ? 'bg-[#2d1b18] border-amber-800/30' 
+                    ? 'bg-[#1a120b] border-amber-900/50' 
                     : 'bg-white border-amber-100/50 shadow-sm'
                   }`}
               >
-                {/* Effet de reflet interne pour éclaircir la carte sombre */}
+                {/* Effet de dégradé interne pour les cartes highlight */}
                 {service.highlight && (
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-amber-600/10 blur-3xl -mr-16 -mt-16 pointer-events-none" />
                 )}
 
                 {/* Icône */}
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-sm transition-transform group-hover:scale-110 duration-300
-                  ${service.highlight ? 'bg-amber-600/40 text-white' : 'bg-amber-50 text-amber-800'}`}>
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-inner transition-transform group-hover:scale-110 duration-300
+                  ${service.highlight ? 'bg-amber-600/20 text-white' : 'bg-amber-50 text-amber-800'}`}>
                   {React.cloneElement(service.icon, { className: "w-7 h-7" })}
                 </div>
                 
-                {/* Titre */}
-                <h3 className={`text-xl font-bold mb-3 tracking-tight ${service.highlight ? 'text-white brightness-110' : 'text-[#3e2723]'}`}>
+                {/* Titre : Blanc Pur forcé */}
+                <h3 className={`text-xl font-bold mb-3 ${service.highlight ? 'text-white' : 'text-[#3e2723]'}`}>
                   {service.title}
                 </h3>
                 
-                {/* Description - Plus claire (Blanc pur) */}
-                <p className={`text-sm leading-relaxed mb-6 font-medium ${service.highlight ? 'text-white' : 'text-[#5d4037]'}`}>
+                {/* Description : Blanc Pur forcé */}
+                <p className={`text-sm leading-relaxed mb-6 ${service.highlight ? 'text-white' : 'text-[#5d4037]'}`}>
                   {service.description}
                 </p>
 
                 {/* Lien interactif */}
                 <div className={`flex items-center text-xs font-bold uppercase tracking-widest transition-all duration-300
-                  ${service.highlight ? 'text-amber-400' : 'text-amber-800 opacity-60 group-hover:opacity-100'}`}>
+                  ${service.highlight ? 'text-amber-500' : 'text-amber-800 opacity-60 group-hover:opacity-100'}`}>
                   En savoir plus 
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>

@@ -15,7 +15,8 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 }
 
-export function FeaturesGrid() {
+// AJOUT : On récupère onOpenModal depuis les props
+export function FeaturesGrid({ onOpenModal }) {
   const features = [
     { title: 'Immigration assistance', icon: <FileText /> },
     { title: 'Intellectual property', icon: <Building /> },
@@ -84,7 +85,7 @@ export function FeaturesGrid() {
           ))}
         </motion.div>
 
-        {/* Action Button */}
+        {/* Action Button CORRIGÉ */}
         <motion.div 
           className="mt-20 text-center"
           initial={{ opacity: 0 }}
@@ -94,6 +95,7 @@ export function FeaturesGrid() {
           <motion.button 
             whileHover={{ scale: 1.05, backgroundColor: "#5d4037" }}
             whileTap={{ scale: 0.95 }}
+            onClick={onOpenModal} // ICI : On lie le clic à l'ouverture de la modale
             className="bg-[#3e2723] text-white px-10 py-4 rounded-xl font-bold shadow-xl transition-all"
           >
             Consulter un avocat

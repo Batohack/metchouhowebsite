@@ -24,14 +24,10 @@ function App() {
       <Header onOpenModal={openModal} />
       
       <main>
-        {/* On peut aussi passer la fonction au Hero ou à la Team si besoin */}
         <Hero onOpenModal={openModal} />
-        
-        {/* La section Team contient souvent des boutons "Prendre rendez-vous" */}
         <Team onOpenModal={openModal} />
-        
-        <ServiceCards />
-        <FeaturesGrid />
+        <ServiceCards onOpenModal={openModal} />
+        <FeaturesGrid onOpenModal={openModal} />
         <Testimonials />
         <WhyChooseUs />
       </main>

@@ -45,7 +45,8 @@ const staggerContainer = {
   visible: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.2 } }
 }
 
-export function Team() {
+// AJOUT : Réception de la prop onOpenModal depuis App.jsx
+export function Team({ onOpenModal }) {
   const { t } = useTranslation()
   const [selectedImage, setSelectedImage] = useState(null)
 
@@ -57,7 +58,6 @@ export function Team() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header : Correction Photo 1 (Texte Sombre sur fond clair) */}
         <motion.div className="text-center mb-20" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
           <motion.div variants={fadeInUp} className="inline-flex items-center px-4 py-2 rounded-full bg-amber-100/50 border border-amber-200 text-amber-900 text-sm font-medium mb-6">
             <Award className="w-4 h-4 mr-2" /> Équipe d'experts
@@ -72,7 +72,13 @@ export function Team() {
 
         <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {teamMembersData.map((member, index) => (
-            <TeamMemberCard key={index} member={member} t={t} onImageClick={() => setSelectedImage(member.image)} />
+            <TeamMemberCard 
+                key={index} 
+                member={member} 
+                t={t} 
+                onImageClick={() => setSelectedImage(member.image)} 
+                onOpenModal={onOpenModal} // Transmis à la carte
+            />
           ))}
         </motion.div>
 
@@ -84,7 +90,7 @@ export function Team() {
   )
 }
 
-function TeamMemberCard({ member, t, onImageClick }) {
+function TeamMemberCard({ member, t, onImageClick, onOpenModal }) {
   return (
     <motion.div 
       className="bg-white rounded-2xl shadow-xl overflow-hidden group border border-amber-100/50"
@@ -94,7 +100,6 @@ function TeamMemberCard({ member, t, onImageClick }) {
       <div className="relative h-96 overflow-hidden cursor-pointer" onClick={onImageClick}>
         <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
         
-        {/* Overlay pour protéger le texte blanc sur l'image */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a07] via-[#0f0a07]/40 to-transparent opacity-90" />
 
         <div className="absolute bottom-6 left-6 right-6 z-20">
@@ -135,6 +140,7 @@ function TeamMemberCard({ member, t, onImageClick }) {
         <motion.button 
           whileHover={{ scale: 1.02, backgroundColor: "#1a120b" }} 
           whileTap={{ scale: 0.98 }} 
+          onClick={onOpenModal} // ACTION : Ouvre la modale de rendez-vous
           className="w-full bg-[#3e2723] text-white py-4 rounded-xl font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2"
         >
           Prendre rendez-vous <ArrowRight className="w-4 h-4" />
