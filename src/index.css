@@ -1,20 +1,24 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* --- Nouvelle Palette Prestige & Contraste Élevé --- */
-:root {
-  /* Fonds assombris pour l'ambiance feutrée */
-  --primary-dark: #0f0a07;       /* Brun-Noir profond */
-  --neutral-beige: #e8e2dc;      /* Beige grisâtre mat (fond de page) */
-  
-  /* Couleurs d'Accent */
-  --accent-amber: #c28d58;       /* Or vieilli / Bronze */
-  --accent-red: #a82323;         /* Rouge Brique sombre */
+/* --- Configuration des Variables --- */
+@theme {
+  --color-primary-dark: #0f0a07;
+  --color-accent-amber: #c28d58;
+  --color-accent-red: #a82323;
+}
 
-  /* Système de Texte */
-  --text-dark: #1a120b;          /* Texte sur fond clair */
-  --text-light: #ffffff;         /* Blanc pur pour l'éclat */
+:root {
+  --primary-dark: #0f0a07;
+  --neutral-beige: #e8e2dc;
+  --text-dark: #1a120b;
+  --text-light: #ffffff;
   --glow-color: rgba(255, 255, 255, 0.4);
+}
+
+/* --- Définition des classes personnalisées --- */
+.text-glow {
+  text-shadow: 0 0 12px var(--glow-color), 0 0 25px rgba(255, 255, 255, 0.1);
 }
 
 /* --- Typographie & Base --- */
@@ -32,39 +36,33 @@ h1, h2, h3, h4 {
   color: var(--text-dark);
 }
 
-/* --- EFFET DE SURBRILLANCE (GLOW) --- */
-.text-glow {
-  text-shadow: 0 0 12px var(--glow-color), 0 0 25px rgba(255, 255, 255, 0.1);
-}
-
-/* --- FORCE LE BLANC SUR LES SECTIONS SOMBRES & LES CARTES AVOCATS --- */
+/* --- FORCE LE BLANC ET LA SURBRILLANCE --- */
+/* Remplacement du @apply qui causait l'erreur par du CSS pur */
 footer, footer h1, footer h2, footer h3, footer h4, footer p, footer a,
 .bg-primary-dark, .bg-primary-dark h1, .bg-primary-dark h2, .bg-primary-dark h3,
 section.relative h1, section.relative h2, section.relative p,
-.team-member-name, 
-.team-member-role, 
-.member-name,
-/* Ciblage spécifique pour les noms des avocats sur les photos */
-.card-luxury h3, 
-.card-luxury .text-xl,
-[class*="Maître"], 
-[class*="Me "] {
+.team-member-name, .team-member-role, .member-name,
+.card-luxury h3, .card-luxury .text-xl {
   color: var(--text-light) !important;
   fill: var(--text-light) !important;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
 }
 
-/* Surbrillance spécifique pour le titre principal (Hero) */
+/* Application manuelle du glow au titre du Hero pour éviter l'erreur de build */
 section.relative h1 {
-  @apply text-glow;
+  text-shadow: 0 0 12px var(--glow-color), 0 0 25px rgba(255, 255, 255, 0.1);
   filter: brightness(1.2);
 }
 
-/* --- Boutons Dynamiques --- */
+/* --- Boutons --- */
 .btn-primary {
-  @apply relative overflow-hidden font-bold py-4 px-8 rounded-xl transition-all duration-300;
-  background: var(--primary-dark);
+  background-color: var(--primary-dark);
   color: var(--text-light) !important;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s;
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
@@ -76,52 +74,14 @@ section.relative h1 {
 
 /* --- Cartes Luxury --- */
 .card-luxury {
-  @apply relative overflow-hidden rounded-2xl transition-all duration-500 ease-out;
-  background: #ffffff;
-  box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  border-radius: 1rem;
   border: 1px solid rgba(194, 141, 88, 0.2);
+  box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.15);
+  transition: all 0.5s ease-out;
 }
 
 .card-luxury:hover {
   transform: translateY(-8px);
   border-color: var(--accent-amber);
-}
-
-/* --- Header Navigation --- */
-.header-glass {
-  @apply fixed top-0 left-0 right-0 z-50 transition-all duration-500;
-  background: rgba(15, 10, 7, 0.1);
-  backdrop-filter: blur(12px);
-}
-
-.header-glass.scrolled {
-  background: rgba(15, 10, 7, 0.96);
-}
-
-.header-glass.scrolled a, .header-glass.scrolled button {
-  color: var(--text-light) !important;
-}
-
-/* --- Utilitaires d'Animation --- */
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.7s ease-out;
-}
-
-.fade-in-up.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Scrollbar Style */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--neutral-beige);
-}
-::-webkit-scrollbar-thumb {
-  background: #33221a;
-  border-radius: 10px;
 }

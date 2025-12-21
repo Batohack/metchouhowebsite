@@ -38,7 +38,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image avec Blur */}
       <div
         className="absolute inset-0"
         style={{
@@ -50,21 +50,21 @@ export function Hero() {
         }}
       ></div>
 
+      {/* Overlay Sombre pour la lisibilité */}
       <div className="absolute inset-0 bg-primary-dark/70" />
 
-      {/* Formes décoratives */}
+      {/* Formes décoratives en arrière-plan */}
       <div className="absolute top-20 right-10 w-32 h-32 bg-amber-200/20 rounded-full blur-xl" />
       <div className="absolute bottom-32 left-16 w-24 h-24 bg-terracotta/15 rounded-full blur-lg" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div
-          // Gap réduit pour maximiser l'espace de l'image
-          className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* Left Content */}
+          {/* Contenu de gauche (Texte et Boutons) */}
           <div className="space-y-8">
             <motion.div variants={itemVariants} className="space-y-6">
               <motion.div
@@ -72,17 +72,17 @@ export function Hero() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <Award className="w-4 h-4 mr-2" />
+                <Award className="w-4 h-4 mr-2 text-amber-400" />
                 Cabinet d'avocats au quartier Omnisport
               </motion.div>
 
               <motion.h1
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white text-glow"
                 variants={itemVariants}
               >
                 Droit & Justice
                 <br />
-                en Afrique
+                <span className="text-white brightness-110">en Afrique</span>
               </motion.h1>
 
               <motion.p
@@ -108,10 +108,18 @@ export function Hero() {
                 {t('talk-to-lawyer')}
                 <ArrowRight className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </motion.button>
-
+              
+              <motion.button
+                className="flex items-center justify-center px-8 py-4 rounded-xl border border-white/30 text-white font-bold hover:bg-white/10 transition-all"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Users className="w-5 h-5 mr-2" />
+                Notre équipe
+              </motion.button>
             </motion.div>
 
-            {/* Stats */}
+            {/* Stats en bas à gauche */}
             <motion.div
               className="grid grid-cols-3 gap-6 pt-8"
               variants={itemVariants}
@@ -120,10 +128,12 @@ export function Hero() {
                 <div className="text-3xl font-bold text-accent-red mb-1">2+</div>
                 <div className="text-sm text-white">Années d'expérience</div>
               </div>
+
               <div className="text-center p-4 bg-primary-dark/60 backdrop-blur-sm rounded-lg border border-secondary-brown">
-                <div className="text-3xl font-bold text-secondary-brown mb-1">100+</div>
+                <div className="text-3xl font-bold text-accent-red mb-1">100+</div>
                 <div className="text-sm text-white">Clients satisfaits</div>
               </div>
+
               <div className="text-center p-4 bg-primary-dark/60 backdrop-blur-sm rounded-lg border border-secondary-brown">
                 <div className="text-3xl font-bold text-accent-red mb-1">24/7</div>
                 <div className="text-sm text-white">Support disponible</div>
@@ -131,22 +141,19 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Content - Image poussée au maximum à droite */}
+          {/* Contenu de droite (Image poussée vers le bord) */}
           <motion.div
-            // MODIFICATIONS : max-w-none pour utiliser tout l'espace et lg:ml-auto pour pousser l'image contre le bord droit de sa colonne
             className="relative w-full max-w-none lg:ml-auto lg:pl-12"
             variants={itemVariants}
           >
             <motion.div
-              // lg:float-right pour forcer l'alignement sur le bord extérieur
-              className="relative rounded-2xl overflow-hidden shadow-2xl lg:float-right"
+              className="relative rounded-3xl overflow-hidden shadow-2xl lg:float-right border border-white/10"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
               <img
                 src={heroImageb}
                 alt="Cabinet d'avocats TCHOUHO - Excellence juridique"
-                // w-full h-auto pour garder les proportions tout en remplissant le conteneur
                 className="w-full max-w-3xl h-auto object-cover"
               />
             </motion.div>
@@ -154,8 +161,9 @@ export function Hero() {
         </motion.div>
       </div>
 
+      {/* Ligne de séparation élégante en bas */}
       <motion.div
-        className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
+        className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
