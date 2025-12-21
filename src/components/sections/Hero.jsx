@@ -48,16 +48,15 @@ export function Hero() {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          filter: 'blur(3px)'
+          filter: 'blur(6px)'
         }}
       ></div>
-      {/* Overlay léger pour fond avec image visible */}
-      <div className="absolute inset-0 bg-primary-dark/30" />
 
-      {/* Background avec image - gradient supprimé pour meilleure visibilité */}
-      {/* <div className="absolute inset-0 gradient-hero" /> */}
+      {/* --- MODIFICATION ICI (Option 1) --- */}
+      {/* J'ai passé l'opacité de /30 à /70 pour assombrir le fond */}
+      <div className="absolute inset-0 bg-primary-dark/70" />
+      {/* ----------------------------------- */}
 
-  
       {/* Formes géométriques décoratives */}
       <div className="absolute top-20 right-10 w-32 h-32 bg-amber-200/20 rounded-full blur-xl" />
       <div className="absolute bottom-32 left-16 w-24 h-24 bg-terracotta/15 rounded-full blur-lg" />
@@ -86,7 +85,7 @@ export function Hero() {
                 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white"
                 variants={itemVariants}
               >
-                Droit & <span className="text-white">Justice</span>
+                Droit & Justice
                 <br />
                 en Afrique
               </motion.h1>
@@ -106,7 +105,7 @@ export function Hero() {
               variants={itemVariants}
             >
               <motion.button
-                className="btn-primary group"
+                className="btn-primary text-white group"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={scrollToTeam}
@@ -116,7 +115,7 @@ export function Hero() {
               </motion.button>
 
               <motion.button
-                className="btn-secondary group"
+                className="btn-secondary text-white group"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
