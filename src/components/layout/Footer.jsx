@@ -5,155 +5,113 @@ import { useTranslation } from '../../hooks/useTranslation'
 export function Footer() {
   const { t } = useTranslation()
 
-  // Définition de la couleur "Bleu Royal" et de la couleur de texte blanche
-  const royalBlueBg = 'bg-[#1a237e]' // Un bleu royal profond (type Indigo 900)
-  const whiteText = 'text-white'
-  const whiteTextHover = 'hover:text-accent-red transition-colors duration-200'
+  // Palette harmonisée avec le reste du site
+  const darkBrownBg = 'bg-[#1a120b]' // Brun très sombre pour le prestige
+  const accentAmber = 'text-amber-500'
+  const whiteText = 'text-white/90'
+  const hoverLink = 'hover:text-amber-500 transition-colors duration-300'
 
   return (
-    // MODIFICATION ICI : Utilisation du bleu royal en background
-    <footer className={`${royalBlueBg} ${whiteText} relative overflow-hidden border-t border-blue-900`}>
-      {/* Pattern de fond subtil - Opacité légèrement augmentée pour être visible sur le bleu */}
-      <div className="absolute inset-0 opacity-[0.05]">
+    <footer className={`${darkBrownBg} relative overflow-hidden border-t border-[#3e2723]`}>
+      {/* Pattern de fond subtil (Cercles ambrés très discrets) */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="absolute inset-0" style={{
-          // Le motif est en blanc pour ressortir sur le bleu
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d97706' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
         }} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Main Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+          
           {/* Cabinet Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            className="lg:col-span-1"
           >
-            {/* MODIFICATION ICI : Texte en blanc */}
-            <h3 className="text-xl font-bold text-white mb-4">Cabinet TCHOUHO</h3>
-            <p className="text-white/90 text-sm leading-relaxed mb-6">
-              Excellence juridique depuis 2 ans. Spécialisés en droit des affaires
-              et accompagnement personnalisé de nos clients.
+            <h3 className="text-2xl font-bold text-white mb-6">Cabinet TCHOUHO</h3>
+            <p className={`${whiteText} text-sm leading-relaxed mb-6 italic`}>
+              "Excellence juridique et accompagnement stratégique au cœur de l'Afrique."
             </p>
-            <div className="flex items-center text-white/90 text-sm font-medium">
+            <div className="flex items-center text-amber-500/80 text-sm font-medium">
               <Globe className="w-4 h-4 mr-2" />
               Yaoundé, Cameroun
             </div>
           </motion.div>
 
           {/* Services */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <h4 className="text-lg font-semibold text-white mb-4">Domaines d'expertise</h4>
-            {/* MODIFICATION ICI : Liste en blanc */}
-            <ul className="space-y-2 text-sm text-white/90">
-              <li>Droit des affaires</li>
-              <li>Droit immobilier</li>
-              <li>Droit de la famille</li>
-              <li>Droit civil</li>
+          <div className="space-y-6">
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Expertises</h4>
+            <ul className={`space-y-3 text-sm ${whiteText}`}>
+              <li className={hoverLink}><a href="#">Droit des affaires</a></li>
+              <li className={hoverLink}><a href="#">Droit immobilier</a></li>
+              <li className={hoverLink}><a href="#">Droit de la famille</a></li>
+              <li className={hoverLink}><a href="#">Conseil Fiscal</a></li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
-            {/* MODIFICATION ICI : Textes en blanc, icônes en rouge (accent) */}
-            <div className="space-y-3 text-white/90">
-              <div className="flex items-center text-sm">
-                <MapPin className="w-4 h-4 mr-3 text-accent-red flex-shrink-0" />
+          <div className="space-y-6">
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Contact</h4>
+            <div className={`space-y-4 text-sm ${whiteText}`}>
+              <div className="flex items-start">
+                <MapPin className={`w-4 h-4 mr-3 ${accentAmber} mt-1`} />
                 <span>Quartier Omnisport,<br />Rue des Généraux</span>
               </div>
-              <div className="flex items-center text-sm">
-                <Phone className="w-4 h-4 mr-3 text-accent-red flex-shrink-0" />
-                <span>+225 XX XX XX XX XX</span>
+              <div className="flex items-center">
+                <Phone className={`w-4 h-4 mr-3 ${accentAmber}`} />
+                <span>+237 677 42 31 69</span>
               </div>
-              <div className="flex items-center text-sm">
-                <Mail className="w-4 h-4 mr-3 text-accent-red flex-shrink-0" />
-                <span>contact@tchouho-avocats.com</span>
+              <div className="flex items-center">
+                <Mail className={`w-4 h-4 mr-3 ${accentAmber}`} />
+                <span className="break-all">contact@tchouho.com</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Liens utiles */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h4 className="text-lg font-semibold text-white mb-4">Liens utiles</h4>
-            {/* MODIFICATION ICI : Liens blancs avec hover rouge */}
-            <ul className="space-y-3">
-              <li><a href="#" className={`${whiteText} ${whiteTextHover} text-sm`}>À propos</a></li>
-              <li><a href="#" className={`${whiteText} ${whiteTextHover} text-sm`}>Notre équipe</a></li>
-              <li><a href="#" className={`${whiteText} ${whiteTextHover} text-sm`}>Services</a></li>
-              <li><a href="#" className={`${whiteText} ${whiteTextHover} text-sm`}>Contact</a></li>
+          {/* Quick Links */}
+          <div className="space-y-6">
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Navigation</h4>
+            <ul className={`space-y-3 text-sm ${whiteText}`}>
+              <li><a href="#" className={hoverLink}>À propos du cabinet</a></li>
+              <li><a href="#" className={hoverLink}>Nos Avocats</a></li>
+              <li><a href="#" className={hoverLink}>Prendre Rendez-vous</a></li>
+              <li><a href="#" className={hoverLink}>FAQ</a></li>
             </ul>
-          </motion.div>
+          </div>
 
-          {/* Réseaux sociaux */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h4 className="text-lg font-semibold text-white mb-4">Suivez-nous</h4>
-            {/* MODIFICATION ICI : Boutons sur fond légèrement plus clair, icônes blanches */}
-            <div className="flex space-x-4">
-              {['Facebook', 'Twitter', 'LinkedIn', 'Instagram'].map((network, index) => {
-                const Icon = [Facebook, Twitter, Linkedin, Instagram][index];
-                return (
-                  <a
-                    key={network}
-                    href="#"
-                    className="w-10 h-10 bg-blue-700/50 hover:bg-accent-red rounded-full flex items-center justify-center transition-colors duration-200 group"
-                    aria-label={network}
-                  >
-                    <Icon className="w-5 h-5 text-white group-hover:text-white" />
-                  </a>
-                )
-              })}
+          {/* Social & CTA */}
+          <div className="space-y-6">
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Suivez-nous</h4>
+            <div className="flex space-x-3">
+              {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
+                <a
+                  key={idx}
+                  href="#"
+                  className="w-10 h-10 bg-[#3e2723]/50 hover:bg-amber-600 rounded-xl flex items-center justify-center transition-all duration-300 group border border-[#3e2723]"
+                >
+                  <Icon className="w-5 h-5 text-amber-200 group-hover:text-white" />
+                </a>
+              ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom Section */}
-        <motion.div
-          // MODIFICATION ICI : Bordure de séparation plus subtile
-          className="border-t border-blue-700/50 pt-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            {/* MODIFICATION ICI : Texte du bas en blanc/90 */}
-            <div className="text-white/90 text-sm mb-4 md:mb-0">
-              © 2024 Cabinet TCHOUHO. Tous droits réservés.
+        <div className="border-t border-[#3e2723] pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-white/40 text-xs">
+              © 2025 Cabinet TCHOUHO. Excellence & Intégrité.
             </div>
 
-            <div className="flex space-x-6 text-sm text-white/90">
-              <a href="#" className="hover:text-accent-red transition-colors duration-200">
-                Politique de confidentialité
-              </a>
-              <a href="#" className="hover:text-accent-red transition-colors duration-200">
-                Conditions d'utilisation
-              </a>
+            <div className="flex space-x-8 text-xs text-white/40">
+              <a href="#" className="hover:text-amber-500 transition-colors">Confidentialité</a>
+              <a href="#" className="hover:text-amber-500 transition-colors">Mentions Légales</a>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   )

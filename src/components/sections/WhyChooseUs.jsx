@@ -1,163 +1,123 @@
-import React, { useEffect, useRef } from 'react'
-import { Scale, Clock, Shield, Smile, BarChart, Headphones } from 'lucide-react'
+import React from 'react'
+import { motion } from 'framer-motion'
+import { Scale, Clock, Shield, Smile, BarChart, Award } from 'lucide-react'
 import { useTranslation } from '../../hooks/useTranslation'
+
+// --- VARIANTES ---
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+}
+
+const scaleIn = {
+  hidden: { scale: 0.8, opacity: 0 },
+  visible: { scale: 1, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
+}
 
 export function WhyChooseUs() {
   const { t } = useTranslation()
-  const elementsRef = useRef([])
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed')
-          }
-        })
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    )
+  const benefits = [
+    { title: t('expertise-title'), desc: t('expertise-desc'), icon: <BarChart />, pos: "lg:top-10 lg:left-0" },
+    { title: t('confidentiality-title'), desc: t('confidentiality-desc'), icon: <Scale />, pos: "lg:top-1/2 lg:-left-20 lg:-translate-y-1/2" },
+    { title: t('results-title'), desc: t('results-desc'), icon: <Shield />, pos: "lg:bottom-10 lg:left-0" },
+    { title: t('availability-title'), desc: t('availability-desc'), icon: <Clock />, pos: "lg:top-10 lg:right-0" },
+    { title: "Service client", desc: "Accompagnement personnalisé et suivi de qualité", icon: <Award />, pos: "lg:top-1/2 lg:-right-20 lg:-translate-y-1/2" },
+    { title: "Localisation", desc: "Situé au quartier Omnisport pour votre commodité", icon: <Smile />, pos: "lg:bottom-10 lg:right-0" },
+  ]
 
-    elementsRef.current.forEach((element) => {
-      if (element) observer.observe(element)
-    })
-
-    return () => observer.disconnect()
-  }, [])
   return (
-    <section className="py-16 bg-neutral-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-      </div>
+    <section className="py-24 bg-[#fdfaf7] relative overflow-hidden">
+      {/* Pattern de fond */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238B4513' fill-opacity='1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")` }} 
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2
-            ref={(el) => (elementsRef.current[0] = el)}
-            className="fade-in-up text-3xl font-bold text-text-primary"
-          >
+        <motion.div 
+          className="text-center mb-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-[#3e2723]">
             {t('why-choose-us')}
           </h2>
-        </div>
+          <div className="w-24 h-1.5 bg-amber-700 mx-auto mt-6 rounded-full" />
+        </motion.div>
 
-        <div className="relative h-[600px] md:h-[500px] flex items-center justify-center">
-          {/* Central Character */}
-          <div className="absolute z-20 w-48 h-48 md:w-64 md:h-64 rounded-full bg-white shadow-2xl flex items-center justify-center border-4 border-white overflow-hidden">
+        <div className="relative min-h-[600px] flex items-center justify-center">
+          
+          {/* Image Centrale (Prestigieuse) */}
+          <motion.div 
+            variants={scaleIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative z-20 w-64 h-64 md:w-80 md:h-80 rounded-3xl bg-white shadow-2xl flex items-center justify-center border-8 border-white overflow-hidden rotate-3"
+          >
             <img
-              src="https://img.freepik.com/free-vector/lawyer-concept-illustration_114360-2278.jpg?w=740&t=st=1709923456~exp=1709924056~hmac=123"
-              alt="Lawyer Character"
+              src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+              alt="Justice & Droit"
               className="w-full h-full object-cover"
             />
+            <div className="absolute inset-0 bg-[#3e2723]/10" />
+          </motion.div>
+
+          {/* Items de bénéfices autour */}
+          <div className="absolute inset-0 hidden lg:block">
+            {benefits.map((benefit, idx) => (
+              <motion.div
+                key={idx}
+                className={`absolute ${benefit.pos} w-64 flex items-center gap-4 group`}
+                initial={{ opacity: 0, x: benefit.pos.includes('left') ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.8 }}
+              >
+                {/* Ordre Icône/Texte inversé pour le côté droit */}
+                {benefit.pos.includes('right') ? (
+                  <>
+                    <div className="w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center text-amber-800 border border-amber-100 group-hover:bg-amber-700 group-hover:text-white transition-all duration-300">
+                      {React.cloneElement(benefit.icon, { className: "w-6 h-6" })}
+                    </div>
+                    <div className="text-left">
+                      <h3 className="font-bold text-[#3e2723] text-sm">{benefit.title}</h3>
+                      <p className="text-[11px] text-[#5d4037] leading-tight">{benefit.desc}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-right">
+                      <h3 className="font-bold text-[#3e2723] text-sm">{benefit.title}</h3>
+                      <p className="text-[11px] text-[#5d4037] leading-tight">{benefit.desc}</p>
+                    </div>
+                    <div className="w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center text-amber-800 border border-amber-100 group-hover:bg-amber-700 group-hover:text-white transition-all duration-300">
+                      {React.cloneElement(benefit.icon, { className: "w-6 h-6" })}
+                    </div>
+                  </>
+                )}
+              </motion.div>
+            ))}
           </div>
 
-          {/* Circular Items - Desktop: Absolute positioning, Mobile: Flex column */}
-          <div className="hidden md:block absolute inset-0">
-            {/* Top Left */}
-            <div className="absolute top-[15%] left-[25%] flex flex-col items-end text-right w-48">
-              <h3 className="font-bold text-gray-900 text-sm">{t('expertise-title')}</h3>
-              <p className="text-[10px] text-gray-500">
-                {t('expertise-desc')}
-              </p>
-            </div>
-            <div className="absolute top-[25%] left-[32%] bg-[#4A5568] p-2 rounded-full text-white">
-              <BarChart className="w-5 h-5" />
-            </div>
-
-            {/* Middle Left */}
-            <div className="absolute top-[45%] left-[15%] flex flex-col items-end text-right w-48">
-              <h3 className="font-bold text-gray-900 text-sm">{t('confidentiality-title')}</h3>
-              <p className="text-[10px] text-gray-500">
-                {t('confidentiality-desc')}
-              </p>
-            </div>
-            <div className="absolute top-[45%] left-[28%] bg-[#2C5F5F] p-3 rounded-full text-white shadow-lg">
-              <Scale className="w-6 h-6" />
-            </div>
-
-            {/* Bottom Left */}
-            <div className="absolute bottom-[20%] left-[25%] flex flex-col items-end text-right w-48">
-              <h3 className="font-bold text-gray-900 text-sm">{t('results-title')}</h3>
-              <p className="text-[10px] text-gray-500">
-                {t('results-desc')}
-              </p>
-            </div>
-            <div className="absolute bottom-[28%] left-[32%] bg-[#4A5568] p-2 rounded-full text-white">
-              <Shield className="w-5 h-5" />
-            </div>
-
-            {/* Top Right */}
-            <div className="absolute top-[15%] right-[25%] flex flex-col items-start text-left w-48">
-              <h3 className="font-bold text-gray-900 text-sm">{t('availability-title')}</h3>
-              <p className="text-[10px] text-gray-500">
-                {t('availability-desc')}
-              </p>
-            </div>
-            {/* No icon for Time in design, but adding for symmetry if needed, or keeping blank as per design */}
-
-            {/* Middle Right */}
-            <div className="absolute top-[45%] right-[15%] flex flex-col items-start text-left w-48">
-              <h3 className="font-bold text-gray-900 text-sm">Service client</h3>
-              <p className="text-[10px] text-gray-500">
-                Accompagnement personnalisé et suivi de qualité
-              </p>
-            </div>
-            <div className="absolute top-[45%] right-[28%] bg-[#4A5568] p-2 rounded-full text-white">
-              <Clock className="w-5 h-5" />
-            </div>
-
-            {/* Bottom Right */}
-            <div className="absolute bottom-[20%] right-[25%] flex flex-col items-start text-left w-48">
-              <h3 className="font-bold text-gray-900 text-sm">
-                Localisation stratégique
-              </h3>
-              <p className="text-[10px] text-gray-500">
-                Situé au quartier Omnisport pour votre commodité
-              </p>
-            </div>
-            <div className="absolute bottom-[28%] right-[32%] bg-[#4A5568] p-2 rounded-full text-white">
-              <Smile className="w-5 h-5" />
-            </div>
-          </div>
-
-          {/* Mobile View */}
-          <div className="md:hidden grid grid-cols-2 gap-4 w-full mt-32">
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-[#4A5568] p-2 rounded-full text-white mb-2">
-                <Scale className="w-4 h-4" />
-              </div>
-              <h3 className="font-bold text-xs">Expertise</h3>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-[#4A5568] p-2 rounded-full text-white mb-2">
-                <Clock className="w-4 h-4" />
-              </div>
-              <h3 className="font-bold text-xs">Disponibilité</h3>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-[#2C5F5F] p-2 rounded-full text-white mb-2">
-                <Shield className="w-4 h-4" />
-              </div>
-              <h3 className="font-bold text-xs">Confidentialité</h3>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-[#4A5568] p-2 rounded-full text-white mb-2">
-                <Headphones className="w-4 h-4" />
-              </div>
-              <h3 className="font-bold text-xs">Support</h3>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-[#4A5568] p-2 rounded-full text-white mb-2">
-                <BarChart className="w-4 h-4" />
-              </div>
-              <h3 className="font-bold text-xs">Résultats</h3>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="bg-[#4A5568] p-2 rounded-full text-white mb-2">
-                <Smile className="w-4 h-4" />
-              </div>
-              <h3 className="font-bold text-xs">Satisfaction</h3>
-            </div>
+          {/* Vue Mobile / Tablette (Grille simple) */}
+          <div className="lg:hidden grid grid-cols-2 md:grid-cols-3 gap-6 w-full mt-20">
+            {benefits.map((benefit, idx) => (
+              <motion.div 
+                key={idx}
+                className="flex flex-col items-center text-center p-4 bg-white rounded-2xl shadow-sm border border-amber-50"
+                variants={fadeInUp}
+              >
+                <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-800 flex items-center justify-center mb-3">
+                  {React.cloneElement(benefit.icon, { className: "w-5 h-5" })}
+                </div>
+                <h3 className="font-bold text-[#3e2723] text-xs mb-1">{benefit.title}</h3>
+                <p className="text-[10px] text-slate-500 leading-tight line-clamp-2">{benefit.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

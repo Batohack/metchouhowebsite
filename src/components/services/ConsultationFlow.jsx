@@ -1,3 +1,5 @@
+import React from 'react'
+import { motion } from 'framer-motion'
 import {
   Clock,
   ThumbsUp,
@@ -6,135 +8,134 @@ import {
   Video,
   Phone,
   FileText,
+  ArrowRight
 } from 'lucide-react'
 import { useTranslation } from '../../hooks/useTranslation'
 
+// --- VARIANTES D'ANIMATION ---
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+}
+
+const floating = {
+  animate: {
+    y: [0, -10, 0],
+    transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+  }
+}
+
 export function ConsultationFlow() {
   const { t } = useTranslation()
+
+  const steps = [
+    { icon: <Clock />, text: "Gagnez du temps et de l'argent", color: "bg-amber-100 text-amber-900" },
+    { icon: <ThumbsUp />, text: "Conseils stratégiques", color: "bg-orange-100 text-orange-900" },
+    { icon: <Shield />, text: "Appels 100% confidentiels", color: "bg-[#3e2723]/10 text-[#3e2723]" },
+    { icon: <MessageCircle />, text: t('step-1-title'), color: "bg-red-50 text-red-900" }
+  ]
+
   return (
-    <section className="py-16 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Side: Flow Diagram */}
-          <div className="relative">
-            {/* Connecting Lines (Dotted) */}
-            <div className="absolute inset-0 pointer-events-none hidden md:block">
-              <svg
-                className="w-full h-full"
-                viewBox="0 0 600 400"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M250 100 L350 100 L350 200 L250 200"
-                  stroke="#3B82F6"
-                  strokeWidth="2"
-                  strokeDasharray="4 4"
-                />
-                <path
-                  d="M250 200 L150 200 L150 300"
-                  stroke="#3B82F6"
-                  strokeWidth="2"
-                  strokeDasharray="4 4"
-                />
-                <path
-                  d="M250 200 L350 200 L400 200"
-                  stroke="#3B82F6"
-                  strokeWidth="2"
-                  strokeDasharray="4 4"
-                />
-              </svg>
-            </div>
+    <section className="py-24 bg-[#fdfaf7] relative overflow-hidden">
+      {/* Pattern de fond identique */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238B4513' fill-opacity='1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")` }} 
+      />
 
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          
+          {/* Côté Gauche: Visuel Interactif */}
+          <div className="relative order-2 lg:order-1">
+            
+            {/* Éléments de flux (Badges) */}
             <div className="space-y-6 relative z-10">
-              <div className="flex items-center gap-4 bg-white p-3 rounded-lg shadow-sm max-w-xs">
-                <div className="bg-purple-100 p-2 rounded-full text-purple-600">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Save Time and Money
-                </span>
-              </div>
-
-              <div className="flex items-center gap-4 bg-white p-3 rounded-lg shadow-sm max-w-xs">
-                <div className="bg-orange-100 p-2 rounded-full text-orange-600">
-                  <ThumbsUp className="w-5 h-5" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Best Advise that Matters
-                </span>
-              </div>
-
-              <div className="flex items-center gap-4 bg-white p-3 rounded-lg shadow-sm max-w-xs">
-                <div className="bg-teal-100 p-2 rounded-full text-teal-600">
-                  <Shield className="w-5 h-5" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Privat and Confidential Calls
-                </span>
-              </div>
-
-              <div className="flex items-center gap-4 bg-white p-3 rounded-lg shadow-sm max-w-xs">
-                <div className="bg-purple-100 p-2 rounded-full text-purple-600">
-                  <MessageCircle className="w-5 h-5" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  {t('step-1-title')}
-                </span>
-              </div>
+              {steps.map((step, idx) => (
+                <motion.div 
+                  key={idx}
+                  variants={fadeInUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="flex items-center gap-4 bg-white p-4 rounded-2xl shadow-sm border border-amber-100/50 max-w-sm hover:shadow-md transition-shadow"
+                >
+                  <div className={`p-3 rounded-xl ${step.color}`}>
+                    {React.cloneElement(step.icon, { className: "w-5 h-5" })}
+                  </div>
+                  <span className="font-bold text-[#3e2723]">{step.text}</span>
+                </motion.div>
+              ))}
             </div>
 
-            {/* Central Lawyer Image */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden md:block">
-              <div className="w-24 h-24 rounded-lg overflow-hidden border-4 border-white shadow-lg">
+            {/* Avatar Central Flottant */}
+            <motion.div 
+              variants={floating}
+              animate="animate"
+              className="absolute top-1/2 left-2/3 transform -translate-x-1/2 -translate-y-1/2 hidden md:block"
+            >
+              <div className="w-32 h-32 rounded-3xl overflow-hidden border-8 border-white shadow-2xl rotate-3">
                 <img
                   src="https://randomuser.me/api/portraits/women/44.jpg"
-                  alt="Lawyer"
+                  alt="Avocat Conseil"
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
+              
+              {/* Petits badges d'action flottants autour de l'image */}
+              <motion.div className="absolute -top-4 -right-4 bg-white p-3 rounded-xl shadow-lg border border-amber-50" whileHover={{ scale: 1.1 }}>
+                <Phone className="w-4 h-4 text-orange-600" />
+              </motion.div>
+              <motion.div className="absolute -bottom-4 -left-4 bg-white p-3 rounded-xl shadow-lg border border-amber-50" whileHover={{ scale: 1.1 }}>
+                <Video className="w-4 h-4 text-green-600" />
+              </motion.div>
+            </motion.div>
 
-            {/* Action Buttons Floating */}
-            <div className="absolute top-0 right-0 hidden md:flex items-center gap-2 bg-white p-2 rounded-lg shadow-md border border-orange-100">
-              <div className="bg-orange-500 p-1 rounded text-white">
-                <Phone className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-bold text-orange-500">Appeler</span>
-            </div>
-
-            <div className="absolute bottom-0 left-0 hidden md:flex items-center gap-2 bg-white p-2 rounded-lg shadow-md border border-green-100">
-              <div className="bg-green-500 p-1 rounded text-white">
-                <Video className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-bold text-green-500">
-                Visio
-              </span>
-            </div>
-
-            <div className="absolute bottom-1/3 -right-8 hidden md:flex items-center gap-2 bg-white p-2 rounded-lg shadow-md border border-red-100">
-              <div className="bg-red-500 p-1 rounded text-white">
-                <FileText className="w-4 h-4" />
-              </div>
-              <span className="text-xs font-bold text-red-500">
-                Documents
-              </span>
-            </div>
+            {/* Décoration de fond (Cercle Marron) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-amber-200/20 rounded-full blur-3xl -z-10" />
           </div>
 
-          {/* Right Side: Text Content */}
-          <div className="space-y-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900">
-              {t('consultation-title')}
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              Notre processus de consultation est simple et efficace. De la prise de contact initiale
-              à l'accompagnement complet, nous vous guidons à chaque étape avec transparence et professionnalisme.
+          {/* Côté Droit: Contenu Texte */}
+          <motion.div 
+            className="space-y-8 order-1 lg:order-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <div className="space-y-4">
+              <h2 className="text-4xl lg:text-5xl font-bold text-[#3e2723] leading-tight">
+                {t('consultation-title')}
+              </h2>
+              <div className="w-20 h-1.5 bg-amber-700 rounded-full" />
+            </div>
+
+            <p className="text-[#5d4037] text-lg leading-relaxed">
+              Notre processus de consultation est conçu pour être simple et sans friction. 
+              De la prise de contact initiale à la résolution de votre dossier, 
+              nous utilisons les meilleurs outils technologiques pour rester proches de vous.
             </p>
-            <button className="bg-[#FF0000] hover:bg-red-700 text-white px-8 py-3 rounded-md font-bold shadow-lg">
+
+            <div className="grid grid-cols-2 gap-4 py-4">
+                <div className="flex items-center gap-2 text-[#3e2723] font-semibold">
+                    <div className="w-2 h-2 bg-amber-700 rounded-full" /> Visio-conférence
+                </div>
+                <div className="flex items-center gap-2 text-[#3e2723] font-semibold">
+                    <div className="w-2 h-2 bg-amber-700 rounded-full" /> Partage de documents
+                </div>
+            </div>
+
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-[#3e2723] hover:bg-[#5d4037] text-white px-10 py-4 rounded-xl font-bold shadow-xl flex items-center gap-3 transition-all"
+            >
               {t('talk-to-lawyer')}
-            </button>
-          </div>
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
+          </motion.div>
+
         </div>
       </div>
     </section>

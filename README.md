@@ -409,9 +409,9 @@ jobs:
 ## 👥 Contributeurs
 
 ### Équipe de Développement
-- **Lead Developer** : [Votre nom]
-- **UI/UX Designer** : [Designer]
-- **Project Manager** : [Chef de projet]
+- **Lead Developer** : [BATOSINE DORIAN]
+- **UI/UX Designer** : [BATOSINE DORIAN]
+- **Project Manager** : [BATOSINE DORIAN]
 
 ### Contribution
 Voir le [guide de contribution](../CONTRIBUTING.md) pour les détails.
