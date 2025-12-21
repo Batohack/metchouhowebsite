@@ -37,28 +37,28 @@ export function ServiceCards() {
     {
       title: t('immigration-title'),
       description: t('immigration-desc'),
-      icon: <FileText className="w-8 h-8 text-blue-500" />,
+      icon: <FileText className="w-8 h-8 text-secondary-brown" />,
       bg: 'bg-blue-50',
       highlight: false,
     },
     {
       title: t('property-title'),
       description: t('property-desc'),
-      icon: <Briefcase className="w-8 h-8 text-[#2C5F5F]" />,
+      icon: <Briefcase className="w-8 h-8 text-secondary-brown" />,
       bg: 'bg-teal-50',
       highlight: true,
     },
     {
       title: t('family-title'),
       description: t('family-desc'),
-      icon: <Heart className="w-8 h-8 text-red-500" />,
+      icon: <Heart className="w-8 h-8 text-secondary-brown" />,
       bg: 'bg-red-50',
       highlight: false,
     },
     {
       title: t('civil-title'),
       description: t('civil-desc'),
-      icon: <Users className="w-8 h-8 text-purple-500" />,
+      icon: <Users className="w-8 h-8 text-secondary-brown" />,
       bg: 'bg-purple-50',
       highlight: false,
     },
@@ -72,23 +72,23 @@ export function ServiceCards() {
     {
       title: t('succession-title'),
       description: t('succession-desc'),
-      icon: <Briefcase className="w-8 h-8 text-green-500" />,
+      icon: <Briefcase className="w-8 h-8 text-secondary-brown" />,
       bg: 'bg-green-50',
       highlight: false,
     },
   ]
   return (
-    <section className="py-16 bg-white relative">
+    <section className="py-16 bg-neutral-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-2">
-              {t('our-services')}
+            <h2 className="text-4xl font-bold text-text-primary mb-2">
+              Nos services
             </h2>
-            <h2 className="text-4xl font-bold text-[#FF0000] mb-6">
-              {t('services-subtitle')}
+            <h2 className="text-4xl font-bold text-secondary-brown mb-6">
+              juridiques
             </h2>
-            <p className="text-gray-600 leading-relaxed max-w-md">
+            <p className="text-text-secondary leading-relaxed max-w-md">
               Notre cabinet d'avocats vous offre une expertise complète en droit des affaires.
               De la création d'entreprise aux contentieux complexes, nous vous accompagnons
               avec professionnalisme et détermination pour défendre vos intérêts.
@@ -101,16 +101,16 @@ export function ServiceCards() {
               <div
                 key={index}
                 ref={(el) => (cardsRef.current[index] = el)}
-                className={`stagger-animation ${service.bg} p-6 rounded-lg hover:shadow-md cursor-pointer hover-lift ${service.highlight ? 'ring-2 ring-amber-200' : ''}`}
+                className={`stagger-animation bg-bg-card p-6 rounded-lg hover:shadow-medium cursor-pointer hover-lift border border-border-light ${service.highlight ? 'ring-2 ring-accent-red' : ''}`}
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="bg-white p-3 rounded-full shadow-sm mb-4">
+                  <div className="bg-secondary-brown/10 p-3 rounded-full mb-4 border border-secondary-brown/20">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">
+                  <h3 className="text-lg font-bold text-text-primary mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-xs text-gray-500">{service.description}</p>
+                  <p className="text-xs text-text-secondary">{service.description}</p>
                 </div>
               </div>
             ))}

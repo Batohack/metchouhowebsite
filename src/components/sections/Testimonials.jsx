@@ -28,7 +28,7 @@ export function Testimonials() {
     },
   ]
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-bg-tertiary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-2xl text-gray-500 mb-2">{t('testimonials-subtitle')}</h2>
@@ -41,10 +41,10 @@ export function Testimonials() {
           {testimonials.map((item, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-md"
+              className="bg-bg-card p-8 rounded-xl border border-border-light shadow-soft hover:shadow-medium"
             >
               <div className="flex flex-col items-center text-center mb-6">
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-4 border-2 border-gray-100">
+                <div className="w-20 h-20 rounded-full overflow-hidden mb-4 border-2 border-secondary-brown">
                   <img
                     src={item.image}
                     alt={item.name}

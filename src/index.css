@@ -1,27 +1,36 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Nouvelle palette claire et naturelle - Inspiration Afrique & Nature Internationale */
+/* Nouvelle Palette Équilibrée - Cabinet d'Avocats International */
 :root {
-  --color-primary: #2d3748;      /* Gris bleu profond élégant */
-  --color-secondary: #718096;    /* Gris moyen raffiné */
-  --color-accent: #d69e2e;       /* Or africain chaleureux */
-  --color-terracotta: #dd6b20;   /* Terracotta léger */
-  --color-sage: #84cc16;        /* Vert d'eau grisé naturel */
-  --color-sand: #f7fafc;         /* Beige sable très clair */
-  --color-cream: #fef7ed;        /* Crème doux et lumineux */
-  --color-white: #ffffff;       /* Blanc pur */
+  /* Couleurs principales */
+  --primary-dark: #0A192F;       /* Bleu Nuit Profond - Autorité */
+  --neutral-white: #FFFFFF;      /* Blanc Pur - Respiration */
+  --secondary-brown: #8D6E63;    /* Marron Bronze - Élégance */
+  --accent-red: #C62828;         /* Rouge Brique - Action */
 
-  /* Tons naturels africains */
-  --color-earth: #a16207;        /* Ocre doux africain */
-  --color-mud: #92400e;          /* Brun terreux naturel */
-  --color-leaf: #16a34a;         /* Vert nature vibrant */
-  --color-sky: #0891b2;          /* Bleu ciel africain */
+  /* Variations textuelles */
+  --text-primary: #0A192F;       /* Bleu Nuit pour texte principal */
+  --text-secondary: #8D6E63;     /* Marron pour texte secondaire */
+  --text-accent: #C62828;        /* Rouge pour accents */
+  --text-light: #FFFFFF;         /* Blanc pour fonds sombres */
 
-  /* Ombres douces et naturelles */
-  --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  --shadow-warm: 0 20px 25px -5px rgba(221, 107, 32, 0.08), 0 10px 10px -5px rgba(221, 107, 32, 0.04);
-  --shadow-natural: 0 4px 6px -1px rgba(161, 98, 7, 0.05), 0 10px 15px -3px rgba(161, 98, 7, 0.08);
+  /* Fonds alternés pour rythme visuel */
+  --bg-dark: #0A192F;            /* Sections impact */
+  --bg-light: #FFFFFF;           /* Sections contenu */
+  --bg-card: #F8F9FA;            /* Cartes sur fond blanc */
+  --bg-card-dark: #1a365d;       /* Cartes sur fond sombre */
+
+  /* Bordures et états */
+  --border-light: #E2E8F0;       /* Bordures subtiles */
+  --border-dark: #8D6E63;        /* Bordures élégantes */
+  --border-accent: #C62828;      /* Bordures CTA */
+
+  /* Ombres équilibrées */
+  --shadow-soft: 0 4px 6px -1px rgba(10, 25, 47, 0.1), 0 10px 15px -3px rgba(10, 25, 47, 0.05);
+  --shadow-medium: 0 10px 15px -3px rgba(10, 25, 47, 0.1), 0 4px 6px -2px rgba(10, 25, 47, 0.05);
+  --shadow-strong: 0 20px 25px -5px rgba(10, 25, 47, 0.1), 0 10px 10px -5px rgba(10, 25, 47, 0.04);
+  --shadow-accent: 0 0 15px rgba(198, 40, 40, 0.2);
 }
 
 /* Typographie haut de gamme */
@@ -29,15 +38,15 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  color: var(--color-primary);
-  background: var(--color-sand);
+  color: var(--text-primary);
+  background: var(--neutral-white);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
   line-height: 1.2;
-  color: var(--color-primary);
+  color: var(--text-primary);
 }
 
 /* Suppression des animations par défaut - on les contrôle maintenant */
@@ -46,19 +55,19 @@ h1, h2, h3, h4, h5, h6 {
   animation-fill-mode: both !important;
 }
 
-/* Boutons naturels et élégants */
+/* Boutons Équilibrés - Nouvelle Palette */
 .btn-primary {
   @apply relative overflow-hidden font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-out;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-terracotta) 100%);
-  color: var(--color-white);
-  box-shadow: var(--shadow-soft);
+  background: var(--accent-red);
+  color: var(--text-light);
+  box-shadow: var(--shadow-medium);
   border: 1px solid transparent;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-warm);
-  background: linear-gradient(135deg, var(--color-terracotta) 0%, var(--color-earth) 100%);
+  box-shadow: var(--shadow-accent);
+  background: var(--hover-accent);
 }
 
 .btn-primary::before {
@@ -68,7 +77,7 @@ h1, h2, h3, h4, h5, h6 {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: left 0.5s;
 }
 
@@ -78,32 +87,45 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-secondary {
   @apply relative overflow-hidden font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-out;
-  background: var(--color-white);
-  color: var(--color-primary);
-  border: 2px solid var(--color-sage);
+  background: transparent;
+  color: var(--secondary-brown);
+  border: 2px solid var(--secondary-brown);
   box-shadow: var(--shadow-soft);
 }
 
 .btn-secondary:hover {
-  background: var(--color-sage);
-  color: var(--color-white);
+  background: var(--secondary-brown);
+  color: var(--text-light);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-natural);
-  border-color: var(--color-leaf);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--hover-secondary);
 }
 
-/* Cartes naturelles et lumineuses */
+/* Cartes Équilibrées - Nouvelle Palette */
 .card-luxury {
   @apply relative overflow-hidden rounded-xl transition-all duration-500 ease-out;
-  background: var(--color-white);
+  background: var(--bg-card);
   box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(0,0,0,0.03);
+  border: 1px solid var(--border-light);
 }
 
 .card-luxury:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-natural);
-  border-color: rgba(214, 158, 46, 0.1);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--secondary-brown);
+}
+
+.card-dark {
+  @apply relative overflow-hidden rounded-xl transition-all duration-500 ease-out;
+  background: var(--bg-card-dark);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-dark);
+}
+
+.card-dark:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--accent-red);
 }
 
 /* Effets de verre subtils */
@@ -113,17 +135,17 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Gradients naturels et lumineux */
+/* Gradients Équilibrés - Nouvelle Palette */
 .gradient-hero {
-  background: linear-gradient(135deg, var(--color-sand) 0%, var(--color-cream) 50%, var(--color-sand) 100%);
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-dark) 100%);
 }
 
 .gradient-section {
-  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-sand) 100%);
+  background: var(--neutral-white);
 }
 
-.gradient-natural {
-  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-sand) 100%);
+.gradient-dark {
+  background: var(--primary-dark);
 }
 
 /* Animations élégantes */
@@ -191,18 +213,18 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--color-primary);
 }
 
-/* Header sticky avec glassmorphism */
+/* Header sticky avec glassmorphism équilibré */
 .header-sticky {
   @apply fixed top-0 left-0 right-0 z-50 transition-all duration-300;
-  background: rgba(247, 250, 252, 0.95);
+  background: rgba(10, 25, 47, 0.95);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(113, 128, 150, 0.1);
+  border-bottom: 1px solid rgba(141, 110, 99, 0.2);
 }
 
 .header-sticky.scrolled {
-  background: rgba(247, 250, 252, 0.85);
+  background: rgba(10, 25, 47, 0.98);
   backdrop-filter: blur(20px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-medium);
 }
 
 /* Animations scroll reveal */

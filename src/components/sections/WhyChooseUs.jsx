@@ -25,7 +25,7 @@ export function WhyChooseUs() {
     return () => observer.disconnect()
   }, [])
   return (
-    <section className="py-16 bg-gray-50 relative overflow-hidden">
+    <section className="py-16 bg-neutral-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
@@ -35,7 +35,7 @@ export function WhyChooseUs() {
         <div className="text-center mb-16">
           <h2
             ref={(el) => (elementsRef.current[0] = el)}
-            className="fade-in-up text-3xl font-bold text-slate-900"
+            className="fade-in-up text-3xl font-bold text-text-primary"
           >
             {t('why-choose-us')}
           </h2>

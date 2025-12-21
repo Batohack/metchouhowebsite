@@ -6,7 +6,7 @@ export function Footer() {
   const { t } = useTranslation()
 
   return (
-    <footer className="bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 text-white relative overflow-hidden border-t border-slate-700">
+    <footer className="bg-gradient-to-br from-bg-primary via-bg-secondary to-bg-primary text-text-primary relative overflow-hidden border-t border-border-primary">
       {/* Pattern de fond subtil */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
@@ -24,14 +24,14 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-xl font-bold text-amber-400 mb-4">Cabinet TCHOUHO</h3>
-            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+            <h3 className="text-xl font-bold text-text-light mb-4">Cabinet TCHOUHO</h3>
+            <p className="text-text-light text-sm leading-relaxed mb-6">
               Excellence juridique depuis 2 ans. Spécialisés en droit des affaires
               et accompagnement personnalisé de nos clients.
             </p>
-            <div className="flex items-center text-amber-400 text-sm font-medium">
+            <div className="flex items-center text-text-light text-sm font-medium">
               <Globe className="w-4 h-4 mr-2" />
-              Abidjan, Côte d'Ivoire
+              Yaoundé, Cameroun
             </div>
           </motion.div>
 
@@ -42,8 +42,8 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h4 className="text-lg font-semibold text-white mb-4">Domaines d'expertise</h4>
-            <ul className="space-y-2 text-sm text-slate-300">
+            <h4 className="text-lg font-semibold text-text-light mb-4">Domaines d'expertise</h4>
+            <ul className="space-y-2 text-sm text-text-light">
               <li>Droit des affaires</li>
               <li>Droit immobilier</li>
               <li>Droit de la famille</li>
@@ -58,18 +58,18 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
+            <h4 className="text-lg font-semibold text-text-light mb-4">Contact</h4>
             <div className="space-y-3">
-              <div className="flex items-center text-slate-300 text-sm">
-                <MapPin className="w-4 h-4 mr-3 text-amber-400 flex-shrink-0" />
+              <div className="flex items-center text-text-light text-sm">
+                <MapPin className="w-4 h-4 mr-3 text-accent-red flex-shrink-0" />
                 <span>Quartier Omnisport,<br />Rue des Généraux</span>
               </div>
-              <div className="flex items-center text-slate-300 text-sm">
-                <Phone className="w-4 h-4 mr-3 text-sage flex-shrink-0" />
+              <div className="flex items-center text-text-light text-sm">
+                <Phone className="w-4 h-4 mr-3 text-accent-red flex-shrink-0" />
                 <span>+225 XX XX XX XX XX</span>
               </div>
-              <div className="flex items-center text-slate-300 text-sm">
-                <Mail className="w-4 h-4 mr-3 text-terracotta flex-shrink-0" />
+              <div className="flex items-center text-text-light text-sm">
+                <Mail className="w-4 h-4 mr-3 text-accent-red flex-shrink-0" />
                 <span>contact@tchouho-avocats.com</span>
               </div>
             </div>
@@ -82,25 +82,25 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <h4 className="text-lg font-semibold text-white mb-4">Liens utiles</h4>
+            <h4 className="text-lg font-semibold text-text-light mb-4">Liens utiles</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-slate-300 hover:text-sage text-sm transition-colors duration-200">
+                <a href="#" className="text-text-light hover:text-accent-red text-sm transition-colors duration-200">
                   À propos
                 </a>
               </li>
               <li>
-                <a href="#" className="text-slate-300 hover:text-sage text-sm transition-colors duration-200">
+                <a href="#" className="text-text-light hover:text-accent-red text-sm transition-colors duration-200">
                   Notre équipe
                 </a>
               </li>
               <li>
-                <a href="#" className="text-slate-300 hover:text-terracotta text-sm transition-colors duration-200">
+                <a href="#" className="text-text-light hover:text-accent-red text-sm transition-colors duration-200">
                   Services
                 </a>
               </li>
               <li>
-                <a href="#" className="text-slate-300 hover:text-earth text-sm transition-colors duration-200">
+                <a href="#" className="text-text-light hover:text-accent-red text-sm transition-colors duration-200">
                   Contact
                 </a>
               </li>
@@ -114,35 +114,35 @@ export function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h4 className="text-lg font-semibold text-white mb-4">Suivez-nous</h4>
+            <h4 className="text-lg font-semibold text-text-light mb-4">Suivez-nous</h4>
             <div className="flex space-x-4">
               <a
                 href="#"
-                className="w-10 h-10 bg-slate-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-200 group"
+                className="w-10 h-10 bg-blue-night-light hover:bg-accent-red rounded-full flex items-center justify-center transition-colors duration-200 group"
                 aria-label="Facebook"
               >
-                <Facebook className="w-5 h-5 text-slate-300 group-hover:text-white" />
+                <Facebook className="w-5 h-5 text-text-light group-hover:text-text-light" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-slate-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-200 group"
+                className="w-10 h-10 bg-blue-night-light hover:bg-accent-red rounded-full flex items-center justify-center transition-colors duration-200 group"
                 aria-label="Twitter"
               >
-                <Twitter className="w-5 h-5 text-slate-300 group-hover:text-white" />
+                <Twitter className="w-5 h-5 text-text-light group-hover:text-text-light" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-slate-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-200 group"
+                className="w-10 h-10 bg-blue-night-light hover:bg-accent-red rounded-full flex items-center justify-center transition-colors duration-200 group"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5 text-slate-300 group-hover:text-white" />
+                <Linkedin className="w-5 h-5 text-text-light group-hover:text-text-light" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 bg-slate-800 hover:bg-amber-600 rounded-full flex items-center justify-center transition-colors duration-200 group"
+                className="w-10 h-10 bg-blue-night-light hover:bg-accent-red rounded-full flex items-center justify-center transition-colors duration-200 group"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5 text-slate-300 group-hover:text-white" />
+                <Instagram className="w-5 h-5 text-text-light group-hover:text-text-light" />
               </a>
             </div>
           </motion.div>
@@ -157,15 +157,15 @@ export function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-slate-400 text-sm mb-4 md:mb-0">
+            <div className="text-text-light text-sm mb-4 md:mb-0">
               © 2024 Cabinet TCHOUHO. Tous droits réservés.
             </div>
 
-            <div className="flex space-x-6 text-sm text-slate-400">
-              <a href="#" className="hover:text-sage transition-colors duration-200">
+            <div className="flex space-x-6 text-sm text-text-light">
+              <a href="#" className="hover:text-accent-red transition-colors duration-200">
                 Politique de confidentialité
               </a>
-              <a href="#" className="hover:text-terracotta transition-colors duration-200">
+              <a href="#" className="hover:text-accent-red transition-colors duration-200">
                 Conditions d'utilisation
               </a>
             </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from '../../hooks/useTranslation'
 import { Mail, Phone, MapPin, Award, Briefcase, Heart, Scale, X } from 'lucide-react'
+import metchouhoImage from '../../assets/Metchouho.jpg'
 
 export function Team() {
   const { t } = useTranslation()
@@ -13,12 +14,12 @@ export function Team() {
       role: t('founder-title'),
       specialty: t('business-law-specialty'),
       experience: '2 ans',
-      image: '/src/assets/Metchouho.jpg',
+      image: metchouhoImage,
       description: t('founder-description'),
       credentials: ['Barreau  Du Cameroun', 'Barreau Du Rwanda', 'Droit Des Affaires'],
       contact: {
         email: 'medardtcouho@yahoo.fr',
-        phone: '+237 677354837'
+        phone: '+237 677423169'
       }
     },
     {
@@ -70,7 +71,7 @@ export function Team() {
   }
 
   return (
-    <section id="team-section" className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+    <section id="team-section" className="py-24 bg-neutral-white relative overflow-hidden">
       {/* Background pattern subtil */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
@@ -97,23 +98,23 @@ export function Team() {
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+            className="text-4xl md:text-5xl font-bold text-text-primary mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {t('our-team')}
+            Notre équipe
           </motion.h2>
 
           <motion.p
-            className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            {t('team-description')}
+            Découvrez notre équipe d'experts juridiques, chacun spécialisé dans son domaine pour vous offrir les meilleurs conseils.
           </motion.p>
         </motion.div>
 
@@ -132,7 +133,7 @@ export function Team() {
 
         {/* Localisation Section */}
         <motion.div
-          className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-slate-100"
+          className="bg-bg-card rounded-2xl shadow-medium p-8 md:p-12 border border-border-light"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -144,27 +145,27 @@ export function Team() {
                 className="flex items-center mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="p-3 bg-amber-50 rounded-xl mr-4">
-                  <MapPin className="w-8 h-8 text-amber-600" />
+                <div className="p-3 bg-secondary-brown/20 rounded-xl mr-4">
+                  <MapPin className="w-8 h-8 text-secondary-brown" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-slate-900">Notre cabinet</h3>
-                  <p className="text-slate-600">Quartier Omnisport, Rue des Généraux, Yaoundé, Cameroun</p>
+                  <h3 className="text-2xl font-bold text-text-primary">Notre cabinet</h3>
+                  <p className="text-text-secondary">Quartier Omnisport, Rue des Généraux, Yaoundé, Cameroun</p>
                 </div>
               </motion.div>
 
               <div className="space-y-4">
-                <div className="flex items-center text-slate-600">
-                  <Phone className="w-5 h-5 mr-3 text-slate-400" />
+                <div className="flex items-center text-text-secondary">
+                  <Phone className="w-5 h-5 mr-3 text-secondary-brown" />
                   <span>+225 XX XX XX XX XX</span>
                 </div>
-                <div className="flex items-center text-slate-600">
-                  <Mail className="w-5 h-5 mr-3 text-slate-400" />
-                  <span>contact@tchouho-avocats.com</span>
+                <div className="flex items-center text-text-secondary">
+                  <Mail className="w-5 h-5 mr-3 text-secondary-brown" />
+                  <span>medardtcouho@ya</span>
                 </div>
-                <div className="flex items-center text-slate-600">
-                  <MapPin className="w-5 h-5 mr-3 text-slate-400" />
-                  <span>Abidjan, Côte d'Ivoire</span>
+                <div className="flex items-center text-text-secondary">
+                  <MapPin className="w-5 h-5 mr-3 text-secondary-brown" />
+                  <span>Yaoundé, Cameroun</span>
                 </div>
               </div>
             </div>
@@ -266,21 +267,19 @@ function TeamMemberCard({ member, index }) {
         {/* Overlay avec informations */}
         <div className="absolute bottom-6 left-6 right-6 text-white drop-shadow-lg">
           <motion.h3
-            className="text-2xl font-bold mb-2 text-amber-100 drop-shadow-2xl"
+            className="text-2xl font-bold mb-2 text-text-primary"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            style={{ textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}
           >
             {member.name}
           </motion.h3>
 
           <motion.p
-            className="text-amber-200 font-medium mb-3 drop-shadow-xl"
+            className="text-secondary-brown font-medium mb-3"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            style={{ textShadow: '0 1px 2px rgba(0,0,0,0.7)' }}
           >
             {member.role}
           </motion.p>
@@ -306,7 +305,7 @@ function TeamMemberCard({ member, index }) {
       {/* Content */}
       <div className="p-8">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-semibold text-amber-600 bg-amber-50 px-4 py-2 rounded-full border border-amber-100">
+          <span className="text-sm font-semibold text-text-primary bg-secondary-brown/10 px-4 py-2 rounded-full border border-secondary-brown">
             {member.specialty}
           </span>
           <span className="text-sm font-medium text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">
@@ -335,7 +334,7 @@ function TeamMemberCard({ member, index }) {
 
         {/* Contact Button */}
         <motion.button
-          className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white py-4 px-6 rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
+          className="w-full bg-accent-red hover:bg-hover-accent text-text-light py-4 px-6 rounded-xl font-semibold text-sm transition-all duration-300 shadow-medium hover:shadow-strong"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
