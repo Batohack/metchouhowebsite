@@ -67,14 +67,7 @@ export function Hero() {
           {/* Contenu de gauche (Texte et Boutons) */}
           <div className="space-y-8">
             <motion.div variants={itemVariants} className="space-y-6">
-              <motion.div
-                className="inline-flex items-center px-4 py-2 rounded-full bg-secondary-brown border border-secondary-brown text-white text-sm font-medium"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Award className="w-4 h-4 mr-2 text-amber-400" />
-                Cabinet d'avocats au quartier Omnisport
-              </motion.div>
+             
 
               <motion.h1
                 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white text-glow"
@@ -84,6 +77,14 @@ export function Hero() {
                 <br />
                 <span className="text-white brightness-110">en Afrique</span>
               </motion.h1>
+              <motion.div
+                className="inline-flex items-center px-4 py-2 rounded-full bg-secondary-brown border border-secondary-brown text-white text-sm font-medium"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <Award className="w-4 h-4 mr-2 text-amber-400" />
+                Cabinet d'avocats au quartier Omnisport
+              </motion.div>
 
               <motion.p
                 className="text-xl text-white max-w-xl leading-relaxed"
@@ -109,14 +110,7 @@ export function Hero() {
                 <ArrowRight className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </motion.button>
               
-              <motion.button
-                className="flex items-center justify-center px-8 py-4 rounded-xl border border-white/30 text-white font-bold hover:bg-white/10 transition-all"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Users className="w-5 h-5 mr-2" />
-                Notre équipe
-              </motion.button>
+             
             </motion.div>
 
             {/* Stats en bas à gauche */}

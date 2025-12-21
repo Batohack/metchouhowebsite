@@ -35,7 +35,6 @@ const teamMembersData = [
   }
 ]
 
-// --- VARIANTES D'ANIMATION ---
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -58,6 +57,7 @@ export function Team() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header : Correction Photo 1 (Texte Sombre sur fond clair) */}
         <motion.div className="text-center mb-20" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
           <motion.div variants={fadeInUp} className="inline-flex items-center px-4 py-2 rounded-full bg-amber-100/50 border border-amber-200 text-amber-900 text-sm font-medium mb-6">
             <Award className="w-4 h-4 mr-2" /> Équipe d'experts
@@ -91,19 +91,14 @@ function TeamMemberCard({ member, t, onImageClick }) {
       variants={fadeInUp} 
       whileHover={{ y: -8 }}
     >
-      {/* Zone Image */}
       <div className="relative h-96 overflow-hidden cursor-pointer" onClick={onImageClick}>
         <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
         
-        {/* Overlay assombri pour le contraste du texte blanc */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a07] via-[#0f0a07]/60 to-transparent opacity-90" />
+        {/* Overlay pour protéger le texte blanc sur l'image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a07] via-[#0f0a07]/40 to-transparent opacity-90" />
 
-        {/* Informations sur l'image - FORCÉ EN BLANC */}
         <div className="absolute bottom-6 left-6 right-6 z-20">
-          <h3 
-            className="text-2xl font-bold mb-1 !text-white drop-shadow-lg"
-            style={{ color: '#ffffff' }} // Sécurité supplémentaire inline
-          >
+          <h3 className="text-2xl font-bold mb-1 !text-white drop-shadow-md">
             {member.name}
           </h3>
           <p className="text-amber-300 font-semibold mb-3 drop-shadow-sm uppercase text-xs tracking-wider">
@@ -119,7 +114,6 @@ function TeamMemberCard({ member, t, onImageClick }) {
         </div>
       </div>
 
-      {/* Contenu textuel (Fond Blanc) */}
       <div className="p-8 bg-white">
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs font-bold text-amber-900 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-100">
@@ -127,13 +121,13 @@ function TeamMemberCard({ member, t, onImageClick }) {
           </span>
           <span className="text-xs font-medium text-slate-500">{member.experience}</span>
         </div>
-        <p className="text-slate-600 text-sm leading-relaxed mb-6 h-12 line-clamp-2">{t(member.descriptionKey)}</p>
+        <p className="text-[#5d4037] text-sm leading-relaxed mb-6 h-12 line-clamp-2">{t(member.descriptionKey)}</p>
         
         <div className="mb-6">
           <h4 className="text-xs font-bold text-[#3e2723] uppercase tracking-widest mb-3">Expertise</h4>
           <div className="flex flex-wrap gap-2">
             {member.credentials.map((cred, idx) => (
-              <span key={idx} className="text-[11px] bg-slate-50 text-slate-600 px-2.5 py-1 rounded border border-slate-100">{cred}</span>
+              <span key={idx} className="text-[11px] bg-slate-50 text-[#5d4037] px-2.5 py-1 rounded border border-slate-100">{cred}</span>
             ))}
           </div>
         </div>

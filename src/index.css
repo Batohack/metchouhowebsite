@@ -1,87 +1,108 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* --- Configuration des Variables --- */
+/* --- Configuration Tailwind v4 --- */
 @theme {
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+
   --color-primary-dark: #0f0a07;
+  --color-neutral-beige: #e8e2dc;
+  --color-text-dark: #1a120b;
+  --color-text-light: #ffffff;
   --color-accent-amber: #c28d58;
   --color-accent-red: #a82323;
 }
 
-:root {
-  --primary-dark: #0f0a07;
-  --neutral-beige: #e8e2dc;
-  --text-dark: #1a120b;
-  --text-light: #ffffff;
-  --glow-color: rgba(255, 255, 255, 0.4);
+/* --- Couche de Base --- */
+@layer base {
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  body {
+    background-color: var(--color-neutral-beige);
+    color: var(--color-text-dark);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Titres sombres par défaut (pour fonds clairs) */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-text-dark);
+  }
 }
 
-/* --- Définition des classes personnalisées --- */
-.text-glow {
-  text-shadow: 0 0 12px var(--glow-color), 0 0 25px rgba(255, 255, 255, 0.1);
+/* --- Couche de Composants --- */
+@layer components {
+  
+  /* CLASSE MAGIQUE : Applique ceci sur <section className="relative section-dark"> (Hero) ou <footer> */
+  .section-dark {
+    h1, h2, h3, h4, p, span, a, div {
+      color: var(--color-text-light) !important;
+    }
+  }
+
+  /* Bouton Prestige */
+  .btn-primary {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-light) !important;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    transition: all 300ms ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+  }
+
+  /* Cartes Luxury (Services & Team) - Fond blanc / Texte sombre */
+  .card-luxury {
+    background-color: white;
+    border-radius: 1.25rem;
+    padding: 2rem;
+    border: 1px solid rgba(194, 141, 88, 0.2);
+    transition: all 500ms ease;
+    box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-luxury h3 {
+    color: var(--color-text-dark) !important;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-luxury p {
+    color: #4a3728; /* Marron doux pour la lecture */
+  }
 }
 
-/* --- Typographie & Base --- */
-body {
-  font-family: 'Inter', sans-serif;
-  color: var(--text-dark);
-  background: var(--neutral-beige);
-  line-height: 1.6;
-  filter: brightness(0.92) contrast(1.02);
+/* --- Couche d'Utilitaires --- */
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+
+  /* Overlay pour le texte blanc sur les photos d'avocats */
+  .member-photo-overlay {
+    background: linear-gradient(to top, var(--color-primary-dark) 0%, rgba(15, 10, 7, 0.4) 60%, transparent 100%);
+  }
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  color: var(--text-dark);
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
-/* --- FORCE LE BLANC ET LA SURBRILLANCE --- */
-/* Remplacement du @apply qui causait l'erreur par du CSS pur */
-footer, footer h1, footer h2, footer h3, footer h4, footer p, footer a,
-.bg-primary-dark, .bg-primary-dark h1, .bg-primary-dark h2, .bg-primary-dark h3,
-section.relative h1, section.relative h2, section.relative p,
-.team-member-name, .team-member-role, .member-name,
-.card-luxury h3, .card-luxury .text-xl {
-  color: var(--text-light) !important;
-  fill: var(--text-light) !important;
+::-webkit-scrollbar-track {
+  background: var(--color-neutral-beige);
 }
-
-/* Application manuelle du glow au titre du Hero pour éviter l'erreur de build */
-section.relative h1 {
-  text-shadow: 0 0 12px var(--glow-color), 0 0 25px rgba(255, 255, 255, 0.1);
-  filter: brightness(1.2);
-}
-
-/* --- Boutons --- */
-.btn-primary {
-  background-color: var(--primary-dark);
-  color: var(--text-light) !important;
-  padding: 1rem 2rem;
-  border-radius: 0.75rem;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  transition: all 0.3s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-}
-
-/* --- Cartes Luxury --- */
-.card-luxury {
-  background-color: #ffffff;
-  border-radius: 1rem;
-  border: 1px solid rgba(194, 141, 88, 0.2);
-  box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.15);
-  transition: all 0.5s ease-out;
-}
-
-.card-luxury:hover {
-  transform: translateY(-8px);
-  border-color: var(--accent-amber);
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-dark);
+  border-radius: 10px;
 }
