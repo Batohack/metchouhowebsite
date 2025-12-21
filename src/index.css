@@ -1,105 +1,112 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* --- Nouvelle Palette Épurée & Prestige --- */
+/* --- Nouvelle Palette Prestige & Contraste Élevé --- */
 :root {
-  /* Couleurs de base */
-  --primary-royal: #1a237e;      /* Bleu Royal - Institutionnel */
-  --primary-dark: #1a120b;       /* Brun Chocolat Profond - Luxe & Fond sombre */
-  --neutral-beige: #fdfaf7;      /* Beige Sépia - Fond clair chaleureux */
-  --accent-amber: #d97706;       /* Ambre / Doré - Détails & Icones */
-  --accent-red: #c62828;         /* Rouge Brique - Boutons d'action */
-
-  /* Système de texte (Lisibilité Maximale) */
-  --text-dark: #3e2723;          /* Marron sombre pour texte sur fond beige */
-  --text-muted: #5d4037;         /* Marron adouci pour paragraphes */
-  --text-light: #ffffff;         /* Blanc pur pour écritures sur fond sombre */
-  --text-amber: #fcd34d;         /* Ambre clair pour titres sur fond sombre */
-
-  /* Fonds de composants */
-  --bg-card: #ffffff;            /* Fond de carte blanc sur section beige */
-  --bg-footer: #1a120b;          /* Fond du footer brun sombre */
+  /* Fonds assombris pour l'ambiance feutrée */
+  --primary-dark: #0f0a07;       /* Brun-Noir profond */
+  --neutral-beige: #e8e2dc;      /* Beige grisâtre mat (fond de page) */
   
-  /* Bordures et Ombres */
-  --border-amber: rgba(217, 119, 6, 0.2);
-  --shadow-luxury: 0 10px 30px -10px rgba(26, 18, 11, 0.15);
-  --shadow-gold: 0 10px 20px -5px rgba(217, 119, 6, 0.1);
+  /* Couleurs d'Accent */
+  --accent-amber: #c28d58;       /* Or vieilli / Bronze */
+  --accent-red: #a82323;         /* Rouge Brique sombre */
+
+  /* Système de Texte */
+  --text-dark: #1a120b;          /* Texte sur fond clair */
+  --text-light: #ffffff;         /* Blanc pur pour l'éclat */
+  --glow-color: rgba(255, 255, 255, 0.4);
 }
 
-/* --- Typographie Global --- */
+/* --- Typographie & Base --- */
 body {
   font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
   color: var(--text-dark);
-  background: var(--neutral-beige); /* Le fond du site devient beige léger */
+  background: var(--neutral-beige);
+  line-height: 1.6;
+  filter: brightness(0.92) contrast(1.02);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
-  line-height: 1.2;
   color: var(--text-dark);
 }
 
-/* Correction pour les écritures blanches sur les composants sombres */
-.bg-primary-dark h1, .bg-primary-dark h2, .bg-primary-dark h3, .bg-primary-dark h4,
-footer h1, footer h2, footer h3, footer h4,
-.card-dark h1, .card-dark h2, .card-dark h3 {
+/* --- EFFET DE SURBRILLANCE (GLOW) --- */
+.text-glow {
+  text-shadow: 0 0 12px var(--glow-color), 0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+/* --- FORCE LE BLANC SUR LES SECTIONS SOMBRES & LES CARTES AVOCATS --- */
+footer, footer h1, footer h2, footer h3, footer h4, footer p, footer a,
+.bg-primary-dark, .bg-primary-dark h1, .bg-primary-dark h2, .bg-primary-dark h3,
+section.relative h1, section.relative h2, section.relative p,
+.team-member-name, 
+.team-member-role, 
+.member-name,
+/* Ciblage spécifique pour les noms des avocats sur les photos */
+.card-luxury h3, 
+.card-luxury .text-xl,
+[class*="Maître"], 
+[class*="Me "] {
   color: var(--text-light) !important;
+  fill: var(--text-light) !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Surbrillance spécifique pour le titre principal (Hero) */
+section.relative h1 {
+  @apply text-glow;
+  filter: brightness(1.2);
 }
 
 /* --- Boutons Dynamiques --- */
 .btn-primary {
   @apply relative overflow-hidden font-bold py-4 px-8 rounded-xl transition-all duration-300;
   background: var(--primary-dark);
-  color: var(--text-light);
-  box-shadow: var(--shadow-luxury);
+  color: var(--text-light) !important;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .btn-primary:hover {
-  background: var(--text-muted);
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px -10px rgba(26, 18, 11, 0.3);
-}
-
-.btn-accent {
-  @apply relative overflow-hidden font-bold py-4 px-8 rounded-xl transition-all duration-300;
-  background: var(--accent-red);
-  color: var(--text-light);
+  filter: brightness(1.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 /* --- Cartes Luxury --- */
 .card-luxury {
   @apply relative overflow-hidden rounded-2xl transition-all duration-500 ease-out;
-  background: var(--bg-card);
-  box-shadow: var(--shadow-luxury);
-  border: 1px solid var(--border-amber);
+  background: #ffffff;
+  box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(194, 141, 88, 0.2);
 }
 
 .card-luxury:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px -15px rgba(62, 39, 35, 0.15);
   border-color: var(--accent-amber);
 }
 
-/* --- Header & Navigation --- */
+/* --- Header Navigation --- */
 .header-glass {
   @apply fixed top-0 left-0 right-0 z-50 transition-all duration-500;
-  background: rgba(26, 18, 11, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(15, 10, 7, 0.1);
+  backdrop-filter: blur(12px);
 }
 
 .header-glass.scrolled {
-  background: rgba(26, 18, 11, 0.95);
-  box-shadow: var(--shadow-luxury);
+  background: rgba(15, 10, 7, 0.96);
+}
+
+.header-glass.scrolled a, .header-glass.scrolled button {
+  color: var(--text-light) !important;
 }
 
 /* --- Utilitaires d'Animation --- */
 .fade-in-up {
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(20px);
+  transition: all 0.7s ease-out;
 }
 
 .fade-in-up.revealed {
@@ -107,28 +114,14 @@ footer h1, footer h2, footer h3, footer h4,
   transform: translateY(0);
 }
 
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.hover-lift:hover {
-  transform: translateY(-5px);
-}
-
 /* Scrollbar Style */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--neutral-beige);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-dark);
+  background: #33221a;
   border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-amber);
 }

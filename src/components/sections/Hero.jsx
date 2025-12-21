@@ -5,16 +5,14 @@ import { safeScrollToElement } from '../../utils/scroll.utils'
 import heroImage from '../../assets/HeroC.png'
 import heroImageb from '../../assets/barrea.webp'
 
-
 export function Hero() {
   const { t } = useTranslation()
 
   const scrollToTeam = () => {
-    // Utilisation de la fonction utilitaire sécurisée
     safeScrollToElement('team-section', {
       behavior: 'smooth',
       block: 'start',
-      offset: 80 // Petit offset pour éviter que le header cache le contenu
+      offset: 80 
     })
   }
 
@@ -40,7 +38,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Image de fond avec blur */}
+      {/* Background Image */}
       <div
         className="absolute inset-0"
         style={{
@@ -52,19 +50,16 @@ export function Hero() {
         }}
       ></div>
 
-      {/* --- MODIFICATION ICI (Option 1) --- */}
-      {/* J'ai passé l'opacité de /30 à /70 pour assombrir le fond */}
       <div className="absolute inset-0 bg-primary-dark/70" />
-      {/* ----------------------------------- */}
 
-      {/* Formes géométriques décoratives */}
+      {/* Formes décoratives */}
       <div className="absolute top-20 right-10 w-32 h-32 bg-amber-200/20 rounded-full blur-xl" />
       <div className="absolute bottom-32 left-16 w-24 h-24 bg-terracotta/15 rounded-full blur-lg" />
-      <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-sage/20 rounded-full blur-md" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+          // Gap réduit pour maximiser l'espace de l'image
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -114,17 +109,9 @@ export function Hero() {
                 <ArrowRight className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </motion.button>
 
-              <motion.button
-                className="btn-secondary text-white group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Users className="inline-block w-5 h-5 mr-2" />
-                Notre équipe
-              </motion.button>
             </motion.div>
 
-            {/* Stats avec design africain */}
+            {/* Stats */}
             <motion.div
               className="grid grid-cols-3 gap-6 pt-8"
               variants={itemVariants}
@@ -144,27 +131,29 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right Content - Hero Image */}
+          {/* Right Content - Image poussée au maximum à droite */}
           <motion.div
-            className="relative w-full max-w-lg mx-auto"
+            // MODIFICATIONS : max-w-none pour utiliser tout l'espace et lg:ml-auto pour pousser l'image contre le bord droit de sa colonne
+            className="relative w-full max-w-none lg:ml-auto lg:pl-12"
             variants={itemVariants}
           >
             <motion.div
-              className="relative rounded-2xl overflow-hidden shadow-2xl"
+              // lg:float-right pour forcer l'alignement sur le bord extérieur
+              className="relative rounded-2xl overflow-hidden shadow-2xl lg:float-right"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
               <img
                 src={heroImageb}
                 alt="Cabinet d'avocats TCHOUHO - Excellence juridique"
-                className="w-full h-auto object-cover"
+                // w-full h-auto pour garder les proportions tout en remplissant le conteneur
+                className="w-full max-w-3xl h-auto object-cover"
               />
             </motion.div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Ligne de séparation élégante */}
       <motion.div
         className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"
         initial={{ scaleX: 0 }}

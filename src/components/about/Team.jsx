@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from '../../hooks/useTranslation'
-import { Mail, Phone, MapPin, Award, X } from 'lucide-react'
+import { Mail, Phone, MapPin, Award, X, ArrowRight } from 'lucide-react'
 import metchouhoImage from '../../assets/Metchouho.jpg'
 
 // --- DONNÉES STATIQUES ---
@@ -46,21 +46,18 @@ const staggerContainer = {
   visible: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.2 } }
 }
 
-// --- COMPOSANT PRINCIPAL ---
 export function Team() {
   const { t } = useTranslation()
   const [selectedImage, setSelectedImage] = useState(null)
 
   return (
     <section id="team-section" className="py-24 bg-[#fdfaf7] relative overflow-hidden">
-      {/* Pattern de fond marron subtil */}
       <div 
         className="absolute inset-0 opacity-[0.04] pointer-events-none" 
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238B4513' fill-opacity='1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")` }} 
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
         <motion.div className="text-center mb-20" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}>
           <motion.div variants={fadeInUp} className="inline-flex items-center px-4 py-2 rounded-full bg-amber-100/50 border border-amber-200 text-amber-900 text-sm font-medium mb-6">
             <Award className="w-4 h-4 mr-2" /> Équipe d'experts
@@ -73,24 +70,19 @@ export function Team() {
           </motion.p>
         </motion.div>
 
-        {/* Grille des membres */}
         <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {teamMembersData.map((member, index) => (
             <TeamMemberCard key={index} member={member} t={t} onImageClick={() => setSelectedImage(member.image)} />
           ))}
         </motion.div>
 
-        {/* Section Localisation */}
         <LocationSection />
       </div>
 
-      {/* Lightbox Modal */}
       <ImageLightbox selectedImage={selectedImage} onClose={() => setSelectedImage(null)} />
     </section>
   )
 }
-
-// --- SOUS-COMPOSANTS ---
 
 function TeamMemberCard({ member, t, onImageClick }) {
   return (
@@ -100,17 +92,26 @@ function TeamMemberCard({ member, t, onImageClick }) {
       whileHover={{ y: -8 }}
     >
       {/* Zone Image */}
-      <div className="relative h-80 overflow-hidden cursor-pointer" onClick={onImageClick}>
+      <div className="relative h-96 overflow-hidden cursor-pointer" onClick={onImageClick}>
         <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a120b] via-[#1a120b]/40 to-transparent opacity-90" />
+        
+        {/* Overlay assombri pour le contraste du texte blanc */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a07] via-[#0f0a07]/60 to-transparent opacity-90" />
 
-        {/* Informations sur l'image (Écritures blanches) */}
-        <div className="absolute bottom-6 left-6 right-6 text-white">
-          <h3 className="text-2xl font-bold mb-1 text-white drop-shadow-md">{member.name}</h3>
-          <p className="text-amber-200 font-medium mb-3 drop-shadow-sm">{t(member.roleKey)}</p>
+        {/* Informations sur l'image - FORCÉ EN BLANC */}
+        <div className="absolute bottom-6 left-6 right-6 z-20">
+          <h3 
+            className="text-2xl font-bold mb-1 !text-white drop-shadow-lg"
+            style={{ color: '#ffffff' }} // Sécurité supplémentaire inline
+          >
+            {member.name}
+          </h3>
+          <p className="text-amber-300 font-semibold mb-3 drop-shadow-sm uppercase text-xs tracking-wider">
+            {t(member.roleKey)}
+          </p>
           <div className="flex flex-wrap gap-2">
             {member.credentials.slice(0, 2).map((cred, idx) => (
-              <span key={idx} className="text-[10px] uppercase tracking-wider bg-white/20 backdrop-blur-md px-2 py-1 rounded border border-white/30 text-white">
+              <span key={idx} className="text-[10px] uppercase tracking-wider bg-white/10 backdrop-blur-md px-2 py-1 rounded border border-white/20 !text-white">
                 {cred}
               </span>
             ))}
@@ -118,7 +119,7 @@ function TeamMemberCard({ member, t, onImageClick }) {
         </div>
       </div>
 
-      {/* Contenu textuel */}
+      {/* Contenu textuel (Fond Blanc) */}
       <div className="p-8 bg-white">
         <div className="flex items-center justify-between mb-4">
           <span className="text-xs font-bold text-amber-900 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-100">
@@ -126,7 +127,7 @@ function TeamMemberCard({ member, t, onImageClick }) {
           </span>
           <span className="text-xs font-medium text-slate-500">{member.experience}</span>
         </div>
-        <p className="text-slate-600 text-sm leading-relaxed mb-6">{t(member.descriptionKey)}</p>
+        <p className="text-slate-600 text-sm leading-relaxed mb-6 h-12 line-clamp-2">{t(member.descriptionKey)}</p>
         
         <div className="mb-6">
           <h4 className="text-xs font-bold text-[#3e2723] uppercase tracking-widest mb-3">Expertise</h4>
@@ -138,11 +139,11 @@ function TeamMemberCard({ member, t, onImageClick }) {
         </div>
         
         <motion.button 
-          whileHover={{ scale: 1.02 }} 
+          whileHover={{ scale: 1.02, backgroundColor: "#1a120b" }} 
           whileTap={{ scale: 0.98 }} 
-          className="w-full bg-[#3e2723] hover:bg-[#5d4037] text-white py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg"
+          className="w-full bg-[#3e2723] text-white py-4 rounded-xl font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2"
         >
-          Prendre rendez-vous
+          Prendre rendez-vous <ArrowRight className="w-4 h-4" />
         </motion.button>
       </div>
     </motion.div>
@@ -152,7 +153,7 @@ function TeamMemberCard({ member, t, onImageClick }) {
 function LocationSection() {
   return (
     <motion.div 
-      className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-amber-100"
+      className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-amber-100 mt-12"
       variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -173,11 +174,11 @@ function LocationSection() {
         </div>
         <div className="relative aspect-video rounded-2xl overflow-hidden shadow-inner border-4 border-slate-50">
           <img 
-            src="https://maps.googleapis.com/maps/api/staticmap?center=Yaounde,Cameroon&zoom=14&size=600x300&maptype=roadmap&markers=color:red%7CYaounde&key=VOTRE_CLE_API" 
+            src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
             alt="Carte Cabinet" 
-            className="w-full h-full object-cover" 
+            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#3e2723]/20 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-amber-900/10 pointer-events-none" />
         </div>
       </div>
     </motion.div>
@@ -189,18 +190,18 @@ function ImageLightbox({ selectedImage, onClose }) {
     <AnimatePresence>
       {selectedImage && (
         <motion.div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#1a120b]/95 backdrop-blur-md"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#0f0a07]/98 backdrop-blur-md"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} 
           onClick={onClose}
         >
           <motion.div 
-            className="relative max-w-5xl w-full"
+            className="relative max-w-4xl w-full"
             initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={selectedImage} alt="Agrandissement" className="w-full h-auto max-h-[85vh] object-contain rounded-xl shadow-2xl border-4 border-white/10" />
+            <img src={selectedImage} alt="Agrandissement" className="w-full h-auto max-h-[80vh] object-contain rounded-2xl shadow-2xl border-2 border-amber-900/20" />
             <button 
-              className="absolute -top-12 right-0 text-white/70 hover:text-white transition-colors"
+              className="absolute -top-14 right-0 bg-white/10 p-2 rounded-full text-white hover:bg-white/20 transition-all"
               onClick={onClose}
             >
               <X className="w-8 h-8" />
