@@ -12,100 +12,71 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = getSafeScrollY()
-      setIsScrolled(scrollY > 50)
+      setIsScrolled(scrollY > 20)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const navItems = [
-    {
-      name: t('Immigration'),
-      hasDropdown: true,
-    },
-    {
-      name: t('Property'),
-      hasDropdown: true,
-    },
-    {
-      name: t('Matrimonial'),
-      hasDropdown: true,
-    },
-    {
-      name: t('Personal'),
-      hasDropdown: true,
-    },
-    {
-      name: t('Business'),
-      hasDropdown: true,
-    },
-    {
-      name: t('Will'),
-      hasDropdown: true,
-    },
+    { name: t('Immigration'), hasDropdown: true },
+    { name: t('Property'), hasDropdown: true },
+    { name: t('Matrimonial'), hasDropdown: true },
+    { name: t('Personal'), hasDropdown: true },
+    { name: t('Business'), hasDropdown: true },
+    { name: t('Will'), hasDropdown: true },
   ]
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled
-        ? 'bg-blue-night/95 backdrop-blur-md shadow-lg'
-        // MODIFICATION ICI : Ajout d'un fond noir léger (20% d'opacité) au lieu de 'bg-transparent'
-        : 'bg-black/20 backdrop-blur-md'
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled ? 'bg-[#0f0a07]/95 backdrop-blur-lg shadow-2xl' : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
+      {/* Container sans marges latérales excessives */}
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-24">
+          
+          {/* Logo dans un Cercle Blanc */}
           <div className="flex-shrink-0 flex items-center">
-            <img
-              src={logo}
-              alt="Cabinet TCHOUHO - Avocats"
-              className="h-12 w-auto"
-            />
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden border-2 border-amber-600/20 hover:scale-105 transition-transform duration-300">
+              <img
+                src={logo}
+                alt="Logo Cabinet"
+                className="w-12 h-12 object-contain"
+              />
+            </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-6 items-center">
-            {/* Language Toggle */}
+          <nav className="hidden lg:flex space-x-8 items-center">
+            {/* Language Toggle : Épuré sans bordures */}
             <button
               onClick={toggleLanguage}
-              // MODIFICATION ICI : Texte en blanc ('text-white') au lieu de 'text-text-light'
-              className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-secondary-brown hover:bg-hover-secondary text-white text-sm font-semibold"
-              title={`Changer de langue (${language === 'fr' ? 'English' : 'Français'})`}
+              className="flex items-center space-x-2 px-3 py-2 text-white hover:text-amber-400 transition-all"
             >
-              <Globe className="w-4 h-4" />
-              <span>{language.toUpperCase()}</span>
+              <Globe className="w-5 h-5 text-amber-500" />
+              <span className="font-bold text-sm tracking-widest">{language.toUpperCase()}</span>
             </button>
+
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href="#"
-                // MODIFICATION ICI : Texte en blanc ('text-white') au lieu de 'text-slate-200'
-                className="text-white hover:text-accent-red px-3 py-2 text-sm font-medium flex items-center rounded-lg hover:bg-primary-dark"
+                className="text-white hover:text-amber-400 px-2 py-2 text-sm font-bold transition-colors tracking-wide"
               >
                 {item.name}
-                {item.hasDropdown && <ChevronDown className="ml-1 h-3 w-3" />}
+                {item.hasDropdown && <ChevronDown className="ml-1 h-3 w-3 inline opacity-70" />}
               </a>
             ))}
-            {/* MODIFICATION ICI : Texte en blanc ('text-white') */}
-            <button className="bg-accent-red hover:bg-hover-accent text-white px-6 py-2 rounded-lg text-sm font-semibold">
+
+            <button className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-95">
               Consulter un avocat
             </button>
           </nav>
 
           {/* Mobile menu button */}
-          <div className="flex items-center lg:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              // MODIFICATION ICI : Texte en blanc ('text-white')
-              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-accent-primary focus:outline-none"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
+          <div className="lg:hidden">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white p-2">
+              {isMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
             </button>
           </div>
         </div>
@@ -113,34 +84,16 @@ export function Header() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-primary-dark border-t border-secondary-brown">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {/* Language Toggle Mobile */}
-            <button
-              onClick={toggleLanguage}
-              // MODIFICATION ICI : Texte en blanc ('text-white')
-              className="flex items-center space-x-2 px-3 py-2 rounded-md bg-secondary-brown hover:bg-hover-secondary text-white w-full text-left"
-            >
-              <Globe className="w-4 h-4" />
-              <span>{language === 'fr' ? 'English' : 'Français'}</span>
+        <div className="lg:hidden bg-[#0f0a07] border-t border-amber-900/20">
+          <div className="px-5 py-8 space-y-4">
+            <button onClick={toggleLanguage} className="flex items-center space-x-3 text-white">
+              <Globe className="w-6 h-6 text-amber-500" />
+              <span className="font-bold uppercase tracking-tighter">{language === 'fr' ? 'English' : 'Français'}</span>
             </button>
-
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href="#"
-                // MODIFICATION ICI : Texte en blanc ('text-white')
-                className="text-white hover:text-accent-red hover:bg-primary-dark block px-3 py-2 rounded-md text-base font-medium"
-              >
-                {item.name}
-              </a>
+              <a key={item.name} href="#" className="text-white block text-lg font-medium">{item.name}</a>
             ))}
-            <div className="pt-4 pb-2">
-              {/* MODIFICATION ICI : Texte en blanc ('text-white') */}
-              <button className="w-full bg-accent-red hover:bg-hover-accent text-white px-6 py-3 rounded-lg text-base font-semibold">
-                Consulter un avocat
-              </button>
-            </div>
+            <button className="w-full bg-[#a82323] text-white py-4 rounded-xl font-bold">Consulter un avocat</button>
           </div>
         </div>
       )}

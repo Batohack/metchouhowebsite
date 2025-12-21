@@ -5,15 +5,15 @@ import { useTranslation } from '../../hooks/useTranslation'
 export function Footer() {
   const { t } = useTranslation()
 
-  // Palette harmonisée avec le reste du site
-  const darkBrownBg = 'bg-[#1a120b]' // Brun très sombre pour le prestige
-  const accentAmber = 'text-amber-500'
-  const whiteText = 'text-white/90'
+  // Configuration de la palette : Focus sur le blanc pur pour le texte
+  const darkBrownBg = 'bg-[#1a120b]' 
+  const accentAmber = 'text-amber-500' 
+  const whiteText = 'text-white' 
   const hoverLink = 'hover:text-amber-500 transition-colors duration-300'
 
   return (
     <footer className={`${darkBrownBg} relative overflow-hidden border-t border-[#3e2723]`}>
-      {/* Pattern de fond subtil (Cercles ambrés très discrets) */}
+      {/* Pattern de fond subtil */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div className="absolute inset-0" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d97706' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
@@ -21,17 +21,18 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Main Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           
-          {/* Cabinet Info */}
+          {/* Section 1: Cabinet Info (H3) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="lg:col-span-1"
           >
-            <h3 className="text-2xl font-bold text-white mb-6">Cabinet TCHOUHO</h3>
+            <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-wider">
+              Cabinet TCHOUHO
+            </h3>
             <p className={`${whiteText} text-sm leading-relaxed mb-6 italic`}>
               "Excellence juridique et accompagnement stratégique au cœur de l'Afrique."
             </p>
@@ -41,9 +42,11 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Services */}
+          {/* Section 2: Expertises (H4) */}
           <div className="space-y-6">
-            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Expertises</h4>
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
+              Expertises
+            </h4>
             <ul className={`space-y-3 text-sm ${whiteText}`}>
               <li className={hoverLink}><a href="#">Droit des affaires</a></li>
               <li className={hoverLink}><a href="#">Droit immobilier</a></li>
@@ -52,9 +55,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Section 3: Contact (H4) */}
           <div className="space-y-6">
-            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Contact</h4>
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
+              Contact
+            </h4>
             <div className={`space-y-4 text-sm ${whiteText}`}>
               <div className="flex items-start">
                 <MapPin className={`w-4 h-4 mr-3 ${accentAmber} mt-1`} />
@@ -71,20 +76,24 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Section 4: Navigation (H4) */}
           <div className="space-y-6">
-            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Navigation</h4>
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
+              Navigation
+            </h4>
             <ul className={`space-y-3 text-sm ${whiteText}`}>
-              <li><a href="#" className={hoverLink}>À propos du cabinet</a></li>
+              <li className={hoverLink}><a href="#">À propos du cabinet</a></li>
               <li><a href="#" className={hoverLink}>Nos Avocats</a></li>
               <li><a href="#" className={hoverLink}>Prendre Rendez-vous</a></li>
               <li><a href="#" className={hoverLink}>FAQ</a></li>
             </ul>
           </div>
 
-          {/* Social & CTA */}
+          {/* Section 5: Réseaux Sociaux (H4) */}
           <div className="space-y-6">
-            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">Suivez-nous</h4>
+            <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
+              Suivez-nous
+            </h4>
             <div className="flex space-x-3">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
                 <a
@@ -99,14 +108,14 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Section */}
+        {/* Bottom Section (Texte secondaire) */}
         <div className="border-t border-[#3e2723] pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-white/40 text-xs">
+            <div className="text-white text-xs opacity-80">
               © 2025 Cabinet TCHOUHO. Excellence & Intégrité.
             </div>
 
-            <div className="flex space-x-8 text-xs text-white/40">
+            <div className="flex space-x-8 text-xs text-white">
               <a href="#" className="hover:text-amber-500 transition-colors">Confidentialité</a>
               <a href="#" className="hover:text-amber-500 transition-colors">Mentions Légales</a>
             </div>

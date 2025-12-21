@@ -1,248 +1,104 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Nouvelle Palette Équilibrée - Cabinet d'Avocats International */
+/* --- Nouvelle Palette Épurée & Prestige --- */
 :root {
-  /* Couleurs principales */
-  --primary-dark: #0A192F;       /* Bleu Nuit Profond - Autorité */
-  --neutral-white: #FFFFFF;      /* Blanc Pur - Respiration */
-  --secondary-brown: #8D6E63;    /* Marron Bronze - Élégance */
-  --accent-red: #C62828;         /* Rouge Brique - Action */
+  /* Couleurs de base */
+  --primary-royal: #1a237e;      /* Bleu Royal - Institutionnel */
+  --primary-dark: #1a120b;       /* Brun Chocolat Profond - Luxe & Fond sombre */
+  --neutral-beige: #fdfaf7;      /* Beige Sépia - Fond clair chaleureux */
+  --accent-amber: #d97706;       /* Ambre / Doré - Détails & Icones */
+  --accent-red: #c62828;         /* Rouge Brique - Boutons d'action */
 
-  /* Variations textuelles */
-  --text-primary: #0A192F;       /* Bleu Nuit pour texte principal */
-  --text-secondary: #8D6E63;     /* Marron pour texte secondaire */
-  --text-accent: #C62828;        /* Rouge pour accents */
-  --text-light: #FFFFFF;         /* Blanc pour fonds sombres */
+  /* Système de texte (Lisibilité Maximale) */
+  --text-dark: #3e2723;          /* Marron sombre pour texte sur fond beige */
+  --text-muted: #5d4037;         /* Marron adouci pour paragraphes */
+  --text-light: #ffffff;         /* Blanc pur pour écritures sur fond sombre */
+  --text-amber: #fcd34d;         /* Ambre clair pour titres sur fond sombre */
 
-  /* Fonds alternés pour rythme visuel */
-  --bg-dark: #0A192F;            /* Sections impact */
-  --bg-light: #FFFFFF;           /* Sections contenu */
-  --bg-card: #F8F9FA;            /* Cartes sur fond blanc */
-  --bg-card-dark: #1a365d;       /* Cartes sur fond sombre */
-
-  /* Bordures et états */
-  --border-light: #E2E8F0;       /* Bordures subtiles */
-  --border-dark: #8D6E63;        /* Bordures élégantes */
-  --border-accent: #C62828;      /* Bordures CTA */
-
-  /* Ombres équilibrées */
-  --shadow-soft: 0 4px 6px -1px rgba(10, 25, 47, 0.1), 0 10px 15px -3px rgba(10, 25, 47, 0.05);
-  --shadow-medium: 0 10px 15px -3px rgba(10, 25, 47, 0.1), 0 4px 6px -2px rgba(10, 25, 47, 0.05);
-  --shadow-strong: 0 20px 25px -5px rgba(10, 25, 47, 0.1), 0 10px 10px -5px rgba(10, 25, 47, 0.04);
-  --shadow-accent: 0 0 15px rgba(198, 40, 40, 0.2);
+  /* Fonds de composants */
+  --bg-card: #ffffff;            /* Fond de carte blanc sur section beige */
+  --bg-footer: #1a120b;          /* Fond du footer brun sombre */
+  
+  /* Bordures et Ombres */
+  --border-amber: rgba(217, 119, 6, 0.2);
+  --shadow-luxury: 0 10px 30px -10px rgba(26, 18, 11, 0.15);
+  --shadow-gold: 0 10px 20px -5px rgba(217, 119, 6, 0.1);
 }
 
-/* Typographie haut de gamme */
+/* --- Typographie Global --- */
 body {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  color: var(--text-primary);
-  background: var(--neutral-white);
+  color: var(--text-dark);
+  background: var(--neutral-beige); /* Le fond du site devient beige léger */
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
-  color: var(--text-primary);
+  color: var(--text-dark);
 }
 
-/* Suppression des animations par défaut - on les contrôle maintenant */
-* {
-  animation-duration: 0.6s !important;
-  animation-fill-mode: both !important;
+/* Correction pour les écritures blanches sur les composants sombres */
+.bg-primary-dark h1, .bg-primary-dark h2, .bg-primary-dark h3, .bg-primary-dark h4,
+footer h1, footer h2, footer h3, footer h4,
+.card-dark h1, .card-dark h2, .card-dark h3 {
+  color: var(--text-light) !important;
 }
 
-/* Boutons Équilibrés - Nouvelle Palette */
+/* --- Boutons Dynamiques --- */
 .btn-primary {
-  @apply relative overflow-hidden font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-out;
-  background: var(--accent-red);
+  @apply relative overflow-hidden font-bold py-4 px-8 rounded-xl transition-all duration-300;
+  background: var(--primary-dark);
   color: var(--text-light);
-  box-shadow: var(--shadow-medium);
-  border: 1px solid transparent;
+  box-shadow: var(--shadow-luxury);
 }
 
 .btn-primary:hover {
+  background: var(--text-muted);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-accent);
-  background: var(--hover-accent);
+  box-shadow: 0 15px 30px -10px rgba(26, 18, 11, 0.3);
 }
 
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-
-.btn-primary:hover::before {
-  left: 100%;
-}
-
-.btn-secondary {
-  @apply relative overflow-hidden font-semibold py-4 px-8 rounded-lg transition-all duration-300 ease-out;
-  background: transparent;
-  color: var(--secondary-brown);
-  border: 2px solid var(--secondary-brown);
-  box-shadow: var(--shadow-soft);
-}
-
-.btn-secondary:hover {
-  background: var(--secondary-brown);
+.btn-accent {
+  @apply relative overflow-hidden font-bold py-4 px-8 rounded-xl transition-all duration-300;
+  background: var(--accent-red);
   color: var(--text-light);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-medium);
-  border-color: var(--hover-secondary);
 }
 
-/* Cartes Équilibrées - Nouvelle Palette */
+/* --- Cartes Luxury --- */
 .card-luxury {
-  @apply relative overflow-hidden rounded-xl transition-all duration-500 ease-out;
+  @apply relative overflow-hidden rounded-2xl transition-all duration-500 ease-out;
   background: var(--bg-card);
-  box-shadow: var(--shadow-soft);
-  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-luxury);
+  border: 1px solid var(--border-amber);
 }
 
 .card-luxury:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-medium);
-  border-color: var(--secondary-brown);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -15px rgba(62, 39, 35, 0.15);
+  border-color: var(--accent-amber);
 }
 
-.card-dark {
-  @apply relative overflow-hidden rounded-xl transition-all duration-500 ease-out;
-  background: var(--bg-card-dark);
-  box-shadow: var(--shadow-soft);
-  border: 1px solid var(--border-dark);
-}
-
-.card-dark:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-medium);
-  border-color: var(--accent-red);
-}
-
-/* Effets de verre subtils */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.85);
+/* --- Header & Navigation --- */
+.header-glass {
+  @apply fixed top-0 left-0 right-0 z-50 transition-all duration-500;
+  background: rgba(26, 18, 11, 0.1);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Gradients Équilibrés - Nouvelle Palette */
-.gradient-hero {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-dark) 100%);
+.header-glass.scrolled {
+  background: rgba(26, 18, 11, 0.95);
+  box-shadow: var(--shadow-luxury);
 }
 
-.gradient-section {
-  background: var(--neutral-white);
-}
-
-.gradient-dark {
-  background: var(--primary-dark);
-}
-
-/* Animations élégantes */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Utilitaires d'animation */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.8s ease-out forwards;
-}
-
-/* Scrollbar élégant */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-cream);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-secondary);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
-/* Header sticky avec glassmorphism équilibré */
-.header-sticky {
-  @apply fixed top-0 left-0 right-0 z-50 transition-all duration-300;
-  background: rgba(10, 25, 47, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(141, 110, 99, 0.2);
-}
-
-.header-sticky.scrolled {
-  background: rgba(10, 25, 47, 0.98);
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-medium);
-}
-
-/* Animations scroll reveal */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
-}
-
-.scroll-reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Animations avancées */
+/* --- Utilitaires d'Animation --- */
 .fade-in-up {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -251,45 +107,28 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(0);
 }
 
-.slide-in-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide-in-left.revealed {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.slide-in-right {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide-in-right.revealed {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.stagger-animation {
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.stagger-animation.revealed {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Micro-interactions */
 .hover-lift {
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-natural);
+  transform: translateY(-5px);
+}
+
+/* Scrollbar Style */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--neutral-beige);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-amber);
 }
