@@ -101,7 +101,7 @@ export function Footer() {
               </a>
               
               {/* LinkedIn */}
-              <a href="#" className="w-10 h-10 bg-[#3e2723]/50 hover:bg-amber-600 rounded-xl flex items-center justify-center transition-all duration-300 group border border-[#3e2723]">
+              <a href="https://cm.linkedin.com/in/me-medard-tchouho-noudimen-03522b233&ved=2ahUKEwjxhN3I6s-RAxVrdUEAHagjBhAQFnoECBoQAQ&usg=AOvVaw2waDoIMD6YpO-VAB2UR9Lk" className="w-10 h-10 bg-[#3e2723]/50 hover:bg-amber-600 rounded-xl flex items-center justify-center transition-all duration-300 group border border-[#3e2723]">
                 <Linkedin className="w-5 h-5 text-amber-200 group-hover:text-white" />
               </a>
 

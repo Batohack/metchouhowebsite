@@ -4,7 +4,6 @@ import { useTranslation } from '../../hooks/useTranslation'
 import { getSafeScrollY } from '../../utils/scroll.utils'
 import logo from '../../assets/CabinetLogo.svg'
 
-// Ajout de la prop onOpenModal pour déclencher la page de rendez-vous
 export function Header({ onOpenModal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -18,6 +17,14 @@ export function Header({ onOpenModal }) {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Fonction pour remonter en haut de page
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   const navItems = [
     { name: t('Immigration'), hasDropdown: true },
@@ -37,22 +44,24 @@ export function Header({ onOpenModal }) {
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
-          {/* Logo dans un Cercle Blanc */}
+          {/* LOGO AJUSTÉ : Remonte au clic et remplit le cercle */}
           <div className="flex-shrink-0 flex items-center">
-            <div className={`bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden border-2 border-amber-600/10 hover:scale-105 transition-all duration-300 ${
-              isScrolled ? 'w-14 h-14' : 'w-16 h-16'
-            }`}>
+            <button 
+              onClick={scrollToTop}
+              className={`bg-white rounded-full shadow-lg overflow-hidden border-2 border-amber-600/10 hover:scale-110 transition-all duration-300 cursor-pointer p-0 flex items-center justify-center ${
+                isScrolled ? 'w-14 h-14' : 'w-18 h-18'
+              }`}
+            >
               <img
                 src={logo}
                 alt="Logo Cabinet"
-                className="w-10 h-10 object-contain"
+                className="w-full h-full object-cover" 
               />
-            </div>
+            </button>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8 items-center">
-            {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
               className="flex items-center space-x-2 px-3 py-2 text-white hover:text-amber-400 transition-all border-none bg-transparent cursor-pointer"
@@ -72,10 +81,9 @@ export function Header({ onOpenModal }) {
               </a>
             ))}
 
-            {/* BOUTON AJUSTÉ : Appel de la fonction onOpenModal */}
             <button 
               onClick={onOpenModal}
-              className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-95 transform hover:-translate-y-0.5"
+              className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-95 transform hover:-translate-y-0.5 cursor-pointer"
             >
               Consulter un avocat
             </button>
@@ -83,7 +91,7 @@ export function Header({ onOpenModal }) {
 
           {/* Mobile menu button */}
           <div className="lg:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white p-2">
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white p-2 cursor-pointer">
               {isMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
             </button>
           </div>
@@ -94,7 +102,7 @@ export function Header({ onOpenModal }) {
       {isMenuOpen && (
         <div className="lg:hidden bg-[#1a120b] border-t border-amber-900/20 shadow-2xl">
           <div className="px-6 py-8 space-y-5">
-            <button onClick={toggleLanguage} className="flex items-center space-x-3 text-white w-full py-2">
+            <button onClick={toggleLanguage} className="flex items-center space-x-3 text-white w-full py-2 cursor-pointer">
               <Globe className="w-6 h-6 text-amber-500" />
               <span className="font-bold uppercase tracking-widest">{language === 'fr' ? 'English' : 'Français'}</span>
             </button>
@@ -103,7 +111,7 @@ export function Header({ onOpenModal }) {
             ))}
             <button 
               onClick={() => { setIsMenuOpen(false); onOpenModal(); }}
-              className="w-full bg-[#a82323] text-white py-4 rounded-xl font-bold shadow-lg"
+              className="w-full bg-[#a82323] text-white py-4 rounded-xl font-bold shadow-lg cursor-pointer"
             >
               Consulter un avocat
             </button>
