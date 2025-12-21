@@ -97,6 +97,19 @@ frontend/
 - **npm** >= 9.0.0 ou **yarn** >= 1.22.0
 - **Backend API** en cours d'exécution (port 3001)
 
+### Variables d'environnement (optionnel)
+```bash
+# Créer un fichier .env à la racine
+cp .env.example.md .env
+
+# Configuration du base path (si nécessaire)
+# Pour la plupart des déploiements : laisser par défaut '/'
+VITE_BASE_PATH=/
+
+# URL de l'API backend
+VITE_API_URL=http://localhost:3001/api
+```
+
 ### Installation rapide
 ```bash
 # Cloner le repository
@@ -384,9 +397,32 @@ npm run preview
 ```
 
 ### Plateformes recommandées
-- **[Vercel](https://vercel.com/)** - Déploiement automatique
-- **[Netlify](https://netlify.com/)** - CDN global
-- **[Railway](https://railway.app/)** - Full-stack deployment
+- **[Vercel](https://vercel.com/)** - Déploiement automatique (base: `/` par défaut)
+- **[Netlify](https://netlify.com/)** - CDN global (base: `/` par défaut)
+- **[Railway](https://railway.app/)** - Full-stack deployment (base: `/` par défaut)
+
+### Configuration spécifique pour certaines plateformes
+
+#### GitHub Pages
+```javascript
+// Dans vite.config.js, modifier si nécessaire :
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  return {
+    base: env.VITE_BASE_PATH || '/nom-du-repo/',
+    // ...
+  }
+})
+```
+
+#### Variables d'environnement par plateforme
+```bash
+# Vercel/Netlify/Railway : fonctionne avec la config par défaut
+VITE_BASE_PATH=/
+
+# GitHub Pages : adapter selon le nom du repo
+VITE_BASE_PATH='/cabinet-tchouho-website/'
+```
 
 ### Configuration CI/CD
 ```yaml
