@@ -4,7 +4,8 @@ import { useTranslation } from '../../hooks/useTranslation'
 import { getSafeScrollY } from '../../utils/scroll.utils'
 import logo from '../../assets/CabinetLogo.svg'
 
-export function Header() {
+// Ajout de la prop onOpenModal pour déclencher la page de rendez-vous
+export function Header({ onOpenModal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { t, language, toggleLanguage } = useTranslation()
@@ -12,7 +13,6 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = getSafeScrollY()
-      // On déclenche l'effet un peu plus tôt pour plus de fluidité
       setIsScrolled(scrollY > 15)
     }
     window.addEventListener('scroll', handleScroll)
@@ -29,22 +29,23 @@ export function Header() {
   ]
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+    <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
       isScrolled 
-        /* MODIFICATION : bg-[#1a120b]/85 pour un marron plus doux et plus transparent */
-        ? 'bg-[#1a120b]/85 backdrop-blur-md shadow-xl border-b border-amber-900/10' 
-        : 'bg-transparent'
+        ? 'bg-[#1a120b]/85 backdrop-blur-md shadow-xl border-b border-amber-900/10 py-1' 
+        : 'bg-transparent py-3'
     }`}>
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24">
+        <div className="flex justify-between items-center h-20">
           
           {/* Logo dans un Cercle Blanc */}
           <div className="flex-shrink-0 flex items-center">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden border-2 border-amber-600/10 hover:scale-105 transition-transform duration-300">
+            <div className={`bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden border-2 border-amber-600/10 hover:scale-105 transition-all duration-300 ${
+              isScrolled ? 'w-14 h-14' : 'w-16 h-16'
+            }`}>
               <img
                 src={logo}
                 alt="Logo Cabinet"
-                className="w-12 h-12 object-contain"
+                className="w-10 h-10 object-contain"
               />
             </div>
           </div>
@@ -54,7 +55,7 @@ export function Header() {
             {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className="flex items-center space-x-2 px-3 py-2 text-white hover:text-amber-400 transition-all"
+              className="flex items-center space-x-2 px-3 py-2 text-white hover:text-amber-400 transition-all border-none bg-transparent cursor-pointer"
             >
               <Globe className="w-5 h-5 text-amber-500" />
               <span className="font-bold text-sm tracking-widest">{language.toUpperCase()}</span>
@@ -71,7 +72,11 @@ export function Header() {
               </a>
             ))}
 
-            <button className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-40">
+            {/* BOUTON AJUSTÉ : Appel de la fonction onOpenModal */}
+            <button 
+              onClick={onOpenModal}
+              className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-95 transform hover:-translate-y-0.5"
+            >
               Consulter un avocat
             </button>
           </nav>
@@ -87,16 +92,21 @@ export function Header() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-[#1a120b] border-t border-amber-900/20">
-          <div className="px-5 py-8 space-y-4">
-            <button onClick={toggleLanguage} className="flex items-center space-x-3 text-white">
+        <div className="lg:hidden bg-[#1a120b] border-t border-amber-900/20 shadow-2xl">
+          <div className="px-6 py-8 space-y-5">
+            <button onClick={toggleLanguage} className="flex items-center space-x-3 text-white w-full py-2">
               <Globe className="w-6 h-6 text-amber-500" />
-              <span className="font-bold uppercase tracking-tighter">{language === 'fr' ? 'English' : 'Français'}</span>
+              <span className="font-bold uppercase tracking-widest">{language === 'fr' ? 'English' : 'Français'}</span>
             </button>
             {navItems.map((item) => (
-              <a key={item.name} href="#" className="text-white block text-lg font-medium">{item.name}</a>
+              <a key={item.name} href="#" className="text-white block text-lg font-bold hover:text-amber-400">{item.name}</a>
             ))}
-            <button className="w-full bg-[#a82323] text-white py-4 rounded-xl font-bold">Consulter un avocat</button>
+            <button 
+              onClick={() => { setIsMenuOpen(false); onOpenModal(); }}
+              className="w-full bg-[#a82323] text-white py-4 rounded-xl font-bold shadow-lg"
+            >
+              Consulter un avocat
+            </button>
           </div>
         </div>
       )}
