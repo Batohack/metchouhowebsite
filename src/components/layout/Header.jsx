@@ -12,7 +12,8 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = getSafeScrollY()
-      setIsScrolled(scrollY > 20)
+      // On déclenche l'effet un peu plus tôt pour plus de fluidité
+      setIsScrolled(scrollY > 15)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -29,15 +30,17 @@ export function Header() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-[#0f0a07]/95 backdrop-blur-lg shadow-2xl' : 'bg-transparent'
+      isScrolled 
+        /* MODIFICATION : bg-[#1a120b]/85 pour un marron plus doux et plus transparent */
+        ? 'bg-[#1a120b]/85 backdrop-blur-md shadow-xl border-b border-amber-900/10' 
+        : 'bg-transparent'
     }`}>
-      {/* Container sans marges latérales excessives */}
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-24">
           
           {/* Logo dans un Cercle Blanc */}
           <div className="flex-shrink-0 flex items-center">
-            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden border-2 border-amber-600/20 hover:scale-105 transition-transform duration-300">
+            <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden border-2 border-amber-600/10 hover:scale-105 transition-transform duration-300">
               <img
                 src={logo}
                 alt="Logo Cabinet"
@@ -48,7 +51,7 @@ export function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8 items-center">
-            {/* Language Toggle : Épuré sans bordures */}
+            {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
               className="flex items-center space-x-2 px-3 py-2 text-white hover:text-amber-400 transition-all"
@@ -68,7 +71,7 @@ export function Header() {
               </a>
             ))}
 
-            <button className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-95">
+            <button className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-70">
               Consulter un avocat
             </button>
           </nav>
@@ -84,7 +87,7 @@ export function Header() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-[#0f0a07] border-t border-amber-900/20">
+        <div className="lg:hidden bg-[#1a120b] border-t border-amber-900/20">
           <div className="px-5 py-8 space-y-4">
             <button onClick={toggleLanguage} className="flex items-center space-x-3 text-white">
               <Globe className="w-6 h-6 text-amber-500" />
