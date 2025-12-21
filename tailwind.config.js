@@ -52,7 +52,22 @@ export default {
         'dark-strong': '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4)',
         'accent-glow': '0 0 20px rgba(255, 107, 53, 0.3)',
       },
+      textShadow: {
+        'glow': '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5)',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    // Plugin pour activer text-shadow
+    function({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          'text-shadow': (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme('textShadow') }
+      )
+    },
+  ],
 }
