@@ -31,7 +31,7 @@ export function Footer() {
             className="lg:col-span-1"
           >
             <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-wider">
-              Cabinet TCHOUHO
+              Cabinet d'avocat tchouho & associes
             </h3>
             <p className={`${whiteText} text-sm leading-relaxed mb-6 italic`}>
               "Excellence juridique et accompagnement stratégique au cœur de l'Afrique."
@@ -71,7 +71,7 @@ export function Footer() {
               </div>
               <div className="flex items-center">
                 <Mail className={`w-4 h-4 mr-3 ${accentAmber}`} />
-                <span className="break-all">contact@tchouho.com</span>
+                <span className="break-all">medardtcouho@yahoo.com</span>
               </div>
             </div>
           </div>

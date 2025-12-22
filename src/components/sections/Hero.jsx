@@ -90,7 +90,7 @@ export function Hero() {
                 className="text-xl text-white max-w-xl leading-relaxed"
                 variants={itemVariants}
               >
-                Cabinet d'avocats international spécialisé en droit des affaires,
+                Cabinet d'avocats internationaux spécialisé en droit des affaires,
                 situé au quartier Omnisport. 2 ans d'excellence juridique
                 au service de votre réussite.
               </motion.p>
