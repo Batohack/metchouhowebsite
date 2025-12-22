@@ -7,7 +7,7 @@ import metchouhoImage from '../../assets/Metchouho.jpg'
 // --- DONNÉES STATIQUES ---
 const teamMembersData = [
   {
-    name: 'Maître TCHOUHO MEDARD',
+    name: 'Me TCHOUHO MEDARD',
     roleKey: 'founder-title',
     specialtyKey: 'business-law-specialty',
     experience: '2 ans',
@@ -20,8 +20,8 @@ const teamMembersData = [
     ],
     socials: {
       whatsapp: "https://wa.me/237677423169",
-      linkedin: "#",
-      facebook: "#"
+      linkedin: "https://www.linkedin.com/in/me-medard-tchouho-noudimen-03522b233/?originalSubdomain=cm",
+      facebook: "https://web.facebook.com/medard.tchouho/?locale=cs_CZ&_rdc=1&_rdr"
     }
   },
   {
