@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Scale, Clock, Shield, Smile, BarChart, Award } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
+
 
 // --- VARIANTES ---
 const fadeInUp = {
@@ -15,19 +15,19 @@ const scaleIn = {
 }
 
 export function WhyChooseUs() {
-  const { t } = useTranslation()
+  
 
   const benefits = [
-    { title: t('expertise-title'), desc: t('expertise-desc'), icon: <BarChart />, pos: "lg:top-10 lg:left-0" },
-    { title: t('confidentiality-title'), desc: t('confidentiality-desc'), icon: <Scale />, pos: "lg:top-1/2 lg:-left-20 lg:-translate-y-1/2" },
-    { title: t('results-title'), desc: t('results-desc'), icon: <Shield />, pos: "lg:bottom-10 lg:left-0" },
-    { title: t('availability-title'), desc: t('availability-desc'), icon: <Clock />, pos: "lg:top-10 lg:right-0" },
+    { title: ('expertise-title'), desc: ('expertise-desc'), icon: <BarChart />, pos: "lg:top-10 lg:left-0" },
+    { title: ('confidentiality-title'), desc: ('confidentiality-desc'), icon: <Scale />, pos: "lg:top-1/2 lg:-left-20 lg:-translate-y-1/2" },
+    { title: ('results-title'), desc: ('results-desc'), icon: <Shield />, pos: "lg:bottom-10 lg:left-0" },
+    { title: ('availability-title'), desc: ('availability-desc'), icon: <Clock />, pos: "lg:top-10 lg:right-0" },
     { title: "Service client", desc: "Accompagnement personnalisé et suivi de qualité", icon: <Award />, pos: "lg:top-1/2 lg:-right-20 lg:-translate-y-1/2" },
     { title: "Localisation", desc: "Situé au quartier Omnisport pour votre commodité", icon: <Smile />, pos: "lg:bottom-10 lg:right-0" },
   ]
 
   return (
-    <section className="py-24 bg-[#fdfaf7] relative overflow-hidden">
+    <section id="about-section" className="py-24 bg-[#fdfaf7] relative overflow-hidden">
       {/* Pattern de fond */}
       <div 
         className="absolute inset-0 opacity-[0.03] pointer-events-none" 
@@ -43,7 +43,7 @@ export function WhyChooseUs() {
           variants={fadeInUp}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-[#3e2723]">
-            {t('why-choose-us')}
+            {('why-choose-us')}
           </h2>
           <div className="w-24 h-1.5 bg-amber-700 mx-auto mt-6 rounded-full" />
         </motion.div>

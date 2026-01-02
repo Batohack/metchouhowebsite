@@ -32,7 +32,7 @@ export function FeaturesGrid({ onOpenModal }) {
         
         {/* En-tête de section */}
         <motion.div 
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -42,7 +42,7 @@ export function FeaturesGrid({ onOpenModal }) {
             <Award className="w-4 h-4 mr-2" /> Plateforme Innovante
           </div>
           <h2 className="text-2xl text-[#5d4037] mb-2 font-medium">Découvrez une solution juridique</h2>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#3e2723]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#3e2723]">
             plus intelligente à portée de main
           </h2>
           <div className="w-24 h-1.5 bg-amber-700 mx-auto mt-8 rounded-full" />

@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Globe, Facebook, Linkedin, MessageCircle } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
+
 
 export function Footer() {
-  const { t } = useTranslation()
-
+ 
   // Configuration de la palette
   const darkBrownBg = 'bg-[#1a120b]' 
   const accentAmber = 'text-amber-500' 
@@ -20,8 +19,8 @@ export function Footer() {
         }} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-16">
           
           {/* Section 1: Cabinet Info */}
           <motion.div

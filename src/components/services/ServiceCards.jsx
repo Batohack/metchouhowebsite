@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FileText, Users, Heart, Briefcase, Scale, Award, ArrowRight } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
 
 // --- VARIANTES D'ANIMATION ---
 const fadeInUp = {
@@ -15,15 +14,14 @@ const staggerContainer = {
 }
 
 export function ServiceCards() {
-  const { t } = useTranslation()
 
   const services = [
-    { title: t('immigration-title'), description: t('immigration-desc'), icon: <FileText /> },
-    { title: t('property-title'), description: t('property-desc'), icon: <Briefcase />, highlight: true },
-    { title: t('family-title'), description: t('family-desc'), icon: <Heart /> },
-    { title: t('civil-title'), description: t('civil-desc'), icon: <Users /> },
-    { title: t('business-title'), description: t('business-desc'), icon: <Scale />, highlight: true },
-    { title: t('succession-title'), description: t('succession-desc'), icon: <Briefcase /> },
+    { title: ('immigration-title'), description: ('immigration-desc'), icon: <FileText /> },
+    { title: ('property-title'), description: ('property-desc'), icon: <Briefcase />, highlight: true },
+    { title: ('family-title'), description: ('family-desc'), icon: <Heart /> },
+    { title: ('civil-title'), description: ('civil-desc'), icon: <Users /> },
+    { title: ('business-title'), description: ('business-desc'), icon: <Scale />, highlight: true },
+    { title: ('succession-title'), description: ('succession-desc'), icon: <Briefcase /> },
   ]
 
   return (
@@ -35,11 +33,11 @@ export function ServiceCards() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-16 items-start">
           
           {/* Texte d'introduction */}
           <motion.div 
-            className="lg:col-span-2 space-y-6 lg:sticky lg:top-32"
+            className="lg:col-span-2 space-y-4 sm:space-y-6 lg:sticky lg:top-32"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -48,7 +46,7 @@ export function ServiceCards() {
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-amber-100/50 border border-amber-200 text-amber-900 text-xs font-bold uppercase tracking-widest">
               <Award className="w-4 h-4 mr-2" /> Expertise Juridique
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
               <span className="text-[#3e2723]">Nos services</span>
               <br />
               <span className="text-amber-700">juridiques</span>

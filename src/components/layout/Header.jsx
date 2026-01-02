@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Menu, X, ChevronDown, Globe } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
-import { getSafeScrollY } from '../../utils/scroll.utils'
+import { Menu, X, ChevronDown } from 'lucide-react'
+import { getSafeScrollY, safeScrollToElement } from '../../utils/scroll.utils'
 import logo from '../../assets/CabinetLogo.svg'
 
 export function Header({ onOpenModal }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const { t, language, toggleLanguage } = useTranslation()
+ 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,13 +26,20 @@ export function Header({ onOpenModal }) {
   };
 
   const navItems = [
-    { name: t('Immigration'), hasDropdown: true },
-    { name: t('Property'), hasDropdown: true },
-    { name: t('Matrimonial'), hasDropdown: true },
-    { name: t('Personal'), hasDropdown: true },
-    { name: t('Business'), hasDropdown: true },
-    { name: t('Will'), hasDropdown: true },
+    { name: 'Équipe', id: 'team-section' },
+    { name: 'Localisation', id: 'location-section' },
+    { name: 'À propos de Nous', id: 'about-section' },
   ]
+
+  const handleNavClick = (e, sectionId) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    safeScrollToElement(sectionId, {
+      behavior: 'smooth',
+      block: 'start',
+      offset: 80
+    });
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
@@ -62,22 +68,15 @@ export function Header({ onOpenModal }) {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8 items-center">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center space-x-2 px-3 py-2 text-white hover:text-amber-400 transition-all border-none bg-transparent cursor-pointer"
-            >
-              <Globe className="w-5 h-5 text-amber-500" />
-              <span className="font-bold text-sm tracking-widest">{language.toUpperCase()}</span>
-            </button>
-
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href="#"
+                onClick={(e) => handleNavClick(e, item.id)}
                 className="text-white hover:text-amber-400 px-2 py-2 text-sm font-bold transition-colors tracking-wide"
               >
                 {item.name}
-                {item.hasDropdown && <ChevronDown className="ml-1 h-3 w-3 inline opacity-50" />}
+                <ChevronDown className="ml-1 h-3 w-3 inline opacity-50" />
               </a>
             ))}
 
@@ -102,12 +101,15 @@ export function Header({ onOpenModal }) {
       {isMenuOpen && (
         <div className="lg:hidden bg-[#1a120b] border-t border-amber-900/20 shadow-2xl">
           <div className="px-6 py-8 space-y-5">
-            <button onClick={toggleLanguage} className="flex items-center space-x-3 text-white w-full py-2 cursor-pointer">
-              <Globe className="w-6 h-6 text-amber-500" />
-              <span className="font-bold uppercase tracking-widest">{language === 'fr' ? 'English' : 'Français'}</span>
-            </button>
             {navItems.map((item) => (
-              <a key={item.name} href="#" className="text-white block text-lg font-bold hover:text-amber-400">{item.name}</a>
+              <a 
+                key={item.name} 
+                href="#" 
+                onClick={(e) => handleNavClick(e, item.id)}
+                className="text-white block text-lg font-bold hover:text-amber-400"
+              >
+                {item.name}
+              </a>
             ))}
             <button 
               onClick={() => { setIsMenuOpen(false); onOpenModal(); }}

@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Award, Users } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
 import { safeScrollToElement } from '../../utils/scroll.utils'
 import heroImage from '../../assets/HeroC.png'
 import heroImageb from '../../assets/barrea.webp'
 
 export function Hero() {
-  const { t } = useTranslation()
+  
 
   const scrollToTeam = () => {
     safeScrollToElement('team-section', {
@@ -83,7 +82,7 @@ export function Hero() {
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <Award className="w-4 h-4 mr-2 text-amber-400" />
-                Cabinet d'avocats au quartier Omnisport
+                CABINET D'AVOCATS TCHOUHO MEDARD & ASSOCIES
               </motion.div>
 
               <motion.p
@@ -94,23 +93,6 @@ export function Hero() {
                 situé au quartier Omnisport. 2 ans d'excellence juridique
                 au service de votre réussite.
               </motion.p>
-            </motion.div>
-
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 pt-6"
-              variants={itemVariants}
-            >
-              <motion.button
-                className="btn-primary text-white group"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={scrollToTeam}
-              >
-                {t('talk-to-lawyer')}
-                <ArrowRight className="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-              
-             
             </motion.div>
 
             {/* Stats en bas à gauche */}
@@ -124,7 +106,7 @@ export function Hero() {
               </div>
 
               <div className="text-center p-4 bg-primary-dark/60 backdrop-blur-sm rounded-lg border border-secondary-brown">
-                <div className="text-3xl font-bold text-accent-red mb-1">100+</div>
+                <div className="text-3xl font-bold text-accent-red mb-1">50+</div>
                 <div className="text-sm text-white">Clients satisfaits</div>
               </div>
 

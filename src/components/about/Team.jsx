@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTranslation } from '../../hooks/useTranslation'
 import { Mail, Phone, MapPin, Award, X, ArrowRight, Linkedin, Facebook } from 'lucide-react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
@@ -10,6 +9,9 @@ import metchouhoImage from '../../assets/Metchouho.jpg'
 // Correction des icônes Leaflet (obligatoire pour l'affichage du marqueur)
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
+import nouDjomImage from '../../assets/NouDjomCard.jpeg'
+import tangImage from '../../assets/Tangcard.jpeg'  
+
 let DefaultIcon = L.icon({
     iconUrl: markerIcon,
     shadowUrl: markerShadow,
@@ -22,15 +24,10 @@ L.Marker.prototype.options.icon = DefaultIcon;
 const teamMembersData = [
   {
     name: 'Me TCHOUHO MEDARD',
-    roleKey: 'founder-title',
-    specialtyKey: 'business-law-specialty',
-    experience: '2 ans',
+    roleKey: 'Avocat International',
     image: metchouhoImage,
-    descriptionKey: 'founder-description',
     credentials: [
       'Avocat au Barreau du Cameroun', 
-      'Avocat au Barreau du Rwanda', 
-      'Expert en Droit Des Affaires'
     ],
     socials: {
       whatsapp: "https://wa.me/237677423169",
@@ -39,23 +36,17 @@ const teamMembersData = [
     }
   },
   {
-    name: 'Me Marie-Christine KOFFI',
-    roleKey: 'associate-lawyer',
-    specialtyKey: 'family-law-specialty',
-    experience: '5 ans',
-    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=256&q=80',
-    descriptionKey: 'associate-description',
+    name: 'Me NOUDJOM PENE Daniele',
+    roleKey: 'Avocat Associé',
+    image: nouDjomImage,
     credentials: ['Droit de la Famille', 'Droit Civil', 'Procédures judiciaires'],
     socials: { whatsapp: "#", linkedin: "#", facebook: "#" }
   },
   {
-    name: 'Me Patrice KOUAKOU',
-    roleKey: 'junior-lawyer',
-    specialtyKey: 'property-law-specialty',
-    experience: '3 ans',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80',
-    descriptionKey: 'junior-description',
-    credentials: ['Droit Immobilier', 'Urbanisme', 'Baux commerciaux'],
+    name: 'Me TANG NDZANA Julie Emmanuel',
+    roleKey: 'Avocat Associé',
+    image: tangImage,
+    
     socials: { whatsapp: "#", linkedin: "#", facebook: "#" }
   }
 ]
@@ -71,7 +62,7 @@ const staggerContainer = {
 }
 
 export function Team({ onOpenModal }) {
-  const { t } = useTranslation()
+
   const [selectedImage, setSelectedImage] = useState(null)
 
   return (
@@ -92,7 +83,7 @@ export function Team({ onOpenModal }) {
         {/* Grille des avocats */}
         <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {teamMembersData.map((member, index) => (
-            <TeamMemberCard key={index} member={member} t={t} onImageClick={() => setSelectedImage(member.image)} onOpenModal={onOpenModal} />
+            <TeamMemberCard key={index} member={member} onImageClick={() => setSelectedImage(member.image)} onOpenModal={onOpenModal} />
           ))}
         </motion.div>
 
@@ -107,36 +98,27 @@ export function Team({ onOpenModal }) {
 
 function TeamMemberCard({ member, t, onImageClick, onOpenModal }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const fullDescription = t(member.descriptionKey);
+  const fullDescription = (member.descriptionKey);
 
   return (
     <motion.div className="bg-white rounded-2xl shadow-xl overflow-hidden group border border-amber-100/50 flex flex-col h-full" variants={fadeInUp} whileHover={{ y: -8 }}>
       <div className="relative h-80 overflow-hidden cursor-pointer" onClick={onImageClick}>
         <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a07] via-transparent to-transparent opacity-90" />
-        {member.credentials.some(c => c.includes('Rwanda')) && (
-          <div className="absolute top-4 right-4 bg-amber-600 text-white text-[9px] font-bold px-2 py-1 rounded uppercase tracking-tighter shadow-lg z-20">Double Barreau</div>
-        )}
+
         <div className="absolute bottom-4 left-6 right-6 z-10">
           <h3 className="text-xl font-bold !text-white drop-shadow-md font-serif">{member.name}</h3>
-          <p className="text-amber-300 font-semibold uppercase text-[10px] tracking-widest">{t(member.roleKey)}</p>
+          <p className="text-amber-300 font-semibold uppercase text-[10px] tracking-widest">{(member.roleKey)}</p>
         </div>
       </div>
 
       <div className="p-6 flex flex-col flex-grow bg-white text-left">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-[10px] font-bold text-amber-900 bg-amber-50 px-3 py-1 rounded-full border border-amber-100 uppercase italic">{t(member.specialtyKey)}</span>
-          <span className="text-xs font-medium text-slate-400">{member.experience} exp.</span>
+          <span className="text-[10px] font-bold text-amber-900 bg-amber-50 px-3 py-1 rounded-full border border-amber-100 uppercase italic">{(member.specialtyKey)}</span>
+  
         </div>
         
-        <div className="mb-4 space-y-1">
-          {member.credentials.filter(c => c.includes('Barreau')).map((bar, i) => (
-            <div key={i} className="flex items-center text-[#3e2723] text-xs font-bold">
-              <Award className="w-3 h-3 mr-2 text-amber-600" /> {bar}
-            </div>
-          ))}
-        </div>
-
+       
         <div className="mb-6 border-l-2 border-amber-100 pl-3">
           <p className={`text-[#5d4037] text-sm leading-relaxed italic transition-all duration-300 ${!isExpanded ? 'line-clamp-2' : ''}`}>{fullDescription}</p>
           <button onClick={() => setIsExpanded(!isExpanded)} className="text-amber-700 text-[11px] font-bold mt-2 hover:text-amber-900 underline cursor-pointer">{isExpanded ? "Voir moins" : "Voir plus..."}</button>
@@ -161,6 +143,7 @@ function LocationSection() {function LocationSection() {
 
   return (
     <motion.div 
+      id="location-section" 
       className="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-4 md:p-12 border border-amber-100 mt-12 text-[#5d4037]" 
       variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
     >

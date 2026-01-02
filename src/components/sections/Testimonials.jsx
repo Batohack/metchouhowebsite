@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Quote, Star, Award } from 'lucide-react'
-import { useTranslation } from '../../hooks/useTranslation'
+
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -9,25 +9,25 @@ const fadeInUp = {
 }
 
 export function Testimonials() {
-  const { t } = useTranslation()
+
 
   const testimonials = [
     {
       name: 'Marie-Laure KONE',
       role: 'Entrepreneure - Création SARL',
-      content: t('testimonial-1'),
+      content: ('testimonial-1'),
       image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=256&q=80',
     },
     {
       name: 'Jean-Pierre DIABATE',
       role: 'Propriétaire - Vente appartement',
-      content: t('testimonial-2'),
+      content: ('testimonial-2'),
       image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=256&q=80',
     },
     {
       name: 'Sophie TRAORE',
       role: 'Chef d\'entreprise - Contentieux commercial',
-      content: t('testimonial-3'),
+      content: ('testimonial-3'),
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=256&q=80',
     },
   ]
@@ -52,9 +52,9 @@ export function Testimonials() {
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-amber-100/50 border border-amber-200 text-amber-900 text-xs font-bold uppercase tracking-widest mb-6">
             <Award className="w-4 h-4 mr-2" /> Témoignages Clients
           </div>
-          <h2 className="text-2xl text-[#5d4037] mb-2 font-medium">{t('testimonials-subtitle')}</h2>
+          <h2 className="text-2xl text-[#5d4037] mb-2 font-medium">{('testimonials-subtitle')}</h2>
           <h2 className="text-4xl md:text-5xl font-bold text-[#3e2723]">
-            {t('testimonials-title')}
+            {('testimonials-title')}
           </h2>
         </motion.div>
 
