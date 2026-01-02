@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Award, X, ArrowRight, Linkedin, Facebook } from 'l
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import metchouhoImage from '../../assets/Metchouho.jpg'
+import metchouhoImage from '../../assets/TChcard.jpeg'
 
 // Correction des icônes Leaflet (obligatoire pour l'affichage du marqueur)
 import markerIcon from 'leaflet/dist/images/marker-icon.png'

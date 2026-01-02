@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Scale, Clock, Shield, Smile, BarChart, Award } from 'lucide-react'
+import { Scale, Clock, Shield, Smile, BarChart, Award, ArrowRight } from 'lucide-react'
 
 
 // --- VARIANTES ---
@@ -9,117 +9,163 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 }
 
-const scaleIn = {
-  hidden: { scale: 0.8, opacity: 0 },
-  visible: { scale: 1, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.15 } }
 }
 
 export function WhyChooseUs() {
-  
+  const [hoveredCard, setHoveredCard] = useState(null)
 
   const benefits = [
-    { title: ('expertise-title'), desc: ('expertise-desc'), icon: <BarChart />, pos: "lg:top-10 lg:left-0" },
-    { title: ('confidentiality-title'), desc: ('confidentiality-desc'), icon: <Scale />, pos: "lg:top-1/2 lg:-left-20 lg:-translate-y-1/2" },
-    { title: ('results-title'), desc: ('results-desc'), icon: <Shield />, pos: "lg:bottom-10 lg:left-0" },
-    { title: ('availability-title'), desc: ('availability-desc'), icon: <Clock />, pos: "lg:top-10 lg:right-0" },
-    { title: "Service client", desc: "Accompagnement personnalisé et suivi de qualité", icon: <Award />, pos: "lg:top-1/2 lg:-right-20 lg:-translate-y-1/2" },
-    { title: "Localisation", desc: "Situé au quartier Omnisport pour votre commodité", icon: <Smile />, pos: "lg:bottom-10 lg:right-0" },
+    { 
+      title: 'Expertise Reconnue', 
+      desc: 'Nos avocats disposent de qualifications et d\'expériences internationales pour résoudre vos enjeux juridiques complexes',
+      icon: <BarChart />,
+      color: 'from-amber-500 to-amber-600'
+    },
+    { 
+      title: 'Confidentialité Absolue', 
+      desc: 'Respect strict du secret professionnel et protection maximale de vos données personnelles et professionnelles',
+      icon: <Scale />,
+      color: 'from-blue-500 to-blue-600'
+    },
+    { 
+      title: 'Résultats Probants', 
+      desc: 'Stratégie juridique éprouvée pour maximiser vos chances de succès et protéger vos intérêts',
+      icon: <Shield />,
+      color: 'from-green-500 to-green-600'
+    },
+    { 
+      title: 'Disponibilité 24/7', 
+      desc: 'Support continu pour vos urgences juridiques, nous sommes toujours là pour vous',
+      icon: <Clock />,
+      color: 'from-red-500 to-red-600'
+    },
+    { 
+      title: 'Accompagnement Personnel', 
+      desc: 'Service sur mesure adapté à vos besoins spécifiques avec suivi régulier',
+      icon: <Award />,
+      color: 'from-purple-500 to-purple-600'
+    },
+    { 
+      title: 'Localisation Stratégique', 
+      desc: 'Au cœur du quartier Omnisport à Yaoundé, facilement accessible à tous',
+      icon: <Smile />,
+      color: 'from-pink-500 to-pink-600'
+    },
   ]
 
   return (
-    <section id="about-section" className="py-24 bg-[#fdfaf7] relative overflow-hidden">
-      {/* Pattern de fond */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%238B4513' fill-opacity='1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")` }} 
-      />
+    <section id="about-section" className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-[#fdfaf7] to-white relative overflow-hidden">
+      {/* Décoration de fond */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-amber-100/20 rounded-full blur-3xl -mr-48 -mt-48 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-100/10 rounded-full blur-3xl -ml-48 -mb-48 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
         <motion.div 
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#3e2723]">
-            {('why-choose-us')}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#3e2723] mb-4">
+            À propos de nous
           </h2>
-          <div className="w-24 h-1.5 bg-amber-700 mx-auto mt-6 rounded-full" />
+          <p className="text-[#5d4037] text-sm sm:text-base max-w-3xl mx-auto leading-relaxed">
+            Découvrez les valeurs qui font notre force et notre engagement envers vous
+          </p>
+          <div className="w-24 h-1.5 bg-gradient-to-r from-amber-600 to-amber-400 mx-auto mt-6 rounded-full" />
         </motion.div>
 
-        <div className="relative min-h-[600px] flex items-center justify-center">
-          
-          {/* Image Centrale (Prestigieuse) */}
-          <motion.div 
-            variants={scaleIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="relative z-20 w-64 h-64 md:w-80 md:h-80 rounded-3xl bg-white shadow-2xl flex items-center justify-center border-8 border-white overflow-hidden rotate-3"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-              alt="Justice & Droit"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-[#3e2723]/10" />
-          </motion.div>
-
-          {/* Items de bénéfices autour */}
-          <div className="absolute inset-0 hidden lg:block">
-            {benefits.map((benefit, idx) => (
-              <motion.div
-                key={idx}
-                className={`absolute ${benefit.pos} w-64 flex items-center gap-4 group`}
-                initial={{ opacity: 0, x: benefit.pos.includes('left') ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.8 }}
-              >
-                {/* Ordre Icône/Texte inversé pour le côté droit */}
-                {benefit.pos.includes('right') ? (
-                  <>
-                    <div className="w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center text-amber-800 border border-amber-100 group-hover:bg-amber-700 group-hover:text-white transition-all duration-300">
-                      {React.cloneElement(benefit.icon, { className: "w-6 h-6" })}
-                    </div>
-                    <div className="text-left">
-                      <h3 className="font-bold text-[#3e2723] text-sm">{benefit.title}</h3>
-                      <p className="text-[11px] text-[#5d4037] leading-tight">{benefit.desc}</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="text-right">
-                      <h3 className="font-bold text-[#3e2723] text-sm">{benefit.title}</h3>
-                      <p className="text-[11px] text-[#5d4037] leading-tight">{benefit.desc}</p>
-                    </div>
-                    <div className="w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center text-amber-800 border border-amber-100 group-hover:bg-amber-700 group-hover:text-white transition-all duration-300">
-                      {React.cloneElement(benefit.icon, { className: "w-6 h-6" })}
-                    </div>
-                  </>
-                )}
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Vue Mobile / Tablette (Grille simple) */}
-          <div className="lg:hidden grid grid-cols-2 md:grid-cols-3 gap-6 w-full mt-20">
-            {benefits.map((benefit, idx) => (
+        {/* Grille de cartes moderne */}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {benefits.map((benefit, idx) => (
+            <motion.div 
+              key={idx}
+              variants={fadeInUp}
+              onMouseEnter={() => setHoveredCard(idx)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="group h-full cursor-pointer"
+            >
               <motion.div 
-                key={idx}
-                className="flex flex-col items-center text-center p-4 bg-white rounded-2xl shadow-sm border border-amber-50"
-                variants={fadeInUp}
+                className="relative h-full bg-white rounded-3xl p-6 sm:p-8 shadow-lg border border-white overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                whileHover={{ y: -8 }}
               >
-                <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-800 flex items-center justify-center mb-3">
-                  {React.cloneElement(benefit.icon, { className: "w-5 h-5" })}
-                </div>
-                <h3 className="font-bold text-[#3e2723] text-xs mb-1">{benefit.title}</h3>
-                <p className="text-[10px] text-slate-500 leading-tight line-clamp-2">{benefit.desc}</p>
+                {/* Gradient background */}
+                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl ${benefit.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-bl-full`} />
+                
+                {/* Icon Circle */}
+                <motion.div 
+                  className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${benefit.color} flex items-center justify-center mb-6 text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                  whileHover={{ rotate: 6 }}
+                >
+                  {React.cloneElement(benefit.icon, { className: "w-7 h-7" })}
+                </motion.div>
+
+                {/* Titre */}
+                <h3 className="text-lg sm:text-xl font-bold text-[#3e2723] mb-3 leading-snug">
+                  {benefit.title}
+                </h3>
+
+                {/* Divider */}
+                <div className={`w-8 h-1 bg-gradient-to-r ${benefit.color} rounded-full mb-4 group-hover:w-16 transition-all duration-300`} />
+
+                {/* Description */}
+                <p className="text-sm text-[#5d4037] leading-relaxed mb-4">
+                  {benefit.desc}
+                </p>
+
+                {/* Arrow icon */}
+                <motion.div 
+                  className="flex items-center text-amber-700 font-semibold text-sm group-hover:text-amber-900"
+                  animate={{ x: hoveredCard === idx ? 8 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  En savoir plus
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </motion.div>
+
+                {/* Bottom accent line */}
+                <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${benefit.color} w-0 group-hover:w-full transition-all duration-500`} />
               </motion.div>
-            ))}
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Image section - Bas de la page */}
+        <motion.div 
+          className="mt-16 sm:mt-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white bg-white">
+            <img
+              src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+              alt="Justice & Droit"
+              className="w-full h-64 sm:h-80 md:h-96 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#3e2723]/20 via-transparent to-transparent" />
+            
+            {/* Overlay text */}
+            <div className="absolute inset-0 flex items-end p-6 sm:p-8">
+              <div className="text-white">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-2">Liberté & Justice</h3>
+                <p className="text-sm sm:text-base text-white/90">Votre confiance est notre priorité</p>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
