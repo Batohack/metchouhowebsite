@@ -1,3 +1,4 @@
+import React, { createElement } from 'react'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Scale, Briefcase, Shield, DollarSign, Users, Gavel, Zap } from 'lucide-react'
