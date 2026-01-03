@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Globe, Facebook, Linkedin, MessageCircle } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import logo from '../../assets/CabinetLogo.svg'
 
 export function Footer() {
@@ -29,18 +30,28 @@ export function Footer() {
             viewport={{ once: true }}
             className="lg:col-span-1 flex flex-col"
           >
-            {/* Logo */}
-            <div className="mb-6">
-              <img 
-                src={logo} 
-                alt="Cabinet TCHOUHO" 
-                className="h-16 w-auto"
-              />
+            {/* Logo + Texte */}
+            <div className="flex items-start gap-3 mb-6">
+              {/* Logo circulaire */}
+              <div className="bg-white rounded-full shadow-lg overflow-hidden border-2 border-amber-600/10 flex items-center justify-center flex-shrink-0 w-16 h-16">
+                <img 
+                  src={logo} 
+                  alt="Cabinet TCHOUHO" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Texte du cabinet */}
+              <div className="flex flex-col justify-center">
+                <h4 className="text-white font-bold text-sm tracking-widest">
+                  TCHOUHO & ASSOCIÉS
+                </h4>
+              </div>
             </div>
             
             {/* Description */}
-            <p className={`${whiteText} text-xs sm:text-sm leading-relaxed mb-6 italic font-light`}>
-              Naviguez avec assurance dans le monde complexe du droit des affaires grâce à l'expertise inégalée de notre cabinet d'avocats basé à Douala, et transformez chaque défi juridique en une opportunité de croissance.
+            <p className={`${whiteText} text-xs sm:text-sm leading-relaxed mb-6 italic font-light text-center`}>
+              Cabinet d'avocats de référence au Cameroun, nous conjuguons expertise pointue et rigueur professionnelle pour défendre vos intérêts avec intégrité et efficacité.
             </p>
             
             {/* Réseaux Sociaux */}
@@ -137,9 +148,16 @@ export function Footer() {
             </div>
 
             <div className="flex space-x-6 text-xs text-white">
-              <a href="#" className="hover:text-amber-500 transition-colors">Confidentialité</a>
-              <a href="#" className="hover:text-amber-500 transition-colors">Mentions Légales</a>
+              <Link to="/confidentialite" className="hover:text-amber-500 transition-colors">Confidentialité</Link>
+              <Link to="/mentions-legales" className="hover:text-amber-500 transition-colors">Mentions Légales</Link>
             </div>
+          </div>
+
+          {/* Developer Credit */}
+          <div className="text-center mt-6 pt-6 border-t border-[#3e2723]">
+            <p className="text-white text-xs opacity-70 font-light">
+              Développé par <span className="font-semibold text-amber-400">BATOSINE DORIAN</span>
+            </p>
           </div>
         </div>
       </div>

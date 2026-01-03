@@ -50,20 +50,23 @@ export function Header({ onOpenModal }) {
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
-          {/* LOGO AJUSTÉ : Remonte au clic et remplit le cercle */}
-          <div className="flex-shrink-0 flex items-center">
-            <button 
-              onClick={scrollToTop}
-              className={`bg-white rounded-full shadow-lg overflow-hidden border-2 border-amber-600/10 hover:scale-110 transition-all duration-300 cursor-pointer p-0 flex items-center justify-center ${
-                isScrolled ? 'w-14 h-14' : 'w-18 h-18'
-              }`}
-            >
+          {/* LOGO + TEXTE */}
+          <div className="flex-shrink-0 flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity" onClick={scrollToTop}>
+            {/* Logo circulaire */}
+            <div className={`bg-white rounded-full shadow-lg overflow-hidden border-2 border-amber-600/10 flex items-center justify-center flex-shrink-0 ${
+              isScrolled ? 'w-14 h-14' : 'w-16 h-16'
+            }`}>
               <img
                 src={logo}
                 alt="Logo Cabinet"
                 className="w-full h-full object-cover" 
               />
-            </button>
+            </div>
+            
+            {/* Texte du cabinet */}
+            <div className="hidden sm:flex flex-col">
+             
+            </div>
           </div>
 
           {/* Desktop Navigation */}
