@@ -109,14 +109,26 @@ export function Footer() {
             transition={{ delay: 0.2 }}
           >
             <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
-              Services
+              Domaines d'Expertise
             </h4>
-            <ul className={`space-y-3 text-xs sm:text-sm ${whiteText}`}>
-              <li className={hoverLink}><a href="#">Droit des Affaires</a></li>
-              <li className={hoverLink}><a href="#">Droit de la Famille</a></li>
-              <li className={hoverLink}><a href="#">Droit Immobilier</a></li>
-              <li className={hoverLink}><a href="#">Conseil Fiscal</a></li>
-              <li className={hoverLink}><a href="#">Contentieux Commercial</a></li>
+            <ul className={`space-y-2 text-xs sm:text-sm ${whiteText}`}>
+              <li className={hoverLink}><a href="#">Droit Administratif</a></li>
+              <li className={hoverLink}><a href="#">Modes Alternatifs de Règlement</a></li>
+              <li className={hoverLink}><a href="#">Droit de la Concurrence</a></li>
+              <li className={hoverLink}><a href="#">Droit Bancaire</a></li>
+              <li className={hoverLink}><a href="#">Droit Commercial</a></li>
+              <li className={hoverLink}><a href="#">Droit des Sociétés</a></li>
+              <li className={hoverLink}><a href="#">Droit Civil</a></li>
+              <li className={hoverLink}><a href="#">Actions Collectives</a></li>
+              <li className={hoverLink}><a href="#">Droit Constitutionnel</a></li>
+              <li className={hoverLink}><a href="#">Droit de la Consommation</a></li>
+              <li className={hoverLink}><a href="#">Droit des Contrats</a></li>
+              <li className={hoverLink}><a href="#">Droit Fiscal et Douanier</a></li>
+              <li className={hoverLink}><a href="#">Droit d'Assurance</a></li>
+              <li className={hoverLink}><a href="#">Droit du Travail</a></li>
+              <li className={hoverLink}><a href="#">Propriété Intellectuelle</a></li>
+              <li className={hoverLink}><a href="#">Droit Foncier</a></li>
+              <li className={hoverLink}><a href="#">Droit de l'Immigration</a></li>
             </ul>
           </motion.div>
 
