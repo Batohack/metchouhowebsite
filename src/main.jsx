@@ -9,7 +9,7 @@ import { Contact } from './pages/Contact'
 
 const root = createRoot(document.getElementById('root'))
 root.render(
-  <BrowserRouter basename="/metchouhowebsite">
+  <BrowserRouter basename="/">
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/contact" element={<Contact />} />
