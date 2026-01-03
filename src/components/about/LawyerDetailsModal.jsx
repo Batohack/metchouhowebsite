@@ -1,231 +1,172 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Award, BookOpen, Heart, MapPin, ArrowRight } from 'lucide-react'
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
-  },
-}
+import { X, Award, BookOpen, Heart, MapPin, ArrowRight, ChevronDown } from 'lucide-react'
+import { useState } from 'react'
 
 export function LawyerDetailsModal({ lawyer, isOpen, onClose }) {
+  const [expandedSections, setExpandedSections] = useState({ about: false })
+
   if (!lawyer) return null
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }))
+  }
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop avec blur */}
+          {/* Backdrop - click to close */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
           />
 
-          {/* Modal container */}
+          {/* Modal - Slide up from bottom on mobile, centered on desktop */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.85, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.85, y: 40 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25, duration: 0.4 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 lg:p-8"
+            initial={{ opacity: 0, y: '100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '100%' }}
+            transition={{ type: "spring", stiffness: 400, damping: 40 }}
+            className="fixed bottom-0 left-0 right-0 md:inset-0 md:flex md:items-center md:justify-center z-50 md:p-4"
             onClick={onClose}
           >
             {/* Modal content */}
             <motion.div
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto scrollbar-hide"
-              layoutId={`lawyer-modal-${lawyer.name}`}
+              className="bg-white w-full md:max-w-2xl md:rounded-2xl rounded-t-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
             >
-              {/* Header avec image */}
-              <motion.div className="relative h-48 sm:h-64 md:h-80 overflow-hidden bg-gradient-to-b from-amber-100 to-orange-50">
-                {/* Image avec parallax */}
-                <motion.img
+              {/* Header avec close button - Sticky */}
+              <div className="sticky top-0 bg-white border-b border-amber-100 p-4 flex items-center justify-between md:rounded-t-2xl z-10">
+                <h2 className="text-lg sm:text-xl font-bold text-[#3e2723] flex-1 truncate">
+                  {lawyer.name}
+                </h2>
+                <motion.button
+                  onClick={onClose}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2 hover:bg-amber-50 rounded-full transition-colors ml-2 flex-shrink-0"
+                >
+                  <X className="w-6 h-6 text-[#3e2723]" />
+                </motion.button>
+              </div>
+
+              {/* Image + Role */}
+              <div className="relative h-40 sm:h-48 overflow-hidden bg-gradient-to-b from-amber-100 to-orange-50">
+                <img
                   src={lawyer.image}
                   alt={lawyer.name}
                   className="w-full h-full object-cover brightness-110"
-                  initial={{ scale: 1.1 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
+                <p className="absolute bottom-3 left-4 text-amber-700 font-bold text-sm uppercase tracking-wider">
+                  {lawyer.roleKey}
+                </p>
+              </div>
+
+              {/* Content - Simple & Clean */}
+              <div className="p-4 sm:p-6 space-y-4">
                 
-                {/* Gradient overlay */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-t from-[#0f0a07] via-transparent to-transparent opacity-80"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.8 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                />
-
-                {/* Close button */}
-                <motion.button
-                  onClick={onClose}
-                  type="button"
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="absolute top-3 sm:top-4 right-3 sm:right-4 p-2.5 sm:p-3 bg-white hover:bg-amber-50 rounded-full shadow-lg hover:shadow-xl z-50 pointer-events-auto cursor-pointer transition-all duration-300 border border-white/50 hover:border-amber-200 backdrop-blur-md"
-                >
-                  <X className="w-5 h-5 sm:w-6 sm:h-6 text-[#3e2723] stroke-[2.5]" />
-                </motion.button>
-
-                {/* Title overlay */}
-                <motion.div 
-                  className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                >
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2 font-serif drop-shadow-lg">
-                    {lawyer.name}
-                  </h2>
-                  <motion.p 
-                    className="text-amber-300 font-semibold uppercase text-xs sm:text-sm tracking-widest drop-shadow"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4, duration: 0.5 }}
-                  >
-                    {lawyer.roleKey}
-                  </motion.p>
-                </motion.div>
-              </motion.div>
-
-              {/* Content */}
-              <motion.div 
-                className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                {/* Expérience highlight */}
+                {/* Experience highlight */}
                 {lawyer.experience && (
-                  <motion.div
-                    variants={itemVariants}
-                    className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-700 rounded-xl p-4 sm:p-5"
-                  >
-                    <p className="text-2xl sm:text-3xl font-bold text-amber-900">
-                      {lawyer.experience}
-                    </p>
-                    <p className="text-sm sm:text-base text-amber-800 font-medium">
-                      d'expérience professionnelle
-                    </p>
-                  </motion.div>
+                  <div className="bg-amber-50 border-l-4 border-amber-700 p-4 rounded-r-lg">
+                    <p className="text-2xl font-bold text-amber-900">{lawyer.experience}</p>
+                    <p className="text-sm text-amber-700 font-medium">d'expérience</p>
+                  </div>
                 )}
 
                 {/* Spécialités */}
                 {lawyer.specialties && lawyer.specialties.length > 0 && (
-                  <motion.div variants={itemVariants}>
-                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#3e2723] mb-3 sm:mb-4 flex items-center gap-2">
-                      <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-amber-700 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-base font-bold text-[#3e2723] mb-3 flex items-center gap-2">
+                      <BookOpen className="w-5 h-5 text-amber-700" />
                       Spécialités
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                    <div className="space-y-2">
                       {lawyer.specialties.map((specialty, idx) => (
-                        <motion.div
-                          key={idx}
-                          variants={itemVariants}
-                          whileHover={{ y: -4, boxShadow: "0 8px 16px rgba(180, 83, 9, 0.15)" }}
-                          className="bg-white border-2 border-amber-200 hover:border-amber-400 rounded-xl p-3 sm:p-4 transition-all duration-300 cursor-default"
-                        >
-                          <div className="flex items-start gap-2">
-                            <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-gradient-to-br from-amber-600 to-orange-600 rounded-full mt-1.5 flex-shrink-0" />
-                            <p className="text-xs sm:text-sm font-semibold text-[#3e2723] leading-tight">
-                              {specialty}
-                            </p>
-                          </div>
-                        </motion.div>
+                        <div key={idx} className="flex items-center gap-2 p-2 bg-amber-50/50 rounded-lg">
+                          <span className="w-2 h-2 bg-amber-700 rounded-full" />
+                          <p className="text-sm text-[#3e2723] font-medium">{specialty}</p>
+                        </div>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Qualifications */}
                 {lawyer.credentials && lawyer.credentials.length > 0 && (
-                  <motion.div variants={itemVariants}>
-                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#3e2723] mb-3 sm:mb-4 flex items-center gap-2">
-                      <Award className="w-5 h-5 sm:w-6 sm:h-6 text-amber-700 flex-shrink-0" />
+                  <div>
+                    <h3 className="text-base font-bold text-[#3e2723] mb-3 flex items-center gap-2">
+                      <Award className="w-5 h-5 text-amber-700" />
                       Qualifications
                     </h3>
-                    <div className="space-y-2 sm:space-y-3">
+                    <div className="space-y-2">
                       {lawyer.credentials.map((cred, idx) => (
-                        <motion.div 
-                          key={idx}
-                          variants={itemVariants}
-                          className="flex items-start gap-3 p-2 sm:p-3 rounded-lg hover:bg-amber-50/50 transition-colors duration-300"
-                        >
-                          <motion.div 
-                            className="w-2 h-2 bg-gradient-to-br from-amber-600 to-orange-600 rounded-full mt-2 flex-shrink-0"
-                            whileHover={{ scale: 1.5 }}
-                          />
-                          <p className="text-xs sm:text-sm text-[#5d4037] font-medium">
-                            {cred}
-                          </p>
-                        </motion.div>
+                        <div key={idx} className="flex items-start gap-2 p-2">
+                          <span className="w-1.5 h-1.5 bg-amber-600 rounded-full mt-2 flex-shrink-0" />
+                          <p className="text-sm text-[#5d4037]">{cred}</p>
+                        </div>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
-                {/* Description complète */}
+                {/* À propos - Expandable on mobile */}
                 {lawyer.fullDescription && (
-                  <motion.div variants={itemVariants}>
-                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-[#3e2723] mb-3 sm:mb-4 flex items-center gap-2">
-                      <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-amber-700 flex-shrink-0" />
-                      À propos
-                    </h3>
-                    <motion.p 
-                      className="text-xs sm:text-sm md:text-base text-[#5d4037] leading-relaxed text-justify p-4 sm:p-5 bg-gradient-to-br from-orange-50/50 to-amber-50/50 rounded-xl border border-amber-100"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5, duration: 0.6 }}
+                  <div>
+                    <button
+                      onClick={() => toggleSection('about')}
+                      className="w-full flex items-center justify-between p-3 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors text-left"
                     >
-                      {lawyer.fullDescription}
-                    </motion.p>
-                  </motion.div>
+                      <div className="flex items-center gap-2">
+                        <Heart className="w-5 h-5 text-amber-700" />
+                        <span className="font-bold text-[#3e2723]">À propos</span>
+                      </div>
+                      <motion.div
+                        animate={{ rotate: expandedSections.about ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ChevronDown className="w-5 h-5 text-amber-700" />
+                      </motion.div>
+                    </button>
+                    <motion.div
+                      initial={false}
+                      animate={{ height: expandedSections.about ? 'auto' : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-sm text-[#5d4037] leading-relaxed p-4 bg-orange-50/30">
+                        {lawyer.fullDescription}
+                      </p>
+                    </motion.div>
+                  </div>
                 )}
 
                 {/* Localisation */}
                 {lawyer.location && (
-                  <motion.div 
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.02 }}
-                    className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 hover:border-amber-400 rounded-xl p-4 sm:p-5 transition-all duration-300 cursor-default"
-                  >
-                    <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-amber-700 mt-0.5 flex-shrink-0" />
-                      <p className="text-xs sm:text-sm md:text-base text-[#3e2723] font-semibold">
-                        {lawyer.location}
-                      </p>
-                    </div>
-                  </motion.div>
+                  <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg">
+                    <MapPin className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
+                    <p className="text-sm text-[#3e2723] font-medium">{lawyer.location}</p>
+                  </div>
                 )}
 
-                {/* CTA Button */}
-                <motion.button 
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05, boxShadow: "0 12px 24px rgba(180, 83, 9, 0.3)" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 hover:from-amber-800 hover:via-amber-700 hover:to-orange-700 text-white font-bold py-3 sm:py-4 rounded-xl transition-all duration-300 transform flex items-center justify-center gap-2 shadow-lg text-sm sm:text-base"
+                {/* CTA Button - Full width and easy to tap */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-amber-700 to-orange-600 hover:from-amber-800 hover:to-orange-700 text-white font-bold py-3 sm:py-4 rounded-lg transition-all flex items-center justify-center gap-2 mt-6 text-sm sm:text-base"
                 >
-                  <span>Prendre rendez-vous</span>
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  Prendre rendez-vous
+                  <ArrowRight className="w-4 h-4" />
                 </motion.button>
-              </motion.div>
+
+                {/* Bottom padding for mobile safety area */}
+                <div className="h-4" />
+              </div>
             </motion.div>
           </motion.div>
         </>
