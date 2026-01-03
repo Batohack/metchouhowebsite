@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { Header } from './components/layout/Header'
 import { Hero } from './components/sections/Hero'
-import { FeaturesGrid } from './components/sections/FeaturesGrid'
 import { ExpertiseDomains } from './components/sections/ExpertiseDomains'
-import { Testimonials } from './components/sections/Testimonials'
 import { WhyChooseUs } from './components/sections/WhyChooseUs'
 import { Team } from './components/about/Team'
 import { Footer } from './components/layout/Footer'
@@ -26,9 +24,7 @@ function App() {
       <main>
         <Hero onOpenModal={openModal} />
         <Team onOpenModal={openModal} />
-        <FeaturesGrid onOpenModal={openModal} />
         <ExpertiseDomains />
-        <Testimonials />
         <WhyChooseUs />
       </main>
 
