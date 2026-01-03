@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Scale, Clock, Shield, Smile, BarChart, Award, ArrowRight } from 'lucide-react'
 

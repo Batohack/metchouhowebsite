@@ -6,10 +6,9 @@ import { useState } from 'react'
 
 export function PrivacyPolicy() {
   const [openSection, setOpenSection] = useState(null)
-  const [isModalOpen] = useState(false)
 
   const handleOpenModal = () => {
-    // Fonction stub pour Header
+    // Stub - Header requires this prop
   }
 
   const sections = [

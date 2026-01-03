@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { getSafeScrollY, safeScrollToElement } from '../../utils/scroll.utils'

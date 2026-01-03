@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion'
 import { Header } from '../components/layout/Header'
 import { Footer } from '../components/layout/Footer'
-import { useState } from 'react'
 import { Clock, FileText, TrendingUp, Shield } from 'lucide-react'
 
 export function Fees() {
-  const [isModalOpen] = useState(false)
-
   const handleOpenModal = () => {
-    // Fonction stub pour Header
+    // Stub - Header requires this prop
   }
 
   const fadeInUp = {

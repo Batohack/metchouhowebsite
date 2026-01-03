@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Header } from './components/layout/Header'
 import { Hero } from './components/sections/Hero'
 import { ExpertiseDomains } from './components/sections/ExpertiseDomains'

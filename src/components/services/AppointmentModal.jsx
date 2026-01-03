@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { X, Calendar, Clock, User, Mail, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 export function AppointmentModal({ isOpen, onClose }) {
