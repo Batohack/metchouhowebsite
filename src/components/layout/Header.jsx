@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { getSafeScrollY, safeScrollToElement } from '../../utils/scroll.utils'
 import logo from '../../assets/CabinetLogo.svg'
 
@@ -83,6 +84,13 @@ export function Header({ onOpenModal }) {
               </a>
             ))}
 
+            <Link 
+              to="/honoraires"
+              className="text-white hover:text-amber-400 px-2 py-2 text-sm font-bold transition-colors tracking-wide"
+            >
+              Honoraires
+            </Link>
+
             <button 
               onClick={onOpenModal}
               className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-95 transform hover:-translate-y-0.5 cursor-pointer"
@@ -114,6 +122,13 @@ export function Header({ onOpenModal }) {
                 {item.name}
               </a>
             ))}
+            <Link 
+              to="/honoraires"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-white block text-lg font-bold hover:text-amber-400"
+            >
+              Honoraires
+            </Link>
             <button 
               onClick={() => { setIsMenuOpen(false); onOpenModal(); }}
               className="w-full bg-[#a82323] text-white py-4 rounded-xl font-bold shadow-lg cursor-pointer"
