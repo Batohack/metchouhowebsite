@@ -28,31 +28,31 @@ export function WhyChooseUs() {
       title: 'Confidentialité Absolue', 
       desc: 'Respect strict du secret professionnel et protection maximale de vos données personnelles et professionnelles',
       icon: <Scale />,
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-amber-600 to-amber-700'
     },
     { 
       title: 'Résultats Probants', 
       desc: 'Stratégie juridique éprouvée pour maximiser vos chances de succès et protéger vos intérêts',
       icon: <Shield />,
-      color: 'from-green-500 to-green-600'
+      color: 'from-amber-500 to-amber-600'
     },
     { 
       title: 'Disponibilité 24/7', 
       desc: 'Support continu pour vos urgences juridiques, nous sommes toujours là pour vous',
       icon: <Clock />,
-      color: 'from-red-500 to-red-600'
+      color: 'from-amber-700 to-amber-800'
     },
     { 
       title: 'Accompagnement Personnel', 
       desc: 'Service sur mesure adapté à vos besoins spécifiques avec suivi régulier',
       icon: <Award />,
-      color: 'from-purple-500 to-purple-600'
+      color: 'from-amber-600 to-amber-700'
     },
     { 
       title: 'Localisation Stratégique', 
       desc: 'Au cœur du quartier Omnisport à Yaoundé, facilement accessible à tous',
       icon: <Smile />,
-      color: 'from-pink-500 to-pink-600'
+      color: 'from-amber-500 to-amber-600'
     },
   ]
 

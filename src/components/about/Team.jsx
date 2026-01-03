@@ -5,12 +5,13 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import metchouhoImage from '../../assets/TChcard.jpeg'
+import nouDjomImage from '../../assets/NouDjomCard.jpeg'
+import tangImage from '../../assets/Tangcard.jpeg'
+import { LawyerDetailsModal } from './LawyerDetailsModal'
 
 // Correction des icônes Leaflet (obligatoire pour l'affichage du marqueur)
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import nouDjomImage from '../../assets/NouDjomCard.jpeg'
-import tangImage from '../../assets/Tangcard.jpeg'  
 
 let DefaultIcon = L.icon({
     iconUrl: markerIcon,
@@ -24,11 +25,22 @@ L.Marker.prototype.options.icon = DefaultIcon;
 const teamMembersData = [
   {
     name: 'Me TCHOUHO MEDARD',
-    roleKey: 'Avocat International',
+    roleKey: 'Avocat International & Fondateur',
     image: metchouhoImage,
+    experience: '2 ans',
     credentials: [
-      'Avocat au Barreau du Cameroun', 
+      'Avocat au Barreau du Cameroun',
+      'Expert en Droit des Affaires',
+      'Spécialiste en Droit International'
     ],
+    specialties: [
+      'Droit des Affaires',
+      'Droit International',
+      'Contentieux Commercial',
+      'Conseil Juridique'
+    ],
+    fullDescription: 'Me Tchouho Medard est le fondateur et directeur du cabinet. Avec 2 ans d\'expérience intensive en droit international et des affaires, il a accompagné de nombreuses entreprises camerounaises et internationales. Son expertise couvre la structuration d\'entreprises, les négociations commerciales complexes et la résolution de litiges stratégiques. Passionné par l\'excellence juridique, il s\'engage à fournir des conseils stratégiques adaptés à chaque client.',
+    location: 'Quartier Omnisport, Rue des Généraux, Yaoundé',
     socials: {
       whatsapp: "https://wa.me/237677423169",
       linkedin: "https://www.linkedin.com/in/me-medard-tchouho-noudimen-03522b233/",
@@ -37,16 +49,44 @@ const teamMembersData = [
   },
   {
     name: 'Me NOUDJOM PENE Daniele',
-    roleKey: 'Avocat Associé',
+    roleKey: 'Avocat Associé en Droit de la Famille',
     image: nouDjomImage,
-    credentials: ['Droit de la Famille', 'Droit Civil', 'Procédures judiciaires'],
+    experience: '5 ans',
+    credentials: [
+      'Spécialiste en Droit de la Famille',
+      'Expert en Droit Civil',
+      'Procédures Judiciaires',
+      'Médiation Familiale'
+    ],
+    specialties: [
+      'Droit de la Famille',
+      'Droit Civil',
+      'Procédures Judiciaires',
+      'Médiation & Conciliation'
+    ],
+    fullDescription: 'Me Noudjom Pene Daniele est une experte reconue en droit de la famille et droit civil. Avec 5 ans d\'expérience, elle a géré avec succès des dossiers de succession, de divorce et de tutelle. Dotée d\'une grande empathie, elle accompagne ses clients avec sensibilité dans les moments difficiles. Son approche combine rigueur juridique et humanité pour trouver des solutions justes et durables.',
+    location: 'Quartier Omnisport, Yaoundé, Cameroun',
     socials: { whatsapp: "#", linkedin: "#", facebook: "#" }
   },
   {
     name: 'Me TANG NDZANA Julie Emmanuel',
-    roleKey: 'Avocat Associé',
+    roleKey: 'Avocat Associé - Droit Immobilier',
     image: tangImage,
-    
+    experience: '3 ans',
+    credentials: [
+      'Spécialiste en Droit Immobilier',
+      'Expert en Urbanisme et Aménagement',
+      'Contrats Commerciaux Immobiliers',
+      'Droit de la Propriété'
+    ],
+    specialties: [
+      'Droit Immobilier',
+      'Urbanisme & Aménagement',
+      'Baux Commerciaux',
+      'Transactions Immobilières'
+    ],
+    fullDescription: 'Me Tang Ndzana Julie Emmanuel apporte son expertise spécialisée en droit immobilier au cabinet. Avec 3 ans d\'expérience, elle maîtrise les enjeux complexes de l\'immobilier et de l\'urbanisme camerounais. Elle conseille entreprises et particuliers dans leurs transactions immobilières, la rédaction de contrats et la gestion des litiges fonciers. Son pragmatisme et sa connaissance approfondie du cadre légal en font une avocate de confiance.',
+    location: 'Quartier Omnisport, Yaoundé',
     socials: { whatsapp: "#", linkedin: "#", facebook: "#" }
   }
 ]
@@ -64,6 +104,8 @@ const staggerContainer = {
 export function Team({ onOpenModal }) {
 
   const [selectedImage, setSelectedImage] = useState(null)
+  const [selectedLawyer, setSelectedLawyer] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <section id="team-section" className="py-24 bg-[#fdfaf7] relative overflow-hidden">
@@ -83,7 +125,7 @@ export function Team({ onOpenModal }) {
         {/* Grille des avocats */}
         <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {teamMembersData.map((member, index) => (
-            <TeamMemberCard key={index} member={member} onImageClick={() => setSelectedImage(member.image)} onOpenModal={onOpenModal} />
+            <TeamMemberCard key={index} member={member} onImageClick={() => setSelectedImage(member.image)} onOpenModal={onOpenModal} onDetailClick={(lawyer) => { setSelectedLawyer(lawyer); setIsModalOpen(true); }} />
           ))}
         </motion.div>
 
@@ -92,45 +134,67 @@ export function Team({ onOpenModal }) {
       </div>
 
       <ImageLightbox selectedImage={selectedImage} onClose={() => setSelectedImage(null)} />
+      <LawyerDetailsModal lawyer={selectedLawyer} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   )
 }
 
-function TeamMemberCard({ member, t, onImageClick, onOpenModal }) {
+function TeamMemberCard({ member, t, onImageClick, onOpenModal, onDetailClick }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const fullDescription = (member.descriptionKey);
 
   return (
     <motion.div className="bg-white rounded-2xl shadow-xl overflow-hidden group border border-amber-100/50 flex flex-col h-full" variants={fadeInUp} whileHover={{ y: -8 }}>
       <div className="relative h-80 overflow-hidden cursor-pointer" onClick={onImageClick}>
-        <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+        <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-110" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0f0a07] via-transparent to-transparent opacity-90" />
 
         <div className="absolute bottom-4 left-6 right-6 z-10">
           <h3 className="text-xl font-bold !text-white drop-shadow-md font-serif">{member.name}</h3>
-          <p className="text-amber-300 font-semibold uppercase text-[10px] tracking-widest">{(member.roleKey)}</p>
+          <p className="text-amber-300 font-semibold uppercase text-[10px] tracking-widest">{member.roleKey}</p>
         </div>
       </div>
 
       <div className="p-6 flex flex-col flex-grow bg-white text-left">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-[10px] font-bold text-amber-900 bg-amber-50 px-3 py-1 rounded-full border border-amber-100 uppercase italic">{(member.specialtyKey)}</span>
-  
-        </div>
+        {/* Spécialités */}
+        {member.specialties && (
+          <div className="mb-4 space-y-1">
+            {member.specialties.slice(0, 2).map((specialty, idx) => (
+              <span key={idx} className="inline-block text-[10px] font-bold text-amber-900 bg-amber-50 px-2 py-1 rounded-full border border-amber-100 uppercase italic mr-2">
+                {specialty}
+              </span>
+            ))}
+          </div>
+        )}
         
-       
+        {/* Description brève */}
         <div className="mb-6 border-l-2 border-amber-100 pl-3">
-          <p className={`text-[#5d4037] text-sm leading-relaxed italic transition-all duration-300 ${!isExpanded ? 'line-clamp-2' : ''}`}>{fullDescription}</p>
-          <button onClick={() => setIsExpanded(!isExpanded)} className="text-amber-700 text-[11px] font-bold mt-2 hover:text-amber-900 underline cursor-pointer">{isExpanded ? "Voir moins" : "Voir plus..."}</button>
+          <p className="text-[#5d4037] text-sm leading-relaxed italic">
+            {member.experience && <span className="block font-semibold mb-2 text-amber-700">{member.experience} d'expérience</span>}
+            {member.credentials && member.credentials[0] && (
+              <span className="text-xs text-[#5d4037]">{member.credentials[0]}</span>
+            )}
+          </p>
         </div>
 
-        <div className="mt-auto">
-          <div className="flex items-center justify-center gap-4 mb-6 pt-4 border-t border-slate-100">
-            <a href={member.socials.whatsapp} target="_blank" className="p-2.5 bg-green-50 text-green-600 rounded-full hover:bg-green-600 hover:text-white transition-all"><WhatsAppIcon /></a>
-            <a href={member.socials.linkedin} target="_blank" className="p-2.5 bg-blue-50 text-blue-700 rounded-full hover:bg-blue-700 hover:text-white transition-all"><Linkedin className="w-5 h-5" /></a>
-            <a href={member.socials.facebook} target="_blank" className="p-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-700 hover:text-white transition-all"><Facebook className="w-5 h-5" /></a>
+        <div className="mt-auto space-y-3">
+          {/* Bouton En savoir plus */}
+          <button 
+            onClick={() => onDetailClick(member)}
+            className="w-full bg-gradient-to-r from-amber-100 to-orange-100 hover:from-amber-200 hover:to-orange-200 text-amber-900 py-3 rounded-xl font-bold text-sm transition-all duration-300 border border-amber-200 flex items-center justify-center gap-2"
+          >
+            En savoir plus
+            <ArrowRight className="w-4 h-4" />
+          </button>
+
+          {/* Réseaux sociaux */}
+          <div className="flex items-center justify-center gap-4 pt-3 border-t border-slate-100">
+            <a href={member.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-green-50 text-green-600 rounded-full hover:bg-green-600 hover:text-white transition-all"><WhatsAppIcon /></a>
+            <a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-blue-50 text-blue-700 rounded-full hover:bg-blue-700 hover:text-white transition-all"><Linkedin className="w-5 h-5" /></a>
+            <a href={member.socials.facebook} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-700 hover:text-white transition-all"><Facebook className="w-5 h-5" /></a>
           </div>
-          <button onClick={onOpenModal} className="w-full bg-[#3e2723] text-white py-4 rounded-xl font-bold text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer">Prendre rendez-vous <ArrowRight className="w-4 h-4" /></button>
+
+          {/* Prendre rendez-vous */}
+          <button onClick={onOpenModal} className="w-full bg-[#3e2723] text-white py-3 rounded-xl font-bold text-sm shadow-lg flex items-center justify-center gap-2 cursor-pointer hover:bg-[#2a1a11] transition-all">Prendre rendez-vous <ArrowRight className="w-4 h-4" /></button>
         </div>
       </div>
     </motion.div>
