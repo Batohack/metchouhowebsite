@@ -91,6 +91,13 @@ export function Header({ onOpenModal }) {
               Honoraires
             </Link>
 
+            <Link 
+              to="/contact"
+              className="text-white hover:text-amber-400 px-2 py-2 text-sm font-bold transition-colors tracking-wide"
+            >
+              Contact
+            </Link>
+
             <button 
               onClick={onOpenModal}
               className="bg-[#a82323] hover:bg-red-700 text-white px-6 py-3 rounded-xl text-sm font-bold shadow-xl transition-all active:scale-95 transform hover:-translate-y-0.5 cursor-pointer"
@@ -128,6 +135,13 @@ export function Header({ onOpenModal }) {
               className="text-white block text-lg font-bold hover:text-amber-400"
             >
               Honoraires
+            </Link>
+            <Link 
+              to="/contact"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-white block text-lg font-bold hover:text-amber-400"
+            >
+              Contact
             </Link>
             <button 
               onClick={() => { setIsMenuOpen(false); onOpenModal(); }}
