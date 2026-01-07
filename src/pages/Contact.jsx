@@ -138,7 +138,13 @@ export function Contact() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
+                  <a
+                    href="https://maps.app.goo.gl/WKUQPcoVQPsSqfL19"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 hover:underline"
+                    aria-label="Voir l'adresse du cabinet sur Google Maps"
+                  >
                     <MapPin className="w-5 h-5 text-amber-600 mt-1 flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-[#3e2723]">Par courrier postal :</p>
@@ -148,7 +154,7 @@ export function Contact() {
                         Yaoundé, Cameroun
                       </p>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </motion.div>
