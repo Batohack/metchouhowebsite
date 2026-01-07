@@ -22,3 +22,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Ajout des éléments sensibles
+.env
+node_modules/
+dist/
+.vscode/
+.DS_Store
+*.log
+*.lock
+*.cache
+*.tmp
+*.env.local
+*.env.development
+*.env.production
+*.env.test
+*.env.*
+.idea/
+*.iml
+*.swp
