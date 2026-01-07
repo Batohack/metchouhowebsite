@@ -5,6 +5,24 @@ import { Scale, Briefcase, Shield, DollarSign, Users, Gavel, Zap } from 'lucide-
 
 export function ExpertiseDomains() {
   const [selectedDomain, setSelectedDomain] = useState(null)
+  const [showAll, setShowAll] = useState(false)
+
+  const MAX_VISIBLE = 8
+  const MOBILE_MAX_VISIBLE = 4
+  const [isMobile, setIsMobile] = useState(false)
+
+  // track small screens so we can show fewer cards on mobile
+  React.useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)')
+    const handler = (e) => setIsMobile(e.matches)
+    setIsMobile(mq.matches)
+    if (mq.addEventListener) mq.addEventListener('change', handler)
+    else mq.addListener(handler)
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handler)
+      else mq.removeListener(handler)
+    }
+  }, [])
 
   const domains = [
     { 
@@ -114,6 +132,10 @@ export function ExpertiseDomains() {
     },
   }
 
+  // compute visible list depending on screen and toggle
+  const visibleDefault = isMobile ? MOBILE_MAX_VISIBLE : MAX_VISIBLE
+  const list = showAll ? domains : domains.slice(0, visibleDefault)
+
   return (
     <section className="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden">
       {/* Décoration de fond */}
@@ -147,10 +169,13 @@ export function ExpertiseDomains() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {domains.map((domain, idx) => (
+          {list.map((domain, idx) => (
             <motion.div
               key={idx}
               variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: idx * 0.04 }}
               onMouseEnter={() => setSelectedDomain(idx)}
               onMouseLeave={() => setSelectedDomain(null)}
               className="group"
@@ -193,6 +218,23 @@ export function ExpertiseDomains() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Voir plus / Voir moins */}
+        {(() => {
+          const visibleDefault = isMobile ? MOBILE_MAX_VISIBLE : MAX_VISIBLE
+          const extra = Math.max(0, domains.length - visibleDefault)
+          if (extra <= 0) return null
+          return (
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={() => setShowAll((s) => !s)}
+                className="inline-flex items-center gap-3 bg-white border border-amber-200 text-amber-800 px-6 py-2 rounded-full font-semibold shadow-sm hover:shadow-md transition-all"
+              >
+                {showAll ? 'Voir moins' : `Voir plus (${extra})`}
+              </button>
+            </div>
+          )
+        })()}
 
         {/* CTA */}
         <motion.div
