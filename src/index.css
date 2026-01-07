@@ -106,3 +106,21 @@
   background: var(--color-primary-dark);
   border-radius: 10px;
 }
+
+/* Leaflet stacking: ensure header stays on top and map controls don't overlap header */
+.leaflet-container {
+  z-index: 0 !important;
+}
+.leaflet-pane,
+.leaflet-map-pane,
+.leaflet-tile-pane,
+.leaflet-overlay-pane,
+.leaflet-shadow-pane,
+.leaflet-marker-pane,
+.leaflet-tooltip-pane,
+.leaflet-popup-pane {
+  z-index: 0 !important;
+}
+.leaflet-control {
+  z-index: 10 !important;
+}

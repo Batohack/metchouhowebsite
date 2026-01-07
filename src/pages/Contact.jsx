@@ -104,10 +104,16 @@ export function Contact() {
                 </MapContainer>
               </div>
 
-              {/* Bouton "Agrandir la carte" */}
-              <button className="text-blue-600 font-semibold hover:underline">
-                Agrandir la carte
-              </button>
+              {/* Bouton "Obtenir l'itinéraire" vers Google Maps */}
+              <a
+                href={`https://maps.app.goo.gl/WKUQPcoVQPsSqfL19`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Ouvrir l'itinéraire dans Google Maps"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white px-4 py-2 rounded-lg font-semibold shadow-md transition-all"
+              >
+                Obtenir l'itinéraire
+              </a>
 
               {/* Infos de contact */}
               <div className="space-y-6">
