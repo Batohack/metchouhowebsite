@@ -68,17 +68,17 @@ export function AppointmentModal({ isOpen, onClose }) {
           />
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.96, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            exit={{ opacity: 0, scale: 0.96, y: 8 }}
             className="fixed inset-0 z-[110] flex items-center justify-center p-4 pointer-events-none"
           >
-            <div className="bg-white w-full max-w-xl rounded-3xl shadow-2xl overflow-hidden pointer-events-auto relative">
+            <div className="bg-white w-full max-w-md md:max-w-xl rounded-3xl shadow-2xl overflow-hidden pointer-events-auto relative max-h-[85vh] overflow-y-auto">
               <button onClick={onClose} className="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-10">
                 <X className="w-5 h-5 text-gray-500" />
               </button>
 
-              <div className="p-8 md:p-12">
+              <div className="p-6 md:p-10">
                 {isSubmitted ? (
                   <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="py-12 flex flex-col items-center text-center space-y-4">
                     <CheckCircle className="w-16 h-16 text-green-500" />
@@ -147,6 +147,17 @@ export function AppointmentModal({ isOpen, onClose }) {
                       >
                         {isPending ? <Loader2 className="w-5 h-5 animate-spin" /> : "Confirmer l'envoi"}
                       </button>
+
+                      {/* Bottom close button for easy dismissal on mobile */}
+                      <div className="mt-4 flex justify-center">
+                        <button
+                          onClick={onClose}
+                          aria-label="Fermer"
+                          className="p-2 bg-amber-50 hover:bg-amber-100 rounded-full shadow-sm transition-colors"
+                        >
+                          <X className="w-5 h-5 text-amber-700" />
+                        </button>
+                      </div>
                     </form>
                   </>
                 )}

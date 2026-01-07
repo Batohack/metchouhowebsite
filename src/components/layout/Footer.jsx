@@ -155,7 +155,7 @@ export function Footer() {
             <ul className={`space-y-3 text-xs sm:text-sm leading-relaxed break-words ${whiteText}`}>
               <li className={hoverLink}><a href="#">Nous contacter</a></li>
               <li className={hoverLink}><a href="#">Cabinet d'avocat</a></li>
-              <li className={hoverLink}><a href="">Plan du site</a></li>
+              <li className={hoverLink}><a href="#">Plan du site</a></li>
             </ul>
           </motion.div>
         </div>
@@ -164,20 +164,13 @@ export function Footer() {
         <div className="border-t border-[#3e2723] pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-white text-xs opacity-80 text-center md:text-left">
-              © 2026 Cabinet TCHOUHO & Associés - Excellence Juridique & Intégrité
+              © 2026 Cabinet D' Avocats Tchouho & Associés - Excellence Juridique & Intégrité
             </div>
 
             <div className="flex space-x-6 text-xs text-white">
               <Link to="/confidentialite" className="hover:text-amber-500 transition-colors">Confidentialité</Link>
               <Link to="/mentions-legales" className="hover:text-amber-500 transition-colors">Mentions Légales</Link>
             </div>
-          </div>
-
-          {/* Developer Credit */}
-          <div className="text-center mt-6 pt-6 border-t border-[#3e2723]">
-            <p className="text-white text-xs opacity-70 font-light">
-              Développé par <span className="font-semibold text-amber-400">BATOSINE DORIAN</span>
-            </p>
           </div>
         </div>
       </div>
