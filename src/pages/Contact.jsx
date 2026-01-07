@@ -155,6 +155,19 @@ export function Contact() {
                       </p>
                     </div>
                   </a>
+              {/* Horaires d'ouverture */}
+              <div className="mt-6 bg-white border border-gray-100 rounded-lg p-4 shadow-sm">
+                <h3 className="text-lg font-semibold text-[#3e2723] mb-3">Horaires d'ouverture</h3>
+                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-[#5d4037]">
+                  <div><dt className="font-medium">lundi</dt><dd>06:30–18:30</dd></div>
+                  <div><dt className="font-medium">mardi</dt><dd>06:30–18:30</dd></div>
+                  <div><dt className="font-medium">mercredi</dt><dd>06:30–18:30</dd></div>
+                  <div><dt className="font-medium">jeudi</dt><dd>06:30–18:30</dd></div>
+                  <div><dt className="font-medium">vendredi</dt><dd>06:30–18:30</dd></div>
+                  <div><dt className="font-medium">samedi</dt><dd>Fermé</dd></div>
+                  <div><dt className="font-medium">dimanche</dt><dd>Fermé</dd></div>
+                </dl>
+              </div>
                 </div>
               </div>
             </motion.div>
