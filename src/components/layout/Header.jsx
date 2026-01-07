@@ -57,7 +57,8 @@ export function Header({ onOpenModal }) {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 bg-[#1a120b]/95 backdrop-blur-md shadow-xl border-b border-amber-900/10 py-2`}>
+    <>
+      <header className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-500 bg-[#1a120b]/95 backdrop-blur-md shadow-xl border-b border-amber-900/10 py-2`}>
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
@@ -171,6 +172,10 @@ export function Header({ onOpenModal }) {
           </div>
         </div>
       )}
-    </header>
+      </header>
+
+      {/* Spacer to push content below fixed header on small screens */}
+      <div aria-hidden="true" className="lg:hidden h-20" />
+    </>
   )
 }

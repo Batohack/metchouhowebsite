@@ -28,10 +28,10 @@ export function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-1 flex flex-col"
+            className="lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left"
           >
             {/* Logo + Texte */}
-            <div className="flex items-start gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 mb-6 w-full">
               {/* Logo circulaire */}
               <div className="bg-white rounded-full shadow-lg overflow-hidden border-2 border-amber-600/10 flex items-center justify-center flex-shrink-0 w-16 h-16">
                 <img 
@@ -43,27 +43,30 @@ export function Footer() {
               
               {/* Texte du cabinet */}
               <div className="flex flex-col justify-center">
-                <h4 className="text-white font-bold text-sm tracking-widest">
-                  TCHOUHO & ASSOCIÉS
+                <h4 className="text-white font-bold text-sm tracking-widest text-center sm:text-left">
+                  CABINET D'AVOCATS TCHOUHO & ASSOCIÉS
                 </h4>
               </div>
             </div>
             
             {/* Description */}
-            <p className={`${whiteText} text-xs sm:text-sm leading-relaxed mb-6 italic font-light text-center`}>
+            <p className={`${whiteText} text-xs sm:text-sm leading-relaxed mb-6 italic font-light text-center sm:text-left max-w-[20rem] sm:max-w-none mx-auto sm:mx-0`}>
               Cabinet d'avocats de référence au Cameroun, nous conjuguons expertise pointue et rigueur professionnelle pour défendre vos intérêts avec intégrité et efficacité.
             </p>
             
             {/* Réseaux Sociaux */}
-            <div className="flex space-x-4 mt-auto">
+            <div className="flex space-x-4 mt-4 sm:mt-auto justify-center sm:justify-start">
               {/* Facebook */}
               <a href="https://web.facebook.com/medard.tchouho/?locale=cs_CZ&_rdc=1&_rdr" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-amber-600/20 hover:bg-amber-600 rounded-full flex items-center justify-center transition-all duration-300 group border border-amber-600/30">
                 <Facebook className="w-5 h-5 text-amber-400 group-hover:text-white" />
               </a>
               
-              {/* Instagram */}
-              <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-amber-600/20 hover:bg-amber-600 rounded-full flex items-center justify-center transition-all duration-300 group border border-amber-600/30">
-                <svg className="w-5 h-5 text-amber-400 group-hover:text-white fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001Z"/></svg>
+              {/* WhatsApp */}
+              <a href="https://wa.me/237677423169" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir WhatsApp" className="w-10 h-10 bg-amber-600/20 hover:bg-amber-600 rounded-full flex items-center justify-center transition-all duration-300 group border border-amber-600/30">
+                <svg className="w-5 h-5 text-amber-400 group-hover:text-white" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.002 3.2C9.01 3.2 3.6 8.61 3.6 15.6c0 2.74.8 5.27 2.18 7.43L3.2 28.8l6.06-2.02c2.03 1.11 4.35 1.7 6.74 1.7 6.99 0 12.4-5.41 12.4-12.4S22.991 3.2 16.002 3.2z" fill="currentColor" opacity="0.12"/>
+                  <path d="M16.002 29.333c-2.04 0-4.03-.54-5.78-1.56l-.41-.24-3.6 1.2 1.2-3.5-.27-.44A12.85 12.85 0 013.2 15.6C3.2 9.13 8.53 3.8 15 3.8c7.44 0 13.2 5.96 13.2 11.8 0 6.28-5.16 11.733-15.398 11.733zM22.89 19.43c-.38-.19-2.26-1.12-2.61-1.25-.35-.13-.61-.19-.87.19-.27.38-1.06 1.25-1.3 1.5-.24.25-.48.28-.87.09-.39-.19-1.66-.61-3.17-1.96-1.17-1.03-1.96-2.3-2.19-2.69-.23-.38-.02-.59.16-.78.16-.16.36-.42.54-.63.18-.22.24-.38.36-.63.12-.25.06-.47-.03-.66-.09-.19-.87-2.1-1.2-2.88-.32-.78-.65-.67-.89-.68-.23-.01-.5-.01-.77-.01-.27 0-.7.09-1.06.42-.36.34-1.37 1.34-1.37 3.26 0 1.92 1.4 3.78 1.6 4.04.2.25 2.78 4.24 6.74 5.92 4.48 1.94 4.48 1.29 5.29 1.21.8-.07 2.6-1.06 2.97-2.08.37-1.02.37-1.9.26-2.08-.12-.19-.36-.3-.73-.49z" fill="currentColor"/>
+                </svg>
               </a>
 
               {/* LinkedIn */}

@@ -27,19 +27,19 @@ export function LawyerDetailsModal({ lawyer, isOpen, onClose }) {
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
           />
 
-          {/* Modal - Slide up from bottom on mobile, centered on desktop */}
+          {/* Modal - centered and size-limited on mobile, centered on desktop */}
           <motion.div
-            initial={{ opacity: 0, y: '100%' }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: '100%' }}
+            initial={{ opacity: 0, scale: 0.98, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.98, y: 8 }}
             transition={{ type: "spring", stiffness: 400, damping: 40 }}
-            className="fixed bottom-0 left-0 right-0 md:inset-0 md:flex md:items-center md:justify-center z-50 md:p-4"
+            className="fixed inset-0 flex items-center justify-center z-50 p-4"
             onClick={onClose}
           >
             {/* Modal content */}
             <motion.div
               onClick={(e) => e.stopPropagation()}
-              className="bg-white w-full md:max-w-2xl md:rounded-2xl rounded-t-3xl shadow-2xl max-h-[90vh] overflow-y-auto"
+              className="bg-white w-full max-w-md md:max-w-2xl rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto"
             >
               {/* Header avec close button - Sticky */}
               <div className="sticky top-0 bg-white border-b border-amber-100 p-4 flex items-center justify-between md:rounded-t-2xl z-10">
@@ -164,8 +164,19 @@ export function LawyerDetailsModal({ lawyer, isOpen, onClose }) {
                   <ArrowRight className="w-4 h-4" />
                 </motion.button>
 
-                {/* Bottom padding for mobile safety area */}
-                <div className="h-4" />
+                  {/* Bottom close button (easy to reach on mobile) */}
+                  <div className="mt-4 flex justify-center">
+                    <button
+                      onClick={onClose}
+                      aria-label="Fermer"
+                      className="p-2 bg-amber-50 hover:bg-amber-100 rounded-full shadow-sm transition-colors"
+                    >
+                      <X className="w-5 h-5 text-amber-700" />
+                    </button>
+                  </div>
+
+                  {/* Bottom padding for mobile safety area */}
+                  <div className="h-4" />
               </div>
             </motion.div>
           </motion.div>
