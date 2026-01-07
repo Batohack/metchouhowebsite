@@ -9,6 +9,22 @@ import { Contact } from './pages/Contact'
 import TeamPage from './pages/TeamPage'
 
 const root = createRoot(document.getElementById('root'))
+
+// Global handlers to reduce noisy uncaught errors and surface actionable logs
+window.addEventListener('unhandledrejection', (event) => {
+  // Log concise warning and prevent default noisy console output (often from extensions)
+  console.warn('Unhandled promise rejection caught:', event.reason)
+  try { event.preventDefault() } catch (e) { /* ignore */ }
+})
+
+window.addEventListener('error', (event) => {
+  // Suppress known benign selection errors originating from browser content scripts
+  if (event && event.message && event.message.includes("getRangeAt")) {
+    console.warn('Suppressed selection error from content script:', event.message)
+    try { event.preventDefault() } catch (e) { /* ignore */ }
+  }
+})
+
 root.render(
   <BrowserRouter basename="/">
     <Routes>

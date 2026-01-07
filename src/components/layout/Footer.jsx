@@ -28,7 +28,7 @@ export function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left"
+            className="lg:col-span-1 flex flex-col items-center sm:items-start text-center sm:text-left order-1"
           >
             {/* Logo + Texte */}
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 mb-6 w-full">
@@ -78,7 +78,7 @@ export function Footer() {
 
           {/* Section 2: Nous Contacter */}
           <motion.div 
-            className="space-y-6"
+            className="space-y-6 px-2 sm:px-0 order-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -87,25 +87,31 @@ export function Footer() {
             <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
               Nous Contacter
             </h4>
-            <div className={`space-y-4 text-sm ${whiteText}`}>
-              <div className="flex items-start gap-3">
+              <div className={`space-y-4 text-sm leading-relaxed ${whiteText}`}>
+              <a
+                href="https://maps.app.goo.gl/WKUQPcoVQPsSqfL19"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Voir l'adresse du cabinet sur Google Maps"
+                className="flex items-start gap-3 hover:underline"
+              >
                 <MapPin className={`w-4 h-4 flex-shrink-0 mt-1 ${accentAmber}`} />
-                <span className="text-xs sm:text-sm">Quartier Omnisport,<br />Rue des Généraux, Yaoundé</span>
-              </div>
+                <span className="text-xs sm:text-sm break-words">Quartier Omnisport,<br />Rue des Généraux, Yaoundé</span>
+              </a>
               <div className="flex items-center gap-3">
                 <Phone className={`w-4 h-4 flex-shrink-0 ${accentAmber}`} />
                 <span className="text-xs sm:text-sm">+237 677 42 31 69</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className={`w-4 h-4 flex-shrink-0 ${accentAmber}`} />
-                <span className="text-xs sm:text-sm break-all">medardtcouho@yahoo.com</span>
+                <span className="text-xs sm:text-sm break-words">medardtcouho@yahoo.com</span>
               </div>
             </div>
           </motion.div>
 
           {/* Section 3: Services */}
           <motion.div 
-            className="space-y-6"
+            className="space-y-6 px-2 sm:px-0 order-4 lg:order-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -114,7 +120,7 @@ export function Footer() {
             <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
               Domaines d'Expertise
             </h4>
-            <ul className={`space-y-2 text-xs sm:text-sm ${whiteText}`}>
+            <ul className={`space-y-2 text-xs sm:text-sm leading-relaxed break-words ${whiteText} max-h-[40vh] overflow-auto sm:max-h-none sm:overflow-visible pr-2`}>
               <li className={hoverLink}><a href="#">Droit Administratif</a></li>
               <li className={hoverLink}><a href="#">Modes Alternatifs de Règlement</a></li>
               <li className={hoverLink}><a href="#">Droit de la Concurrence</a></li>
@@ -137,7 +143,7 @@ export function Footer() {
 
           {/* Section 4: Liens Utiles */}
           <motion.div 
-            className="space-y-6"
+            className="space-y-6 px-2 sm:px-0 order-3 lg:order-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -146,11 +152,10 @@ export function Footer() {
             <h4 className="text-lg font-bold text-white uppercase tracking-widest text-xs">
               Liens Utiles
             </h4>
-            <ul className={`space-y-3 text-xs sm:text-sm ${whiteText}`}>
+            <ul className={`space-y-3 text-xs sm:text-sm leading-relaxed break-words ${whiteText}`}>
               <li className={hoverLink}><a href="#">Nous contacter</a></li>
-              <li className={hoverLink}><a href="#">Mentions légales</a></li>
               <li className={hoverLink}><a href="#">Cabinet d'avocat</a></li>
-              <li className={hoverLink}><a href="#">Plan du site</a></li>
+              <li className={hoverLink}><a href="">Plan du site</a></li>
             </ul>
           </motion.div>
         </div>
@@ -159,7 +164,7 @@ export function Footer() {
         <div className="border-t border-[#3e2723] pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-white text-xs opacity-80 text-center md:text-left">
-              © 2025 Cabinet TCHOUHO & Associés - Excellence Juridique & Intégrité
+              © 2026 Cabinet TCHOUHO & Associés - Excellence Juridique & Intégrité
             </div>
 
             <div className="flex space-x-6 text-xs text-white">
