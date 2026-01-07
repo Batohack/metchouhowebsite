@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { getSafeScrollY, safeScrollToElement } from '../../utils/scroll.utils'
 import logo from '../../assets/CabinetLogo.svg'
 
@@ -27,10 +27,24 @@ export function Header({ onOpenModal }) {
   };
 
   const navItems = [
-    { name: 'Équipe', id: 'team-section' },
-    { name: 'Localisation', id: 'location-section' },
-    { name: 'À propos de Nous', id: 'about-section' },
+    { name: "À propos de Nous", id: 'about-section' },
   ]
+
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleTeamClick = (e) => {
+    e.preventDefault()
+    setIsMenuOpen(false)
+    const scrollOptions = { behavior: 'smooth', block: 'start', offset: 80 }
+    if (location.pathname === '/') {
+      safeScrollToElement('team-section', scrollOptions)
+    } else {
+      navigate('/')
+      // wait for route change and DOM mount, then scroll
+      setTimeout(() => safeScrollToElement('team-section', scrollOptions), 180)
+    }
+  }
 
   const handleNavClick = (e, sectionId) => {
     e.preventDefault();
@@ -43,11 +57,7 @@ export function Header({ onOpenModal }) {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-      isScrolled 
-        ? 'bg-[#1a120b]/85 backdrop-blur-md shadow-xl border-b border-amber-900/10 py-1' 
-        : 'bg-transparent py-3'
-    }`}>
+    <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 bg-[#1a120b]/95 backdrop-blur-md shadow-xl border-b border-amber-900/10 py-2`}>
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
@@ -72,6 +82,14 @@ export function Header({ onOpenModal }) {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8 items-center">
+            <a
+              href="/"
+              onClick={handleTeamClick}
+              className="text-white hover:text-amber-400 px-2 py-2 text-sm font-bold transition-colors tracking-wide"
+            >
+              Équipe
+            </a>
+
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -119,6 +137,7 @@ export function Header({ onOpenModal }) {
       {isMenuOpen && (
         <div className="lg:hidden bg-[#1a120b] border-t border-amber-900/20 shadow-2xl">
           <div className="px-6 py-8 space-y-5">
+            <a href="/" onClick={handleTeamClick} className="text-white block text-lg font-bold hover:text-amber-400">Équipe</a>
             {navItems.map((item) => (
               <a 
                 key={item.name} 

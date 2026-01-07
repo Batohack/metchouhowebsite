@@ -6,6 +6,7 @@ import { PrivacyPolicy } from './pages/PrivacyPolicy'
 import { LegalNotice } from './pages/LegalNotice'
 import { Fees } from './pages/Fees'
 import { Contact } from './pages/Contact'
+import TeamPage from './pages/TeamPage'
 
 const root = createRoot(document.getElementById('root'))
 root.render(
@@ -14,6 +15,7 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/honoraires" element={<Fees />} />
+      <Route path="/equipe" element={<TeamPage />} />
       <Route path="/confidentialite" element={<PrivacyPolicy />} />
       <Route path="/mentions-legales" element={<LegalNotice />} />
     </Routes>
